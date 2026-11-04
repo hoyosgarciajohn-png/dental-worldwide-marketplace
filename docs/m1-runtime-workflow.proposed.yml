@@ -1,6 +1,6 @@
-# DORMANT: original M1 allowance exhausted. Additional owner approval required before activation.
+# Dormant template for the owner-approved additional M1 allowance (attempts 4–6).
 name: M1 isolated account and access validation
-# Retained execution template; no fourth run authorized.
+# Record each activation against the remaining approved allowance.
 on:
   push:
     branches: [m1-accounts-access-20261104]

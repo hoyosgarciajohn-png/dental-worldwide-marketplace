@@ -273,3 +273,6 @@ John subsequently answered "Yes I approve M1 package" to the bounded M1 decision
 
 ## M1 implementation checkpoint — November 4, 2026
 M1 authorized and implemented on draft PR #2; M1 overall acceptance BLOCKED. Third hosted candidate passes actual database/Auth authorization suite and M0 regression, but API/mail stopped at request-origin validation and browser tests were not reached. Origin defect corrected and locally verified after that run. All three approved hosted attempts consumed; active runner removed. See m1-validation-followup.md and m1-execution-evidence.json for exact tested source, evidence, limitations and concrete further-runtime proposal. No fourth execution, merge, deployment or M2 work authorized.
+
+## Additional M1 runtime approval — November 4, 2026
+John approved up to three further standard Ubuntu executions (M1 attempts 4–6), 20 minutes each, USD 0 new external charges, solely to finish M1 validation and necessary corrections. Stop early on success. Existing fictional-data/isolation/cleanup constraints and human deferral remain. No seventh run, merge, deployment or M2 work is authorized.

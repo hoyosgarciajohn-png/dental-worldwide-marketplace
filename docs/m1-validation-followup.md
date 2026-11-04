@@ -1,6 +1,6 @@
 # M1 review handoff and remaining validation — November 4, 2026
 
-**M1 overall acceptance: BLOCKED. Implementation is reviewable in draft PR #2.** The original three hosted executions are consumed. No fourth run is authorized. No merge, deployment, real data, external mail, paid services or M2 implementation.
+**M1 overall acceptance: BLOCKED. Implementation is reviewable in draft PR #2.** The original three hosted executions are consumed. John subsequently approved up to three additional executions (attempts 4–6), at most 20 minutes each and USD 0 new charges. No merge, deployment, real data, external mail, paid services or M2 implementation.
 
 ## What is implemented
 
@@ -36,13 +36,13 @@ The original service PASS belongs to the recorded hosted source. The post-run co
 
 Raw downloaded job logs are saved in docs/evidence/m1-run1-job.txt through m1-run3-job.txt. SHA-256 values, sources, jobs and results are in m1-execution-evidence.json. Logs and source scanned for JWTs, provider key formats and private-key blocks; no matches. Pattern scans are not an exhaustive secret audit.
 
-## Concrete additional-runtime proposal — not approved
+## Additional-runtime scope — approved November 4, 2026
 
-Request **up to three additional standard Ubuntu hosted executions, each capped at 20 minutes, USD 0 new external charges**, solely to finish M1 validation and necessary corrections. Preserve the account-wide USD 0 Actions spending block, pinned actions, read-only workflow permissions, local Docker Supabase, captured local mail, fictional records and cleanup. No cache/artifact upload or live services. Count every additional execution, including failures; stop at the limit. Remove the workflow after validation.
+John approved **up to three additional standard Ubuntu hosted executions, each capped at 20 minutes, USD 0 new external charges**, solely to finish M1 validation and necessary corrections. Preserve the account-wide USD 0 Actions spending block, pinned actions, read-only workflow permissions, local Docker Supabase, captured local mail, fictional records and cleanup. No cache/artifact upload or live services. Count every additional execution, including failures; stop at the limit. Remove the workflow after validation.
 
-If authorized: activate the dormant template once with an exact source; run the early origin regression, then actual M0/M1 services, signup/recovery/mail, BFF MFA/rate limits and six browser cases. Correct only evidenced M1 defects within the remaining allowance. Preserve each failed and passing result. Remove the workflow, reconcile provider status and billing, and deliver the exact candidate/evidence to Chat 06 for independent acceptance. Do not infer acceptance, required-check compliance or merge permission from author tests.
+Execute within this allowance: activate the dormant template once with an exact source; run the early origin regression, then actual M0/M1 services, signup/recovery/mail, BFF MFA/rate limits and six browser cases. Correct only evidenced M1 defects within the remaining allowance. Preserve each failed and passing result. Remove the workflow, reconcile provider status and billing, and deliver the exact candidate/evidence to Chat 06 for independent acceptance. Do not infer acceptance, required-check compliance or merge permission from author tests.
 
-If not authorized: the corrected implementation and all evidence remain reviewable without launching another hosted execution. M1 stays BLOCKED.
+No seventh execution is authorized. If the additional allowance is exhausted without complete validation, preserve the corrected implementation and evidence; M1 stays BLOCKED.
 
 ## Financial check
 

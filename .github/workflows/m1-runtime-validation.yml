@@ -1,0 +1,81 @@
+# Authorized M1 execution 4 of 6 (additional allowance 1 of 3).
+name: M1 isolated account and access validation
+# Record each activation against the remaining approved allowance.
+on:
+  push:
+    branches: [m1-accounts-access-20261104]
+    paths: [.github/workflows/m1-runtime-validation.yml]
+permissions:
+  contents: read
+concurrency:
+  group: dental-m1-runtime-validation
+  cancel-in-progress: false
+jobs:
+  foundation:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      CI: 'true'
+      NEXT_TELEMETRY_DISABLED: '1'
+      SUPABASE_HOME: ${{ github.workspace }}/.supabase-local/runtime
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          package-manager-cache: false
+      - name: Record exact source and runtime
+        run: |
+          git rev-parse HEAD
+          node --version
+          npm --version
+          docker version --format '{{.Server.Version}}'
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Foundation build and HTTP checks
+        run: |
+          npm run test:unit
+          npm run typecheck
+          npm run build
+          npm run test:http
+          npm run test:m1:origin
+      - name: Install pinned Chromium for local browser checks
+        run: npx --no-install playwright install --with-deps chromium
+      - name: Actual local M0 regression and M1 database, Auth, captured mail and browser checks
+        run: npm run test:m1:docker
+      - name: Stop only this project and remove connection credentials
+        if: always()
+        shell: bash
+        run: |
+          if [ -f node_modules/supabase/dist/supabase.js ]; then
+            mkdir -p .supabase-local
+            result=0
+            node node_modules/supabase/dist/supabase.js stop > .supabase-local/ci-stop.log 2>&1 || result=$?
+            rm -f .supabase-local/connection.json .supabase-local/m1-fixtures.json .env.local
+            if [ "$result" -ne 0 ]; then
+              echo 'FAIL: project stack cleanup; raw log withheld because it may contain credentials'
+              exit "$result"
+            fi
+          fi
+      - name: Publish sanitized evidence in the job summary
+        if: always()
+        env:
+          JOB_RESULT: ${{ job.status }}
+        run: |
+          node --input-type=module <<'JS'
+          import { existsSync, readFileSync, appendFileSync } from 'node:fs';
+          const path = '.supabase-local/m1-evidence.json';
+          const evidence = existsSync(path) ? JSON.parse(readFileSync(path, 'utf8')) : null;
+          const report = {
+            source: process.env.GITHUB_SHA,
+            job: process.env.JOB_RESULT,
+            services: evidence?.result ?? 'NOT PERFORMED',
+            evidence,
+            limitation: 'M1 fictional-data implementation only. Human checks deferred to M7. Independent acceptance pending Chat 06.'
+          };
+          const json = JSON.stringify(report, null, 2);
+          console.log(json);
+          appendFileSync(process.env.GITHUB_STEP_SUMMARY, '```json\n' + json + '\n```\n');
+          JS
