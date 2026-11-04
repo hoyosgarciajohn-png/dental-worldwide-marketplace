@@ -1,0 +1,71 @@
+{
+  "date": "2026-11-04",
+  "scope": "M0 local foundation only",
+  "overall": "BASELINE_INDEPENDENTLY_ACCEPTED; LATEST_TEST_HARDENING_DELTA_PENDING_FOCUSED_REVIEW",
+  "download_blocker": "RESOLVED",
+  "artifact_verification": [
+    {
+      "service": "database",
+      "archive_sha256": "986389e7cdfc81e30c5b2f8e3e15bca98377374c1124b80d1740d0035e657128",
+      "manifest_sha256": "10ba0c16e8c5160be1dc7cf4e3698e661c8bd3bf7353b6f78e7022d9cf6a5591",
+      "verified": true
+    },
+    {
+      "service": "auth",
+      "archive_sha256": "bd8f59ed1a817014afe71288c2275ad0396630f016f8cb5ab5129388860ec49b",
+      "manifest_sha256": "ccad45ee54edf7506b055b85dcebee6db8c5b9ec57ac3c6d30baf38bb81b1deb",
+      "verified": true
+    },
+    {
+      "service": "rest",
+      "archive_sha256": "e224ec6209a4ff800524c54e3b11715ede07aa3923154e44e97a67bb786b6417",
+      "manifest_sha256": "644809d3e7912ef4c1273e848e0a0b52b8c353b909c1b63e95eb7c3d6413f12b",
+      "verified": true
+    },
+    {
+      "service": "storage",
+      "archive_sha256": "6e1b616343a8623cfa5176a851dc3bff89f11efd3bf3f533d36524597c6ef160",
+      "manifest_sha256": "5e0a3be00a0d3d82a5b0566adb6a87a04dfc90feaabb6e4ce90472faa8a07ec2",
+      "verified": true
+    },
+    {
+      "service": "imgproxy",
+      "archive_sha256": "7865edf054b8217c2daf9d42bce6bebe34f83df5c4183fbbe6495a3603dcd4a8",
+      "manifest_sha256": "5ae7f22a6fbdc55f41ffc3334747a3475295676699ac1d2c372bc5fe2ad239bb",
+      "verified": true
+    }
+  ],
+  "native_postgres_version_probe": "PASS: PostgreSQL 17.11",
+  "uid_map": "0 0 1",
+  "gid_map": "0 0 1",
+  "identity_probe": {
+    "result": "BLOCKED",
+    "errno": 22
+  },
+  "native_start": "BLOCKED at directory ownership handoff to non-root PostgreSQL account",
+  "failed_stack_stop": "PASS",
+  "syntax_checks": "PASS: JS parsing and Python compilation only",
+  "typecheck": "PASS",
+  "actual_database_query": "PASS on approved GitHub runner",
+  "actual_auth_smoke": "PASS on approved GitHub runner",
+  "actual_storage_smoke": "PASS on approved GitHub runner",
+  "docker_path": "PASS on approved GitHub runner",
+  "human_acceptance": "DEFERRED TO M7",
+  "external_charges_usd": 0,
+  "host_recheck": "UNCHANGED: Docker unavailable; only UID/GID 0 mapped",
+  "user_namespace_probe": "BLOCKED: mapping write rejected (Operation not permitted)",
+  "host_alternative": "OWNER APPROVED AND EXECUTED",
+  "proposed_workflow_validation": "EXECUTED: third/final approved run; real Docker SQL/Auth/Storage and negative-assertion regressions passed",
+  "github_billing_observed": {
+    "included_compute_used_usd": 0.27,
+    "included_compute_total_usd": 12,
+    "actions_overage_budget_usd": 0,
+    "usage_blocked": true,
+    "settings_changed": false
+  },
+  "current_evidence": "docs/m0-hosted-runtime-evidence.json",
+  "provider_final_status": "Attempt 2 and attempt 3 jobs completed/success; earlier reporting discrepancy resolved",
+  "hosted_attempts_used": 3,
+  "hosted_attempts_remaining": 0,
+  "acceptance_record": "docs/m0-acceptance-reconciliation.md"
+}
