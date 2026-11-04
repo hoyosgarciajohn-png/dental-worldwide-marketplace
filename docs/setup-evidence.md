@@ -1,5 +1,7 @@
 # M0 setup evidence — November 4, 2026
 
+Latest: corrected M0 technical checks PASS from attempt 3's complete execution log. Attempt 2's provider-status discrepancy is resolved. Attempt 3 provider status and independent M0 acceptance remain pending; see the final section. Earlier BLOCKED entries describe historical host limits.
+
 Overall: BLOCKED. Current prerequisite is a host with a usable non-root UID/GID or Docker; artifact download is now resolved. Foundation checks passed; actual Supabase DB/Auth/Storage acceptance has not run. This is not an M0 PASS or live-readiness verdict.
 
 ## Authorization
@@ -64,3 +66,15 @@ A fresh host check confirms the same UID/GID limitation and absent Docker engine
 John approved the bounded host exception. Attempt 1 was rejected before runner allocation because runner.temp is unavailable in job env. Replaced it with github.workspace; attempt 2 source 5eb647e4b3eaf007c9b2c14844d5da392ccee6aa executed on Ubuntu 24.04.5 / Node 24.22.1 / Docker 28.0.4. The complete job log reports locked install, TypeScript, build, HTTP smoke, actual SQL, nine Auth/Storage/cleanup checks, project stack stop and success summary. See docs/m0-hosted-runtime-evidence.json for exact evidence and log digest.
 
 Technical checks PASS from actual execution. Current run/job metadata and browser still show queued despite the completed job log. Final provider conclusion and independent acceptance are not yet verified; formal M0 acceptance remains pending. The original workspace restriction remains, but the approved runner supplied a working local Docker stack. No third run is needed for the successful tests. Temporary active workflow is removed after collecting results to prevent new executions. Billable Actions usage displayed USD 0; the USD 0 hard stop remains unchanged. Human checks remain deferred to M7; later implementation and live activity remain unapproved.
+
+## Final authorized validation and review handoff — November 4, 2026
+
+Author review found that several negative service tests accepted any error, which could mistake an outage for an access denial. Tests now require expected Auth codes/status and Storage denial/masked-not-found responses, reject service/transport/throttling failures, disable redirects, and explicitly check Docker shutdown before reporting cleanup. Three focused offline regression tests pass. Official Storage error behavior: https://supabase.com/docs/guides/storage/debugging/error-codes ; installed SDK 2.119.0 exposes status/statusCode/code. Positive login and exact-byte Storage round trips remain required.
+
+The third and final approved execution tested source `31fb04effd239a7661bc6769b2fa6080fd7cdf12`, tree `ac49615094bf2c4a9f2baa644ea6cf6339007d61`. Run `41880262397`, job `126750559309`, logged 17:45:52–17:46:57 UTC. Clean npm install, the three regression tests, TypeScript, production build, HTTP smoke, Docker startup/status, real SQL, all nine Auth/Storage/fixture checks and explicit stack/credential cleanup PASS. Full log SHA-256: `fb63a8e5b12d5e222c458a83494c8b123b08d034e25cacb37a18f5a9c8af49ba`. Local regression/typecheck/build/HTTP checks also pass. No application feature changed.
+
+Fresh metadata confirms attempt 2 completed/success, resolving its earlier queued discrepancy. Attempt 3's complete log contains success and post-job cleanup, while its latest metadata still says queued. Record technical execution PASS without asserting a verified final provider conclusion. Formal independent M0 acceptance remains pending. The prepared task is `docs/m0-independent-acceptance-handoff.md`; this is author work, not a Chat 06 verdict.
+
+All three authorized attempts are now used. Active workflow removed; dormant template retained for reference and must not be reactivated under the exhausted run authorization. Read-only review and documentation remain permitted. Main is preserved and PR #1 remains draft. Pre-run billing showed USD 0 billable Actions usage, USD 0.27 of USD 12 included compute used, and the unchanged account-wide USD 0 spending block. Billing may lag. No new external charges authorized or initiated.
+
+Chat 06's existing planning report stored version 2 closes F-01/F-02/F-03 FOR PLANNING. Its software tests were NOT RUN; that closure does not supply M0 acceptance. No human testing, real records, messages, paid services or deployment occurred. Human checks stay deferred to M7; M1 implementation remains unauthorized.

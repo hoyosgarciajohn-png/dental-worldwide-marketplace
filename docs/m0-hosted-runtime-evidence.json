@@ -2,15 +2,15 @@
   "date": "2026-11-04",
   "scope": "M0 foundation only; fictional data",
   "technical_checks": "PASS_FROM_COMPLETED_JOB_LOG",
-  "formal_acceptance": "PENDING_FINAL_STATUS_RECONCILIATION_AND_REVIEW",
-  "source_sha": "5eb647e4b3eaf007c9b2c14844d5da392ccee6aa",
-  "source_tree": "78ad88d4377dc9cf11cd05601ecb2364bbf67612",
-  "run_url": "https://github.com/hoyosgarciajohn-png/dental-worldwide-marketplace/actions/runs/41877608651",
-  "run_id": 41877608651,
-  "job_id": 126741249655,
-  "job_log_sha256": "fc9f727fd456d3be10c29a5042201acdbe7ce95e50b77ddf2ffdc34b29a24a9a",
-  "job_logged_start_utc": "2026-11-04T17:26:49Z",
-  "job_logged_end_utc": "2026-11-04T17:27:45Z",
+  "formal_acceptance": "PENDING_INDEPENDENT_REVIEW_AND_LATEST_PROVIDER_STATUS",
+  "source_sha": "31fb04effd239a7661bc6769b2fa6080fd7cdf12",
+  "source_tree": "ac49615094bf2c4a9f2baa644ea6cf6339007d61",
+  "run_url": "https://github.com/hoyosgarciajohn-png/dental-worldwide-marketplace/actions/runs/41880262397",
+  "run_id": 41880262397,
+  "job_id": 126750559309,
+  "job_log_sha256": "fb63a8e5b12d5e222c458a83494c8b123b08d034e25cacb37a18f5a9c8af49ba",
+  "job_logged_start_utc": "2026-11-04T17:45:52Z",
+  "job_logged_end_utc": "2026-11-04T17:46:57Z",
   "runtime": {
     "os": "Ubuntu 24.04.5",
     "node": "24.22.1",
@@ -31,8 +31,9 @@
       "auth_schema": 1,
       "storage_schema": 1
     },
-    "project_stack_stop": "PASS: shell step completed before success summary",
-    "connection_credentials_removal": "PASS: cleanup shell completed"
+    "project_stack_stop": "PASS: Docker runner explicitly checked exit status; workflow cleanup also succeeded",
+    "connection_credentials_removal": "PASS: Docker runner removed local connection file; workflow cleanup also removed it",
+    "denial_assertion_regressions": "PASS: 3 tests; 0 failures, both locally and on hosted runner"
   },
   "service_checks": [
     {
@@ -83,10 +84,16 @@
       "number": 2,
       "source_sha": "5eb647e4b3eaf007c9b2c14844d5da392ccee6aa",
       "run_id": 41877608651,
-      "result": "ALL_CHECKS_PASS_IN_LOG; provider metadata still queued"
+      "result": "COMPLETED_SUCCESS: metadata and log now agree; earlier status delay resolved"
+    },
+    {
+      "number": 3,
+      "source_sha": "31fb04effd239a7661bc6769b2fa6080fd7cdf12",
+      "run_id": 41880262397,
+      "result": "ALL_CHECKS_PASS_IN_COMPLETE_LOG; latest provider metadata queued"
     }
   ],
-  "status_discrepancy": "Run/job APIs and browser still show queued with no steps, while downloadable job log contains full execution, success summary and post-job cleanup. Do not represent provider final conclusion or independent acceptance as verified.",
+  "status_discrepancy": "Attempt 2 metadata now completed/success. Attempt 3 downloadable log includes all checks, job success summary and post-job cleanup; latest API metadata still queued with no steps. Independent reviewer must reconcile or explicitly assess this evidence limitation.",
   "billing_observed": {
     "billable_actions_usd": 0,
     "included_compute_used_usd": 0.27,
@@ -98,5 +105,33 @@
   "human_acceptance": "DEFERRED TO M7 / NOT PERFORMED",
   "independent_acceptance": "NOT PERFORMED",
   "workspace_limitation": "ChatGPT workspace still lacks usable non-root UID and Docker; tests executed on approved ephemeral GitHub runner",
-  "limits": "No application roles, tenant policies, clinical workflows, browser acceptance or live readiness established"
+  "limits": "No application roles, tenant policies, clinical workflows, browser acceptance or live readiness established",
+  "previous_successful_run": {
+    "source_sha": "5eb647e4b3eaf007c9b2c14844d5da392ccee6aa",
+    "source_tree": "78ad88d4377dc9cf11cd05601ecb2364bbf67612",
+    "run_id": 41877608651,
+    "job_id": 126741249655,
+    "job_log_sha256": "fc9f727fd456d3be10c29a5042201acdbe7ce95e50b77ddf2ffdc34b29a24a9a",
+    "job_logged_start_utc": "2026-11-04T17:26:49Z",
+    "job_logged_end_utc": "2026-11-04T17:27:45Z",
+    "provider_status": "completed",
+    "provider_conclusion": "success",
+    "reviewed_on": "2026-11-04",
+    "note": "Previous queued/log discrepancy resolved by fresh provider job metadata. Earlier negative assertions were weaker; latest source supersedes them."
+  },
+  "attempts_remaining": 0,
+  "changes_validated": [
+    "Expected Auth codes/status instead of any error",
+    "Storage access/masked-denial statuses instead of any error, with successful exact-byte positive controls",
+    "Reject fetch redirects outside loopback origin",
+    "Docker stop exit assertion and credential-file removal",
+    "Three offline regression tests reject network, server, throttling and malformed-request errors"
+  ],
+  "author_secret_inspection": {
+    "tracked_files_checked_before_evidence_commit": 36,
+    "suspected_secret_pattern_matches": 0,
+    "tracked_credentials_or_runtime_files": 0,
+    "latest_job_log_secret_pattern_matches": 0,
+    "limitation": "Pattern scan and tracked-file review, not a comprehensive independent security audit"
+  }
 }
