@@ -267,3 +267,15 @@ John explicitly approved the prepared bounded GitHub-hosted test run. This permi
 
 ## M0 independent acceptance received — November 4, 2026
 Chat 06's acceptance/M1 package v1.0 accepts baseline `5d975f5` using tested source `5eb647e`. The later `31fb04e`/`ba6bca5` test-hardening delta has successful runtime evidence and now completed/success provider job metadata, but needs focused independent closure. Preserve baseline acceptance and exact source boundaries. See `docs/m0-acceptance-reconciliation.md` for findings and the concrete M1 approval scope. M1 remains prepared, not authorized; no additional runner allowance, merge or deployment is implied. Human checks remain deferred to live M7.
+
+## M1 authorization — November 4, 2026
+John subsequently answered "Yes I approve M1 package" to the bounded M1 decision and three 20-minute $0 hosted test runs. This supersedes earlier M1-not-authorized wording only within docs/m1-authorization.md. M2–M7, merges, charges and deployments remain excluded. Security decisions are recorded in docs/m1-security-decisions.md before affected implementation.
+
+## M1 implementation checkpoint — November 4, 2026
+M1 authorized and implemented on draft PR #2; M1 overall acceptance BLOCKED. Third hosted candidate passes actual database/Auth authorization suite and M0 regression, but API/mail stopped at request-origin validation and browser tests were not reached. Origin defect corrected and locally verified after that run. All three approved hosted attempts consumed; active runner removed. See m1-validation-followup.md and m1-execution-evidence.json for exact tested source, evidence, limitations and concrete further-runtime proposal. No fourth execution, merge, deployment or M2 work authorized.
+
+## Additional M1 runtime approval — November 4, 2026
+John approved up to three further standard Ubuntu executions (M1 attempts 4–6), 20 minutes each, USD 0 new external charges, solely to finish M1 validation and necessary corrections. Stop early on success. Existing fictional-data/isolation/cleanup constraints and human deferral remain. No seventh run, merge, deployment or M2 work is authorized.
+
+## M1 automated validation complete — November 4, 2026
+Source 1f6de519f7f59a0ef4b713cea91fab6ae84824fa passed all executed M1-01–07 automated suites in run 41903522909 / job 126831935371, provider completed/success. All six browser cases and actual signup/verification/recovery/rate-limit/MFA tests passed; fixture/stack/credential cleanup passed. Fifth M1 execution completed; sixth unused. Active workflow removed. No further routine test run is needed. Next gate: independent Chat 06 evidence/source review and focused later-M0-hardening closure. This author result is not independent M1 acceptance or permission to merge/deploy/start M2.

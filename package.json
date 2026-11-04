@@ -10,7 +10,11 @@
     "preflight": "node scripts/preflight.mjs",
     "test:http": "node scripts/http-smoke.mjs",
     "test:services": "node scripts/m0-services-smoke.mjs",
-    "test:m0:docker": "node scripts/m0-docker-smoke.mjs"
+    "test:m0:docker": "node scripts/m0-docker-smoke.mjs",
+    "test:unit": "node --test scripts/*.test.mjs",
+    "test:m1:docker": "node scripts/m1-docker-smoke.mjs",
+    "test:m1:browser": "playwright test",
+    "test:m1:origin": "node scripts/m1-origin-smoke.mjs"
   },
   "keywords": [],
   "author": "",
@@ -19,11 +23,11 @@
   "dependencies": {
     "next": "16.4.5",
     "react": "19.3.1",
-    "react-dom": "19.3.1"
+    "react-dom": "19.3.1",
+    "@supabase/supabase-js": "2.119.0"
   },
   "devDependencies": {
     "@playwright/test": "1.64.1",
-    "@supabase/supabase-js": "2.119.0",
     "@tailwindcss/postcss": "4.3.4",
     "@types/node": "26.6.6",
     "@types/react": "19.3.0",

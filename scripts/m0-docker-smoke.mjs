@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { mkdirSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, writeFileSync } from 'node:fs';
+import { cleanupProject } from './runtime-cleanup.mjs';
 import { fileURLToPath } from 'node:url';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const local = new URL('../.supabase-local/', import.meta.url);
@@ -31,9 +32,7 @@ try {
   const services = spawnSync(process.execPath, ['scripts/m0-services-smoke.mjs'], { cwd: root, stdio: 'inherit', timeout: 120000 });
   assert.equal(services.status, 0, 'Local Auth/Storage smoke failed');
 } finally {
-  const stopped = spawnSync(process.execPath, [cli, 'stop'], { cwd: root, encoding: 'utf8', timeout: 30000 });
-  writeFileSync(new URL('docker-stop.log', local), `${stopped.stdout ?? ''}${stopped.stderr ?? ''}`, { mode: 0o600 });
-  rmSync(new URL('connection.json', local), { force: true });
-  assert.equal(stopped.status, 0, 'Project stack cleanup failed; check ignored local log');
+  cleanupProject({ stop: () => spawnSync(process.execPath, [cli, 'stop'], { cwd: root, encoding: 'utf8', timeout: 30000 }),
+    logPath: new URL('docker-stop.log', local), connectionPath: new URL('connection.json', local) });
   console.log('PASS docker-stop and local credential removal');
 }

@@ -1,0 +1,412 @@
+{
+  "scope": "Owner-approved M1 fictional local development",
+  "approved_runs": 6,
+  "runs_initiated": 5,
+  "max_minutes_per_run": 20,
+  "new_external_charge_limit_usd": 0,
+  "independent_acceptance": "PENDING CHAT 06",
+  "human_checks": "DEFERRED TO LIVE M7 / NOT PERFORMED",
+  "package_lock_sha256": "580079e7240d3117fe796b5125bf012e177a31a8356a6078feeab07169b130b2",
+  "dependency_audit": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 0
+  },
+  "runs": [
+    {
+      "attempt": 1,
+      "source": "d68045f51a71085774ff0b91c97e25da734aad6d",
+      "tree": "02c3735bfa581dbfa369ae70908e45f040c7182b",
+      "run": 41888861736,
+      "job": 126780547878,
+      "result": "FAIL",
+      "reason": "CLI 3.0.0 rejects custom email template content_path; failed before service startup",
+      "log_sha256": "53c44d55f8753f1f44c62db23dae1d8f266b42502c71aa7fbd67713754ac5601",
+      "recorded_pass_lines": [
+        "PASS M1 project stack stopped"
+      ],
+      "provider_conclusion": "completed/failure",
+      "saved_log": "docs/evidence/m1-run1-job.txt"
+    },
+    {
+      "attempt": 2,
+      "source": "2428b3f1a4e7f96d5f6a982d8ff9f51df23aeb5d",
+      "tree": "852fee9561287433d98fa07f2e1a4ae04a468004",
+      "run": 41890528383,
+      "job": 126786399212,
+      "result": "FAIL",
+      "reason": "First fixture SQL write failed; multi-statement batch split in next candidate; raw provider error not exposed",
+      "log_sha256": "5d14acb2734139418098a8ec159bf0a271f69d876311f416356ecc26df319b47",
+      "recorded_pass_lines": [
+        "PASS m1-start",
+        "PASS m1-status",
+        "PASS m1-migration-check",
+        "PASS m1-security-advisors",
+        "PASS Auth: fictional confirmed identity created without invitation/email",
+        "PASS Auth: invalid password rejected",
+        "PASS Auth: password login and server validation",
+        "PASS Auth: session refresh",
+        "PASS Storage: private bucket and exact-byte upload/download",
+        "PASS Storage: anonymous, public URL and ungranted user reads denied",
+        "PASS Storage: short-lived signed download round trip",
+        "PASS Auth: sign out rejects refresh-token reuse",
+        "PASS Cleanup: fictional object, bucket and identity removed",
+        "PASS M1-02 anonymous RPC denied by database privilege",
+        "PASS M1-02 private tables default deny with RLS and no anonymous execution",
+        "PASS m1-fixture-reset",
+        "PASS m1-empty-after-reset",
+        "PASS M1 project stack stopped"
+      ],
+      "provider_conclusion": "completed/failure",
+      "saved_log": "docs/evidence/m1-run2-job.txt"
+    },
+    {
+      "attempt": 3,
+      "source": "46205d34c49d64bbe0153e0afe3b72711c463efd",
+      "tree": "7413cc05e6bf9dd8d2a63c7f7ea1ec82d02760e8",
+      "run": 41891201967,
+      "job": 126788754220,
+      "result": "FAIL",
+      "provider_conclusion": "completed/failure",
+      "reason": "First API request returned 403 instead of 401: locally reproduced NextRequest loopback origin normalization defect",
+      "log_sha256": "9f7523dc5d5fa6abe074c5d19e468a5b10aa8a424690f6fcea82b178bd77b6fd",
+      "recorded_pass_lines": [
+        "PASS m1-start",
+        "PASS m1-status",
+        "PASS m1-migration-check",
+        "PASS m1-security-advisors",
+        "PASS Auth: fictional confirmed identity created without invitation/email",
+        "PASS Auth: invalid password rejected",
+        "PASS Auth: password login and server validation",
+        "PASS Auth: session refresh",
+        "PASS Storage: private bucket and exact-byte upload/download",
+        "PASS Storage: anonymous, public URL and ungranted user reads denied",
+        "PASS Storage: short-lived signed download round trip",
+        "PASS Auth: sign out rejects refresh-token reuse",
+        "PASS Cleanup: fictional object, bucket and identity removed",
+        "PASS M1-02 anonymous RPC denied by database privilege",
+        "PASS M1-02 private tables default deny with RLS and no anonymous execution",
+        "PASS M1-01 20 actual fictional patient accounts, five practices and ten sites; real TOTP for privileged roles",
+        "PASS M1-02 200 staff/record combinations enforce organization and site boundaries; 20 cross-patient denials and consent prerequisites",
+        "PASS M1-02 owner reassignment, self-selected role and profile-metadata escalation denied",
+        "PASS M1-03 current database membership read/write/removal takes effect with unchanged JWT; practice admin cannot escape site or elevate role",
+        "PASS M1-04 warmed list, export, queued fixture execution, recipient/category/action consent and assignment withdrawal enforced; no blanket administrator clinical access",
+        "PASS M1-05 password alone and unverified TOTP cannot exercise staff access",
+        "PASS M1-03 account deactivation is immediate; reactivation requires a new session and remains visible to administrator",
+        "PASS M1-05 idle and absolute expiry cannot be reset by reopening an old session",
+        "PASS M1-05 global sign-out denies old access JWT immediately and provider refresh replay",
+        "PASS M1-05 lost-factor reset revokes old sessions and requires newly enrolled, verified factor",
+        "PASS M1-06 metadata-only audit read scope, append-only enforcement and fail-closed transaction rollback",
+        "PASS M1-02 direct table/schema bypass denied",
+        "PASS M1 database/auth checks complete; browser and local-mail checks remain separate",
+        "PASS m1-fixture-reset",
+        "PASS m1-empty-after-reset",
+        "PASS M1 project stack stopped"
+      ],
+      "database": "PASS",
+      "api_mail": "FAIL at first request; remaining checks NOT PERFORMED",
+      "browser": "NOT PERFORMED",
+      "cleanup": {
+        "fixtures": "PASS",
+        "empty_state": "PASS",
+        "stack": "PASS",
+        "credential_files": "REMOVED"
+      },
+      "saved_log": "docs/evidence/m1-run3-job.txt"
+    },
+    {
+      "attempt": 4,
+      "source": "3deeba3fa4d93bc944ced298b79bd1e14e505e1d",
+      "tree": "59aa5ad04e61972c078630a6157b8d50a4ce4feb",
+      "run": 41902217807,
+      "job": 126827367778,
+      "result": "FAIL",
+      "provider_conclusion": "completed/failure",
+      "reason": "Recovery password change returned link_invalid; dedicated recovery method required instead of otp",
+      "log_sha256": "81622bf7b80c6b789e79a347fdc9c2c3bb5e3ea4e8dfd600f2fd95a5770f0f30",
+      "saved_log": "docs/evidence/m1-run4-job.txt",
+      "evidence": {
+        "result": "FAIL",
+        "database": {
+          "result": "PASS",
+          "checks": [
+            {
+              "check": "M1-02 anonymous RPC denied by database privilege",
+              "result": "PASS"
+            },
+            {
+              "check": "M1-02 private tables default deny with RLS and no anonymous execution",
+              "result": "PASS"
+            },
+            {
+              "check": "M1-01 20 actual fictional patient accounts, five practices and ten sites; real TOTP for privileged roles",
+              "result": "PASS"
+            },
+            {
+              "check": "M1-02 200 staff/record combinations enforce organization and site boundaries; 20 cross-patient denials and consent prerequisites",
+              "result": "PASS"
+            },
+            {
+              "check": "M1-02 owner reassignment, self-selected role and profile-metadata escalation denied",
+              "result": "PASS"
+            },
+            {
+              "check": "M1-03 current database membership read/write/removal takes effect with unchanged JWT; practice admin cannot escape site or elevate role",
+              "result": "PASS"
+            },
+            {
+              "check": "M1-04 warmed list, export, queued fixture execution, recipient/category/action consent and assignment withdrawal enforced; no blanket administrator clinical access",
+              "result": "PASS"
+            },
+            {
+              "check": "M1-05 password alone and unverified TOTP cannot exercise staff access",
+              "result": "PASS"
+            },
+            {
+              "check": "M1-03 account deactivation is immediate; reactivation requires a new session and remains visible to administrator",
+              "result": "PASS"
+            },
+            {
+              "check": "M1-05 idle and absolute expiry cannot be reset by reopening an old session",
+              "result": "PASS"
+            },
+            {
+              "check": "M1-05 global sign-out denies old access JWT immediately and provider refresh replay",
+              "result": "PASS"
+            },
+            {
+              "check": "M1-05 lost-factor reset revokes old sessions and requires newly enrolled, verified factor",
+              "result": "PASS"
+            },
+            {
+              "check": "M1-06 metadata-only audit read scope, append-only enforcement and fail-closed transaction rollback",
+              "result": "PASS"
+            },
+            {
+              "check": "M1-02 direct table/schema bypass denied",
+              "result": "PASS"
+            },
+            {
+              "check": "M1 database/auth checks complete; browser and local-mail checks remain separate",
+              "result": "PASS"
+            }
+          ],
+          "counts": {
+            "patients": 20,
+            "practices": 5,
+            "sites": 10,
+            "identities": 40
+          },
+          "human": "DEFERRED TO M7"
+        },
+        "api": {
+          "result": "FAIL",
+          "checks": [
+            {
+              "check": "M1-01 API rejects cross-origin, non-fictional email, short passwords, role injection and oversized bodies",
+              "result": "PASS"
+            },
+            {
+              "check": "M1-01 captured-mail verification required, single-use token enforced, tokens confined to HttpOnly cookies",
+              "result": "PASS"
+            }
+          ],
+          "human": "DEFERRED TO M7",
+          "mail": "local capture only"
+        },
+        "cleanup": {
+          "fixtures": "PASS",
+          "credentialFiles": "REMOVED"
+        },
+        "human": "DEFERRED TO M7",
+        "independentAcceptance": "PENDING CHAT 06"
+      }
+    },
+    {
+      "attempt": 5,
+      "source": "1f6de519f7f59a0ef4b713cea91fab6ae84824fa",
+      "tree": "fba306870e621d6d1f400b46e7fe6ef80964d0ca",
+      "run": 41903522909,
+      "result": "PASS",
+      "job": 126831935371,
+      "provider_conclusion": "completed/success",
+      "started_at_utc": "2026-11-04T20:07:15Z",
+      "updated_at_utc": "2026-11-04T20:12:29Z",
+      "log_sha256": "d2c4274f0a87150fb8b7df30f50213f7013890db64dd274fb5aeac3a81052590",
+      "saved_log": "docs/evidence/m1-run5-job.txt",
+      "evidence": {
+        "result": "PASS",
+        "database": {
+          "result": "PASS",
+          "checks": [
+            {
+              "check": "M1-02 anonymous RPC denied by database privilege",
+              "result": "PASS"
+            },
+            {
+              "check": "M1-02 private tables default deny with RLS and no anonymous execution",
+              "result": "PASS"
+            },
+            {
+              "check": "M1-01 password-authenticated session cannot authorize account recovery",
+              "result": "PASS"
+            },
+            {
+              "check": "M1-01 20 actual fictional patient accounts, five practices and ten sites; real TOTP for privileged roles",
+              "result": "PASS"
+            },
+            {
+              "check": "M1-02 200 staff/record combinations enforce organization and site boundaries; 20 cross-patient denials and consent prerequisites",
+              "result": "PASS"
+            },
+            {
+              "check": "M1-02 owner reassignment, self-selected role and profile-metadata escalation denied",
+              "result": "PASS"
+            },
+            {
+              "check": "M1-03 current database membership read/write/removal takes effect with unchanged JWT; practice admin cannot escape site or elevate role",
+              "result": "PASS"
+            },
+            {
+              "check": "M1-04 warmed list, export, queued fixture execution, recipient/category/action consent and assignment withdrawal enforced; no blanket administrator clinical access",
+              "result": "PASS"
+            },
+            {
+              "check": "M1-05 password alone and unverified TOTP cannot exercise staff access",
+              "result": "PASS"
+            },
+            {
+              "check": "M1-03 account deactivation is immediate; reactivation requires a new session and remains visible to administrator",
+              "result": "PASS"
+            },
+            {
+              "check": "M1-05 idle and absolute expiry cannot be reset by reopening an old session",
+              "result": "PASS"
+            },
+            {
+              "check": "M1-05 global sign-out denies old access JWT immediately and provider refresh replay",
+              "result": "PASS"
+            },
+            {
+              "check": "M1-05 lost-factor reset revokes old sessions and requires newly enrolled, verified factor",
+              "result": "PASS"
+            },
+            {
+              "check": "M1-06 metadata-only audit read scope, append-only enforcement and fail-closed transaction rollback",
+              "result": "PASS"
+            },
+            {
+              "check": "M1-02 direct table/schema bypass denied",
+              "result": "PASS"
+            },
+            {
+              "check": "M1 database/auth checks complete; browser and local-mail checks remain separate",
+              "result": "PASS"
+            }
+          ],
+          "counts": {
+            "patients": 20,
+            "practices": 5,
+            "sites": 10,
+            "identities": 40
+          },
+          "human": "DEFERRED TO M7"
+        },
+        "api": {
+          "result": "PASS",
+          "checks": [
+            {
+              "check": "M1-01 API rejects cross-origin, non-fictional email, short passwords, role injection and oversized bodies",
+              "result": "PASS"
+            },
+            {
+              "check": "M1-01 captured-mail verification required, single-use token enforced, tokens confined to HttpOnly cookies",
+              "result": "PASS"
+            },
+            {
+              "check": "M1-01 actual recovery method accepted, password session substitution denied, recovery cannot open application session",
+              "result": "PASS"
+            },
+            {
+              "check": "M1-01 password recovery is neutral, captured locally, single-use, and revokes the old session",
+              "result": "PASS"
+            },
+            {
+              "check": "M1-01 actual recovery link expires after the configured 15 minutes; invalid token rejected",
+              "result": "PASS"
+            },
+            {
+              "check": "M1-05 BFF sign-out and malformed/old cookie replay denied",
+              "result": "PASS"
+            },
+            {
+              "check": "M1-05 atomic account/IP attempt limits, shared recovery bucket, window reset and spoofed proxy-header resistance",
+              "result": "PASS"
+            },
+            {
+              "check": "M1-05 BFF authenticator enrollment, invalid code denial and actual TOTP verification",
+              "result": "PASS"
+            }
+          ],
+          "human": "DEFERRED TO M7",
+          "mail": "local capture only"
+        },
+        "browser": {
+          "result": "PASS",
+          "configuredCases": 6
+        },
+        "cleanup": {
+          "fixtures": "PASS",
+          "credentialFiles": "REMOVED"
+        },
+        "human": "DEFERRED TO M7",
+        "independentAcceptance": "PENDING CHAT 06"
+      }
+    }
+  ],
+  "overall_acceptance": "PENDING INDEPENDENT CHAT 06",
+  "active_workflow": "REMOVED after successful attempt 5",
+  "billing": {
+    "observed_date_utc": "2026-11-04",
+    "billable_usd": 0,
+    "included_compute_used_usd": 0.35,
+    "included_compute_limit_usd": 12,
+    "actions_budget_usd": 0,
+    "actions_budget_status": "Usage blocked",
+    "settings_changed": false,
+    "caveat": "Provider usage may lag",
+    "observed_at": "2026-11-04 during attempt 5; provider may lag"
+  },
+  "original_allowance": 3,
+  "additional_allowance": 3,
+  "automated_validation": "PASS",
+  "tested_source": "1f6de519f7f59a0ef4b713cea91fab6ae84824fa",
+  "tested_tree": "fba306870e621d6d1f400b46e7fe6ef80964d0ca",
+  "unused_approved_runs": 1,
+  "unit_tests": {
+    "pass": 12,
+    "fail": 0
+  },
+  "typecheck": "PASS",
+  "production_build": "PASS",
+  "foundation_http": "PASS",
+  "request_origin_regression": "PASS",
+  "m0_service_regression": "PASS",
+  "secret_pattern_scan": "No JWT/provider-key/private-key patterns; not exhaustive assurance",
+  "post_attempt_3_correction_history": {
+    "reason": "NextRequest loopback normalization",
+    "local_unit_tests": {
+      "pass": 12,
+      "fail": 0
+    },
+    "typecheck": "PASS",
+    "production_build": "PASS",
+    "foundation_http": "PASS",
+    "request_origin_http_regression": "PASS",
+    "database_mail_browser_retest": "NOT PERFORMED; additional hosted allowance required",
+    "subsequent_runtime_result": "Origin correction passed in attempts 4 and 5; complete candidate passed in attempt 5"
+  }
+}

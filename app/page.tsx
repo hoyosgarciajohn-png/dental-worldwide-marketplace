@@ -5,5 +5,6 @@ export default function Home() {
     <p className="mt-6 text-lg">Foundation setup in progress. Fictional data only.</p>
     <p lang="es" className="mt-3 text-lg">Base de desarrollo en preparación. Solo datos ficticios.</p>
     <p className="mt-8 rounded-lg border border-slate-300 p-4">No patient intake, bookings, payments, or clinical advice are available.</p>
+    <a className="mt-6 inline-block rounded-lg bg-cyan-800 px-5 py-3 text-white" href="/account">Account workspace / Espacio de cuenta</a>
   </main>;
 }
