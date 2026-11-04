@@ -13,7 +13,7 @@ Never commit credentials, .env files, runtime DB/object files or patient data. B
 Human checks stay NOT PERFORMED until live M7. Author corrections are not independent review. Before M1: record role/session/recovery/audit/revocation decisions. Before M3: file limits, rates, quarantine/download rules. Before M5: continuity permissions. Before M6 recovery: revocation reconciliation and fail-closed decisions. Preserve plan precedence and approval history.
 
 ## Framework documentation
-Use version-matched official Next.js and Supabase documentation. Supabase CLI native runtime is experimental; verify installed help before use. No automatic deployment is configured. The bounded M0 runner exception below is the only authorized hosted CI.
+Use version-matched official Next.js and Supabase documentation. Supabase CLI native runtime is experimental; verify installed help before use. No automatic deployment is configured. Only the separately bounded M0 and M1 runner exceptions below authorize hosted CI. Both original three-run allowances are exhausted; no active workflow may be restored without additional owner authorization.
 
 ## Approved M0 hosted-runner exception — November 4, 2026
 John answered "yes, approve" to docs/m0-runtime-host-proposal.md. Use only the existing private GitHub repository and standard Ubuntu test runner, actual Supabase local Docker services, fictional data, no new external charges, unchanged USD 0 Actions spending block, at most three executions and 20 minutes each. This narrow exception supersedes the no-cloud-provisioning sentence above only for these tests. No deployment, hosted Supabase project, paid runner, billing change or later milestone is authorized. Remove the active workflow after testing; preserve evidence.

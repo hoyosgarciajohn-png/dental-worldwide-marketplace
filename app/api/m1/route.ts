@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { audit, client, config, emailValue, passwordValue, rateLimit, rpc, SafeFailure, validate, type Tokens } from '../../../lib/m1-server';
+import { trustedLocalRequest } from '../../../lib/m1-origin';
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
@@ -19,7 +20,7 @@ export async function POST(req: NextRequest) {
   };
   try {
     const cfg = config(); secure = new URL(cfg.origin).protocol === 'https:';
-    if (req.headers.get('origin') !== cfg.origin || new URL(req.url).origin !== cfg.origin) throw new SafeFailure('origin_rejected', 403);
+    if (!trustedLocalRequest(req, cfg.origin)) throw new SafeFailure('origin_rejected', 403);
     if (!req.headers.get('content-type')?.startsWith('application/json')) throw new SafeFailure('invalid_request',400);
     const reader = req.body?.getReader();
     if (!reader) throw new SafeFailure('invalid_request',400);

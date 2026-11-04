@@ -1,0 +1,651 @@
+﻿2026-11-04T18:47:09.3971907Z Current runner version: '2.338.2'
+2026-11-04T18:47:09.3997477Z ##[group]Runner Image Provisioner
+2026-11-04T18:47:09.3998369Z Hosted Compute Agent
+2026-11-04T18:47:09.3998992Z Version: 20261028.624
+2026-11-04T18:47:09.3999564Z Commit: 54898b74c23fde5556c9b3c3a2290865feef0dfe
+2026-11-04T18:47:09.4000209Z Build Date: 2026-10-28T21:51:42Z
+2026-11-04T18:47:09.4000890Z Worker ID: {5f2104f4-936f-44a9-a484-cf707e326c70}
+2026-11-04T18:47:09.4001606Z Region: centralus
+2026-11-04T18:47:09.4002150Z Cloud: Azure
+2026-11-04T18:47:09.4002630Z ##[endgroup]
+2026-11-04T18:47:09.4004040Z ##[group]Operating System
+2026-11-04T18:47:09.4004690Z Ubuntu
+2026-11-04T18:47:09.4005194Z 24.04.5
+2026-11-04T18:47:09.4005670Z LTS
+2026-11-04T18:47:09.4006156Z ##[endgroup]
+2026-11-04T18:47:09.4006970Z ##[group]Runner Image
+2026-11-04T18:47:09.4008000Z Image: ubuntu-24.04
+2026-11-04T18:47:09.4008582Z Version: 20261101.360.1
+2026-11-04T18:47:09.4009752Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261101.360/images/ubuntu/Ubuntu2404-Readme.md
+2026-11-04T18:47:09.4011337Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261101.360
+2026-11-04T18:47:09.4012333Z ##[endgroup]
+2026-11-04T18:47:09.4013372Z ##[group]GITHUB_TOKEN Permissions
+2026-11-04T18:47:09.4015581Z Contents: read
+2026-11-04T18:47:09.4016147Z Metadata: read
+2026-11-04T18:47:09.4016924Z ##[endgroup]
+2026-11-04T18:47:09.4018867Z Secret source: Actions
+2026-11-04T18:47:09.4019820Z Cache mode: write
+2026-11-04T18:47:09.4020759Z Prepare workflow directory
+2026-11-04T18:47:09.4771230Z Prepare all required actions
+2026-11-04T18:47:09.4865520Z Getting action download info
+2026-11-04T18:47:09.7584846Z Download action repository 'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+2026-11-04T18:47:09.8831740Z Download action repository 'actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1' (SHA:949feb2413d6458794dcd2491c4babbbce0c15c1)
+2026-11-04T18:47:10.1090660Z Complete job name: foundation
+2026-11-04T18:47:10.1745839Z ##[group]Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+2026-11-04T18:47:10.1746858Z with:
+2026-11-04T18:47:10.1747283Z   persist-credentials: false
+2026-11-04T18:47:10.1747799Z   repository: hoyosgarciajohn-png/dental-worldwide-marketplace
+2026-11-04T18:47:10.1750486Z   token: ***
+2026-11-04T18:47:10.1750839Z   ssh-strict: true
+2026-11-04T18:47:10.1751191Z   ssh-user: git
+2026-11-04T18:47:10.1751565Z   clean: true
+2026-11-04T18:47:10.1751927Z   sparse-checkout-cone-mode: true
+2026-11-04T18:47:10.1752380Z   fetch-depth: 1
+2026-11-04T18:47:10.1752728Z   fetch-tags: false
+2026-11-04T18:47:10.1753421Z   show-progress: true
+2026-11-04T18:47:10.1753821Z   lfs: false
+2026-11-04T18:47:10.1754164Z   submodules: false
+2026-11-04T18:47:10.1754540Z   set-safe-directory: true
+2026-11-04T18:47:10.1754943Z   allow-unsafe-pr-checkout: false
+2026-11-04T18:47:10.1755564Z env:
+2026-11-04T18:47:10.1755920Z   CI: true
+2026-11-04T18:47:10.1756267Z   NEXT_TELEMETRY_DISABLED: 1
+2026-11-04T18:47:10.1757314Z   SUPABASE_HOME: /home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace/.supabase-local/runtime
+2026-11-04T18:47:10.1758048Z ##[endgroup]
+2026-11-04T18:47:10.4251105Z Syncing repository: hoyosgarciajohn-png/dental-worldwide-marketplace
+2026-11-04T18:47:10.4261657Z ##[group]Getting Git version info
+2026-11-04T18:47:10.4266197Z Working directory is '/home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace'
+2026-11-04T18:47:10.4268404Z [command]/usr/bin/git version
+2026-11-04T18:47:10.4269519Z git version 2.56.0
+2026-11-04T18:47:10.4274902Z ##[endgroup]
+2026-11-04T18:47:10.4281586Z Temporarily overriding HOME='/home/runner/work/_temp/041e0b77-4474-4fff-979c-439350fa78b3' before making global git config changes
+2026-11-04T18:47:10.4283073Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-04T18:47:10.4293092Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace
+2026-11-04T18:47:10.4359007Z Deleting the contents of '/home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace'
+2026-11-04T18:47:10.4378403Z ##[group]Determining repository object format
+2026-11-04T18:47:10.4387319Z ##[endgroup]
+2026-11-04T18:47:10.4388921Z ##[group]Initializing the repository
+2026-11-04T18:47:10.4390743Z [command]/usr/bin/git init /home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace
+2026-11-04T18:47:10.5411208Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-11-04T18:47:10.5412698Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-11-04T18:47:10.5418151Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-11-04T18:47:10.5419587Z hint: call:
+2026-11-04T18:47:10.5420416Z hint:
+2026-11-04T18:47:10.5421179Z hint: 	git config --global init.defaultBranch <name>
+2026-11-04T18:47:10.5422002Z hint:
+2026-11-04T18:47:10.5422874Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-11-04T18:47:10.5424052Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-11-04T18:47:10.5425003Z hint:
+2026-11-04T18:47:10.5425635Z hint: 	git branch -m <name>
+2026-11-04T18:47:10.5426287Z hint:
+2026-11-04T18:47:10.5427843Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-11-04T18:47:10.5429630Z Initialized empty Git repository in /home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace/.git/
+2026-11-04T18:47:10.5432803Z [command]/usr/bin/git remote add origin https://github.com/hoyosgarciajohn-png/dental-worldwide-marketplace
+2026-11-04T18:47:10.5435368Z ##[endgroup]
+2026-11-04T18:47:10.5436646Z ##[group]Disabling automatic garbage collection
+2026-11-04T18:47:10.5437694Z [command]/usr/bin/git config --local gc.auto 0
+2026-11-04T18:47:10.5439819Z ##[endgroup]
+2026-11-04T18:47:10.5441327Z ##[group]Setting up auth
+2026-11-04T18:47:10.5442562Z Removing SSH command configuration
+2026-11-04T18:47:10.5443513Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-04T18:47:10.5447012Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-04T18:47:10.5449717Z Removing HTTP extra header
+2026-11-04T18:47:10.5450997Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-04T18:47:10.5454260Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-04T18:47:10.5502745Z Removing includeIf entries pointing to credentials config files
+2026-11-04T18:47:10.5504066Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-04T18:47:10.5523613Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-04T18:47:10.5665934Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-2754fdc9-151b-42a8-9abb-2df690649152.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-11-04T18:47:10.5696324Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace/.git.path /home/runner/work/_temp/git-credentials-2754fdc9-151b-42a8-9abb-2df690649152.config
+2026-11-04T18:47:10.5723115Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-2754fdc9-151b-42a8-9abb-2df690649152.config
+2026-11-04T18:47:10.5752830Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-2754fdc9-151b-42a8-9abb-2df690649152.config
+2026-11-04T18:47:10.5783223Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-2754fdc9-151b-42a8-9abb-2df690649152.config
+2026-11-04T18:47:10.5807029Z ##[endgroup]
+2026-11-04T18:47:10.5808246Z ##[group]Fetching the repository
+2026-11-04T18:47:10.5812648Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +2428b3f1a4e7f96d5f6a982d8ff9f51df23aeb5d:refs/remotes/origin/m1-accounts-access-20261104
+2026-11-04T18:47:11.0104903Z From https://github.com/hoyosgarciajohn-png/dental-worldwide-marketplace
+2026-11-04T18:47:11.0113549Z  * [new ref]         2428b3f1a4e7f96d5f6a982d8ff9f51df23aeb5d -> origin/m1-accounts-access-20261104
+2026-11-04T18:47:11.0119271Z [command]/usr/bin/git branch --list --remote origin/m1-accounts-access-20261104
+2026-11-04T18:47:11.0139122Z   origin/m1-accounts-access-20261104
+2026-11-04T18:47:11.0153593Z [command]/usr/bin/git rev-parse refs/remotes/origin/m1-accounts-access-20261104
+2026-11-04T18:47:11.0166602Z 2428b3f1a4e7f96d5f6a982d8ff9f51df23aeb5d
+2026-11-04T18:47:11.0170432Z ##[endgroup]
+2026-11-04T18:47:11.0171642Z ##[group]Determining the checkout info
+2026-11-04T18:47:11.0173153Z ##[endgroup]
+2026-11-04T18:47:11.0174855Z [command]/usr/bin/git sparse-checkout disable
+2026-11-04T18:47:11.0225601Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-11-04T18:47:11.0249636Z ##[group]Checking out the ref
+2026-11-04T18:47:11.0258560Z [command]/usr/bin/git checkout --progress --force -B m1-accounts-access-20261104 refs/remotes/origin/m1-accounts-access-20261104
+2026-11-04T18:47:11.0321058Z Switched to a new branch 'm1-accounts-access-20261104'
+2026-11-04T18:47:11.0324400Z branch 'm1-accounts-access-20261104' set up to track 'origin/m1-accounts-access-20261104'.
+2026-11-04T18:47:11.0338526Z ##[endgroup]
+2026-11-04T18:47:11.0365089Z [command]/usr/bin/git log -1 --format=%H
+2026-11-04T18:47:11.0379668Z 2428b3f1a4e7f96d5f6a982d8ff9f51df23aeb5d
+2026-11-04T18:47:11.0388661Z ##[group]Removing auth
+2026-11-04T18:47:11.0389696Z Removing SSH command configuration
+2026-11-04T18:47:11.0391678Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-04T18:47:11.0415532Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-04T18:47:11.0557852Z Removing HTTP extra header
+2026-11-04T18:47:11.0560418Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-04T18:47:11.0588988Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-04T18:47:11.0783702Z Removing includeIf entries pointing to credentials config files
+2026-11-04T18:47:11.0788817Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-04T18:47:11.0816905Z includeif.gitdir:/home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace/.git.path
+2026-11-04T18:47:11.0820179Z includeif.gitdir:/home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace/.git/worktrees/*.path
+2026-11-04T18:47:11.0822623Z includeif.gitdir:/github/workspace/.git.path
+2026-11-04T18:47:11.0824439Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-11-04T18:47:11.0829204Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace/.git.path
+2026-11-04T18:47:11.0845397Z /home/runner/work/_temp/git-credentials-2754fdc9-151b-42a8-9abb-2df690649152.config
+2026-11-04T18:47:11.0856070Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-2754fdc9\-151b\-42a8\-9abb\-2df690649152\.config
+2026-11-04T18:47:11.0894294Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace/.git/worktrees/*.path
+2026-11-04T18:47:11.0917513Z /home/runner/work/_temp/git-credentials-2754fdc9-151b-42a8-9abb-2df690649152.config
+2026-11-04T18:47:11.0933457Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-2754fdc9\-151b\-42a8\-9abb\-2df690649152\.config
+2026-11-04T18:47:11.0959632Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-11-04T18:47:11.0980186Z /github/runner_temp/git-credentials-2754fdc9-151b-42a8-9abb-2df690649152.config
+2026-11-04T18:47:11.0988217Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-2754fdc9\-151b\-42a8\-9abb\-2df690649152\.config
+2026-11-04T18:47:11.1014629Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-11-04T18:47:11.1031670Z /github/runner_temp/git-credentials-2754fdc9-151b-42a8-9abb-2df690649152.config
+2026-11-04T18:47:11.1040382Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-2754fdc9\-151b\-42a8\-9abb\-2df690649152\.config
+2026-11-04T18:47:11.1066189Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-04T18:47:11.1217443Z Removing credentials config '/home/runner/work/_temp/git-credentials-2754fdc9-151b-42a8-9abb-2df690649152.config'
+2026-11-04T18:47:11.1221112Z ##[endgroup]
+2026-11-04T18:47:11.1481438Z ##[group]Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+2026-11-04T18:47:11.1482604Z with:
+2026-11-04T18:47:11.1483245Z   node-version-file: .nvmrc
+2026-11-04T18:47:11.1484021Z   package-manager-cache: false
+2026-11-04T18:47:11.1484781Z   check-latest: false
+2026-11-04T18:47:11.1491050Z   token: ***
+2026-11-04T18:47:11.1491694Z env:
+2026-11-04T18:47:11.1492304Z   CI: true
+2026-11-04T18:47:11.1492941Z   NEXT_TELEMETRY_DISABLED: 1
+2026-11-04T18:47:11.1494453Z   SUPABASE_HOME: /home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace/.supabase-local/runtime
+2026-11-04T18:47:11.1496029Z ##[endgroup]
+2026-11-04T18:47:11.2485121Z Node version file is not JSON file
+2026-11-04T18:47:11.2486581Z Node version file is not TOML file
+2026-11-04T18:47:11.2487613Z Resolved .nvmrc as 24.22.1
+2026-11-04T18:47:11.2509115Z Attempting to download 24.22.1...
+2026-11-04T18:47:12.0140549Z Acquiring 24.22.1 - x64 from https://github.com/actions/node-versions/releases/download/24.22.1-39619001896/node-24.22.1-linux-x64.tar.gz
+2026-11-04T18:47:12.6345870Z Extracting ...
+2026-11-04T18:47:12.6530391Z [command]/usr/bin/tar xz --strip 1 --warning=no-unknown-keyword --overwrite -C /home/runner/work/_temp/c672370c-40a6-4a7b-bbce-e280d859367c -f /home/runner/work/_temp/957efa2c-433a-435a-b750-0b24c75f6919
+2026-11-04T18:47:13.8570784Z Adding to the cache ...
+2026-11-04T18:47:17.6116231Z ##[group]Environment details
+2026-11-04T18:47:17.8168900Z node: v24.22.1
+2026-11-04T18:47:17.8169591Z npm: 11.19.1
+2026-11-04T18:47:17.8169969Z yarn: 1.22.22
+2026-11-04T18:47:17.8170628Z ##[endgroup]
+2026-11-04T18:47:17.8316767Z ##[group]Run git rev-parse HEAD
+2026-11-04T18:47:17.8317315Z [36;1mgit rev-parse HEAD[0m
+2026-11-04T18:47:17.8317642Z [36;1mnode --version[0m
+2026-11-04T18:47:17.8317878Z [36;1mnpm --version[0m
+2026-11-04T18:47:17.8318183Z [36;1mdocker version --format '{{.Server.Version}}'[0m
+2026-11-04T18:47:17.8335408Z shell: /usr/bin/bash -e {0}
+2026-11-04T18:47:17.8335716Z env:
+2026-11-04T18:47:17.8335917Z   CI: true
+2026-11-04T18:47:17.8336177Z   NEXT_TELEMETRY_DISABLED: 1
+2026-11-04T18:47:17.8337187Z   SUPABASE_HOME: /home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace/.supabase-local/runtime
+2026-11-04T18:47:17.8337661Z ##[endgroup]
+2026-11-04T18:47:17.8404552Z 2428b3f1a4e7f96d5f6a982d8ff9f51df23aeb5d
+2026-11-04T18:47:17.8430725Z v24.22.1
+2026-11-04T18:47:17.8971992Z 11.19.1
+2026-11-04T18:47:17.9749176Z 28.0.4
+2026-11-04T18:47:17.9794256Z ##[group]Run npm ci --no-audit --no-fund
+2026-11-04T18:47:17.9794576Z [36;1mnpm ci --no-audit --no-fund[0m
+2026-11-04T18:47:17.9805841Z shell: /usr/bin/bash -e {0}
+2026-11-04T18:47:17.9806100Z env:
+2026-11-04T18:47:17.9806316Z   CI: true
+2026-11-04T18:47:17.9806796Z   NEXT_TELEMETRY_DISABLED: 1
+2026-11-04T18:47:17.9807281Z   SUPABASE_HOME: /home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace/.supabase-local/runtime
+2026-11-04T18:47:17.9807756Z ##[endgroup]
+2026-11-04T18:47:26.6178734Z 
+2026-11-04T18:47:26.6179883Z added 79 packages in 9s
+2026-11-04T18:47:26.6990612Z ##[group]Run npm run test:unit
+2026-11-04T18:47:26.6991139Z [36;1mnpm run test:unit[0m
+2026-11-04T18:47:26.6991532Z [36;1mnpm run typecheck[0m
+2026-11-04T18:47:26.6991863Z [36;1mnpm run build[0m
+2026-11-04T18:47:26.6992698Z [36;1mnpm run test:http[0m
+2026-11-04T18:47:26.7009784Z shell: /usr/bin/bash -e {0}
+2026-11-04T18:47:26.7010249Z env:
+2026-11-04T18:47:26.7010582Z   CI: true
+2026-11-04T18:47:26.7010947Z   NEXT_TELEMETRY_DISABLED: 1
+2026-11-04T18:47:26.7011682Z   SUPABASE_HOME: /home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace/.supabase-local/runtime
+2026-11-04T18:47:26.7012463Z ##[endgroup]
+2026-11-04T18:47:27.0407286Z 
+2026-11-04T18:47:27.0433191Z > dental-worldwide-marketplace@0.0.1 test:unit
+2026-11-04T18:47:27.0434400Z > node --test scripts/*.test.mjs
+2026-11-04T18:47:27.0434820Z 
+2026-11-04T18:47:27.1886179Z ✔ Auth requires the expected service code and client-error status (1.573657ms)
+2026-11-04T18:47:27.1913920Z ✔ Storage accepts explicit or legacy masked denials (0.187339ms)
+2026-11-04T18:47:27.1956866Z ✔ Storage never treats network, server, throttling or malformed-request failures as denials (1.463568ms)
+2026-11-04T18:47:27.2578555Z ✔ cleanup removes credentials and reports success (1.390849ms)
+2026-11-04T18:47:27.2594705Z ✔ cleanup removes credentials and reports nonzero (0.584866ms)
+2026-11-04T18:47:27.2615137Z ✔ cleanup removes credentials and reports timeout (0.311464ms)
+2026-11-04T18:47:27.2631123Z ✔ cleanup removes credentials and reports spawn failure (0.349374ms)
+2026-11-04T18:47:27.2647677Z ✔ cleanup removes credentials and reports log write failure (0.357256ms)
+2026-11-04T18:47:27.2697311Z ℹ tests 8
+2026-11-04T18:47:27.2717290Z ℹ suites 0
+2026-11-04T18:47:27.2720283Z ℹ pass 8
+2026-11-04T18:47:27.2722004Z ℹ fail 0
+2026-11-04T18:47:27.2722752Z ℹ cancelled 0
+2026-11-04T18:47:27.2739860Z ℹ skipped 0
+2026-11-04T18:47:27.2740486Z ℹ todo 0
+2026-11-04T18:47:27.2741070Z ℹ duration_ms 180.370226
+2026-11-04T18:47:27.3844983Z 
+2026-11-04T18:47:27.3876213Z > dental-worldwide-marketplace@0.0.1 typecheck
+2026-11-04T18:47:27.3897411Z > next typegen && tsc --noEmit
+2026-11-04T18:47:27.3907108Z 
+2026-11-04T18:47:27.7041131Z Generating route types...
+2026-11-04T18:47:27.7211106Z ✓ Types generated successfully
+2026-11-04T18:47:28.6907045Z 
+2026-11-04T18:47:28.6928426Z > dental-worldwide-marketplace@0.0.1 build
+2026-11-04T18:47:28.6929119Z > next build
+2026-11-04T18:47:28.6931135Z 
+2026-11-04T18:47:29.0178096Z ▲ Next.js 16.4.5 (Turbopack)
+2026-11-04T18:47:29.0718717Z ✓ Running next.config.ts took 55ms
+2026-11-04T18:47:29.0768544Z ⚠ No build cache found. Please configure build caching for faster rebuilds. Read more: https://nextjs.org/docs/messages/no-cache
+2026-11-04T18:47:29.0812454Z 
+2026-11-04T18:47:29.1156219Z   Creating an optimized production build ...
+2026-11-04T18:47:34.1278670Z ✓ Compiled successfully in 4.9s
+2026-11-04T18:47:34.2877728Z   Running TypeScript ...
+2026-11-04T18:47:35.1079698Z   Finished TypeScript in 823ms ...
+2026-11-04T18:47:35.1095366Z   Collecting page data using 1 worker ...
+2026-11-04T18:47:35.7367708Z   Generating static pages using 1 worker (0/4) ...
+2026-11-04T18:47:35.8380001Z   Generating static pages using 1 worker (1/4) 
+2026-11-04T18:47:35.8388031Z   Generating static pages using 1 worker (2/4) 
+2026-11-04T18:47:35.8390131Z   Generating static pages using 1 worker (3/4) 
+2026-11-04T18:47:35.8391856Z ✓ Generating static pages using 1 worker (4/4) in 103ms
+2026-11-04T18:47:36.0240327Z   Finalizing page optimization ...
+2026-11-04T18:47:36.0977900Z 
+2026-11-04T18:47:36.0991999Z Route (app)
+2026-11-04T18:47:36.0993172Z ┌ ○ /
+2026-11-04T18:47:36.0993729Z ├ ○ /_not-found
+2026-11-04T18:47:36.0994336Z ├ ○ /account
+2026-11-04T18:47:36.0994797Z ├ ƒ /api/m1
+2026-11-04T18:47:36.0995214Z └ ƒ /auth/callback
+2026-11-04T18:47:36.0995767Z 
+2026-11-04T18:47:36.0995930Z 
+2026-11-04T18:47:36.0996706Z ○  (Static)   prerendered as static content
+2026-11-04T18:47:36.0997213Z ƒ  (Dynamic)  server-rendered on demand
+2026-11-04T18:47:36.0997754Z 
+2026-11-04T18:47:36.2293264Z 
+2026-11-04T18:47:36.2294122Z > dental-worldwide-marketplace@0.0.1 test:http
+2026-11-04T18:47:36.2294922Z > node scripts/http-smoke.mjs
+2026-11-04T18:47:36.2295447Z 
+2026-11-04T18:47:36.6685565Z PASS: foundation production HTTP smoke (not browser or database acceptance)
+2026-11-04T18:47:36.8711643Z ##[group]Run npx --no-install playwright install --with-deps chromium
+2026-11-04T18:47:36.8712142Z [36;1mnpx --no-install playwright install --with-deps chromium[0m
+2026-11-04T18:47:36.8724562Z shell: /usr/bin/bash -e {0}
+2026-11-04T18:47:36.8724837Z env:
+2026-11-04T18:47:36.8725031Z   CI: true
+2026-11-04T18:47:36.8725276Z   NEXT_TELEMETRY_DISABLED: 1
+2026-11-04T18:47:36.8725711Z   SUPABASE_HOME: /home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace/.supabase-local/runtime
+2026-11-04T18:47:36.8726141Z ##[endgroup]
+2026-11-04T18:47:37.4392205Z Installing dependencies...
+2026-11-04T18:47:37.4453665Z Switching to root user to install dependencies...
+2026-11-04T18:47:37.5549592Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+2026-11-04T18:47:37.6097228Z Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
+2026-11-04T18:47:37.6118460Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+2026-11-04T18:47:37.6153838Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+2026-11-04T18:47:37.6154840Z Get:6 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
+2026-11-04T18:47:37.6187827Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+2026-11-04T18:47:37.7139911Z Get:7 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1408 kB]
+2026-11-04T18:47:37.7288789Z Get:8 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1707 kB]
+2026-11-04T18:47:37.7548208Z Get:9 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [721 kB]
+2026-11-04T18:47:37.7747990Z Get:10 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [652 kB]
+2026-11-04T18:47:37.8418308Z Get:11 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [1155 kB]
+2026-11-04T18:47:37.8459590Z Get:12 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [233 kB]
+2026-11-04T18:47:37.8475192Z Get:13 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1224 kB]
+2026-11-04T18:47:37.8522903Z Get:14 http://azure.archive.ubuntu.com/ubuntu noble-security/universe Translation-en [247 kB]
+2026-11-04T18:47:37.8541238Z Get:15 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1721 kB]
+2026-11-04T18:47:37.8614967Z Get:16 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [394 kB]
+2026-11-04T18:47:37.8642255Z Get:17 http://azure.archive.ubuntu.com/ubuntu noble-security/multiverse Translation-en [12.4 kB]
+2026-11-04T18:47:40.8164708Z Fetched 9857 kB in 1s (11.2 MB/s)
+2026-11-04T18:47:41.6194242Z Reading package lists...
+2026-11-04T18:47:41.6463915Z Reading package lists...
+2026-11-04T18:47:41.8246850Z Building dependency tree...
+2026-11-04T18:47:41.8252388Z Reading state information...
+2026-11-04T18:47:41.9661150Z libasound2t64 is already the newest version (1.2.11-1ubuntu0.3).
+2026-11-04T18:47:41.9662805Z libasound2t64 set to manually installed.
+2026-11-04T18:47:41.9664266Z libatk-bridge2.0-0t64 is already the newest version (2.52.0-1build1).
+2026-11-04T18:47:41.9665197Z libatk-bridge2.0-0t64 set to manually installed.
+2026-11-04T18:47:41.9666040Z libatk1.0-0t64 is already the newest version (2.52.0-1build1).
+2026-11-04T18:47:41.9667068Z libatk1.0-0t64 set to manually installed.
+2026-11-04T18:47:41.9667616Z libatspi2.0-0t64 is already the newest version (2.52.0-1build1).
+2026-11-04T18:47:41.9668187Z libatspi2.0-0t64 set to manually installed.
+2026-11-04T18:47:41.9668854Z libcairo2 is already the newest version (1.18.0-3build1).
+2026-11-04T18:47:41.9669320Z libcairo2 set to manually installed.
+2026-11-04T18:47:41.9669747Z libcups2t64 is already the newest version (2.4.7-1.2ubuntu7.14).
+2026-11-04T18:47:41.9670356Z libcups2t64 set to manually installed.
+2026-11-04T18:47:41.9670756Z libdbus-1-3 is already the newest version (1.14.10-4ubuntu4.1).
+2026-11-04T18:47:41.9671117Z libdbus-1-3 set to manually installed.
+2026-11-04T18:47:41.9672084Z libdrm2 is already the newest version (2.4.125-1ubuntu0.1~24.04.2).
+2026-11-04T18:47:41.9672471Z libdrm2 set to manually installed.
+2026-11-04T18:47:41.9672918Z libgbm1 is already the newest version (25.2.8-0ubuntu0.24.04.4).
+2026-11-04T18:47:41.9673281Z libgbm1 set to manually installed.
+2026-11-04T18:47:41.9673649Z libglib2.0-0t64 is already the newest version (2.80.0-6ubuntu3.10).
+2026-11-04T18:47:41.9674166Z libglib2.0-0t64 set to manually installed.
+2026-11-04T18:47:41.9674616Z libnspr4 is already the newest version (2:4.35-1.1build1).
+2026-11-04T18:47:41.9675097Z libnspr4 set to manually installed.
+2026-11-04T18:47:41.9675511Z libnss3 is already the newest version (2:3.98-1ubuntu0.3).
+2026-11-04T18:47:41.9675899Z libnss3 set to manually installed.
+2026-11-04T18:47:41.9676353Z libpango-1.0-0 is already the newest version (1.52.1+ds-1build1).
+2026-11-04T18:47:41.9677031Z libpango-1.0-0 set to manually installed.
+2026-11-04T18:47:41.9677406Z libx11-6 is already the newest version (2:1.8.7-1ubuntu0.1).
+2026-11-04T18:47:41.9677774Z libx11-6 set to manually installed.
+2026-11-04T18:47:41.9678076Z libxcb1 is already the newest version (1.15-1ubuntu2).
+2026-11-04T18:47:41.9678424Z libxcb1 set to manually installed.
+2026-11-04T18:47:41.9678761Z libxcomposite1 is already the newest version (1:0.4.5-1build3).
+2026-11-04T18:47:41.9679207Z libxcomposite1 set to manually installed.
+2026-11-04T18:47:41.9679582Z libxdamage1 is already the newest version (1:1.1.6-1build1).
+2026-11-04T18:47:41.9679890Z libxdamage1 set to manually installed.
+2026-11-04T18:47:41.9680253Z libxext6 is already the newest version (2:1.3.4-1build2).
+2026-11-04T18:47:41.9680558Z libxext6 set to manually installed.
+2026-11-04T18:47:41.9680985Z libxfixes3 is already the newest version (1:6.0.0-2build1).
+2026-11-04T18:47:41.9681393Z libxfixes3 set to manually installed.
+2026-11-04T18:47:41.9681809Z libxkbcommon0 is already the newest version (1.6.0-1build1).
+2026-11-04T18:47:41.9682305Z libxkbcommon0 set to manually installed.
+2026-11-04T18:47:41.9682769Z libxrandr2 is already the newest version (2:1.5.2-2build1).
+2026-11-04T18:47:41.9683170Z libxrandr2 set to manually installed.
+2026-11-04T18:47:41.9683591Z xvfb is already the newest version (2:21.1.12-1ubuntu1.9).
+2026-11-04T18:47:41.9684060Z fonts-noto-color-emoji is already the newest version (2.047-0ubuntu0.24.04.1).
+2026-11-04T18:47:41.9684521Z libfontconfig1 is already the newest version (2.15.0-1.1ubuntu2).
+2026-11-04T18:47:41.9685016Z libfontconfig1 set to manually installed.
+2026-11-04T18:47:41.9685509Z libfreetype6 is already the newest version (2.13.2+dfsg-1ubuntu0.2).
+2026-11-04T18:47:41.9685966Z libfreetype6 set to manually installed.
+2026-11-04T18:47:41.9686344Z fonts-liberation is already the newest version (1:2.1.5-3).
+2026-11-04T18:47:41.9686871Z fonts-liberation set to manually installed.
+2026-11-04T18:47:41.9687398Z The following additional packages will be installed:
+2026-11-04T18:47:41.9687711Z   xfonts-encodings xfonts-utils
+2026-11-04T18:47:41.9688068Z Recommended packages:
+2026-11-04T18:47:41.9688541Z   fonts-ipafont-mincho fonts-tlwg-loma
+2026-11-04T18:47:41.9820743Z The following NEW packages will be installed:
+2026-11-04T18:47:41.9821638Z   fonts-freefont-ttf fonts-ipafont-gothic fonts-tlwg-loma-otf fonts-unifont
+2026-11-04T18:47:41.9827803Z   fonts-wqy-zenhei xfonts-cyrillic xfonts-encodings xfonts-scalable
+2026-11-04T18:47:41.9828601Z   xfonts-utils
+2026-11-04T18:47:41.9980061Z 0 upgraded, 9 newly installed, 0 to remove and 12 not upgraded.
+2026-11-04T18:47:41.9981074Z Need to get 21.1 MB of archives.
+2026-11-04T18:47:41.9981688Z After this operation, 79.5 MB of additional disk space will be used.
+2026-11-04T18:47:41.9982385Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+2026-11-04T18:47:42.0793335Z Get:2 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-ipafont-gothic all 00303-21ubuntu1 [3513 kB]
+2026-11-04T18:47:42.1539850Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 fonts-freefont-ttf all 20211204+svn4273-2 [5641 kB]
+2026-11-04T18:47:42.2528788Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-tlwg-loma-otf all 1:0.7.3-1 [107 kB]
+2026-11-04T18:47:42.2810751Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-unifont all 1:15.1.01-1build1 [2993 kB]
+2026-11-04T18:47:42.3444072Z Get:6 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-wqy-zenhei all 0.9.45-8 [7472 kB]
+2026-11-04T18:47:42.4579551Z Get:7 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-encodings all 1:1.0.5-0ubuntu2 [578 kB]
+2026-11-04T18:47:42.4956940Z Get:8 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-utils amd64 1:7.7+6build3 [94.4 kB]
+2026-11-04T18:47:42.5329437Z Get:9 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 xfonts-cyrillic all 1:1.0.5+nmu1 [384 kB]
+2026-11-04T18:47:42.5693422Z Get:10 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-scalable all 1:1.0.3-1.3 [304 kB]
+2026-11-04T18:47:42.7764723Z Fetched 21.1 MB in 1s (36.2 MB/s)
+2026-11-04T18:47:42.8006218Z Selecting previously unselected package fonts-ipafont-gothic.
+2026-11-04T18:47:42.8161799Z (Reading database ... 
+2026-11-04T18:47:42.8162306Z (Reading database ... 5%
+2026-11-04T18:47:42.8162746Z (Reading database ... 10%
+2026-11-04T18:47:42.8163050Z (Reading database ... 15%
+2026-11-04T18:47:42.8163327Z (Reading database ... 20%
+2026-11-04T18:47:42.8163712Z (Reading database ... 25%
+2026-11-04T18:47:42.8164005Z (Reading database ... 30%
+2026-11-04T18:47:42.8164252Z (Reading database ... 35%
+2026-11-04T18:47:42.8164477Z (Reading database ... 40%
+2026-11-04T18:47:42.8164701Z (Reading database ... 45%
+2026-11-04T18:47:42.8164943Z (Reading database ... 50%
+2026-11-04T18:47:42.8204550Z (Reading database ... 55%
+2026-11-04T18:47:42.9880001Z (Reading database ... 60%
+2026-11-04T18:47:43.1534086Z (Reading database ... 65%
+2026-11-04T18:47:43.4003577Z (Reading database ... 70%
+2026-11-04T18:47:43.5512768Z (Reading database ... 75%
+2026-11-04T18:47:43.7470417Z (Reading database ... 80%
+2026-11-04T18:47:43.9401436Z (Reading database ... 85%
+2026-11-04T18:47:44.1543785Z (Reading database ... 90%
+2026-11-04T18:47:44.3474578Z (Reading database ... 95%
+2026-11-04T18:47:44.3475475Z (Reading database ... 100%
+2026-11-04T18:47:44.3477665Z (Reading database ... 215960 files and directories currently installed.)
+2026-11-04T18:47:44.3521510Z Preparing to unpack .../0-fonts-ipafont-gothic_00303-21ubuntu1_all.deb ...
+2026-11-04T18:47:44.3780964Z Unpacking fonts-ipafont-gothic (00303-21ubuntu1) ...
+2026-11-04T18:47:44.6798357Z Selecting previously unselected package fonts-freefont-ttf.
+2026-11-04T18:47:44.6895786Z Preparing to unpack .../1-fonts-freefont-ttf_20211204+svn4273-2_all.deb ...
+2026-11-04T18:47:44.6915079Z Unpacking fonts-freefont-ttf (20211204+svn4273-2) ...
+2026-11-04T18:47:44.8518832Z Selecting previously unselected package fonts-tlwg-loma-otf.
+2026-11-04T18:47:44.8624914Z Preparing to unpack .../2-fonts-tlwg-loma-otf_1%3a0.7.3-1_all.deb ...
+2026-11-04T18:47:44.8643326Z Unpacking fonts-tlwg-loma-otf (1:0.7.3-1) ...
+2026-11-04T18:47:44.8857566Z Selecting previously unselected package fonts-unifont.
+2026-11-04T18:47:44.8944569Z Preparing to unpack .../3-fonts-unifont_1%3a15.1.01-1build1_all.deb ...
+2026-11-04T18:47:44.8955555Z Unpacking fonts-unifont (1:15.1.01-1build1) ...
+2026-11-04T18:47:45.2619157Z Selecting previously unselected package fonts-wqy-zenhei.
+2026-11-04T18:47:45.2718529Z Preparing to unpack .../4-fonts-wqy-zenhei_0.9.45-8_all.deb ...
+2026-11-04T18:47:45.2792632Z Unpacking fonts-wqy-zenhei (0.9.45-8) ...
+2026-11-04T18:47:45.8213790Z Selecting previously unselected package xfonts-encodings.
+2026-11-04T18:47:45.8322105Z Preparing to unpack .../5-xfonts-encodings_1%3a1.0.5-0ubuntu2_all.deb ...
+2026-11-04T18:47:45.8333674Z Unpacking xfonts-encodings (1:1.0.5-0ubuntu2) ...
+2026-11-04T18:47:45.8774188Z Selecting previously unselected package xfonts-utils.
+2026-11-04T18:47:45.8881361Z Preparing to unpack .../6-xfonts-utils_1%3a7.7+6build3_amd64.deb ...
+2026-11-04T18:47:45.8890891Z Unpacking xfonts-utils (1:7.7+6build3) ...
+2026-11-04T18:47:45.9315060Z Selecting previously unselected package xfonts-cyrillic.
+2026-11-04T18:47:45.9421710Z Preparing to unpack .../7-xfonts-cyrillic_1%3a1.0.5+nmu1_all.deb ...
+2026-11-04T18:47:45.9433394Z Unpacking xfonts-cyrillic (1:1.0.5+nmu1) ...
+2026-11-04T18:47:45.9877883Z Selecting previously unselected package xfonts-scalable.
+2026-11-04T18:47:45.9983463Z Preparing to unpack .../8-xfonts-scalable_1%3a1.0.3-1.3_all.deb ...
+2026-11-04T18:47:45.9995082Z Unpacking xfonts-scalable (1:1.0.3-1.3) ...
+2026-11-04T18:47:46.0642869Z Setting up fonts-wqy-zenhei (0.9.45-8) ...
+2026-11-04T18:47:46.0778763Z Setting up fonts-freefont-ttf (20211204+svn4273-2) ...
+2026-11-04T18:47:46.0819461Z Setting up fonts-tlwg-loma-otf (1:0.7.3-1) ...
+2026-11-04T18:47:46.0861874Z Setting up xfonts-encodings (1:1.0.5-0ubuntu2) ...
+2026-11-04T18:47:46.0898773Z Setting up fonts-ipafont-gothic (00303-21ubuntu1) ...
+2026-11-04T18:47:46.0960080Z update-alternatives: using /usr/share/fonts/opentype/ipafont-gothic/ipag.ttf to provide /usr/share/fonts/truetype/fonts-japanese-gothic.ttf (fonts-japanese-gothic.ttf) in auto mode
+2026-11-04T18:47:46.0992119Z Setting up fonts-unifont (1:15.1.01-1build1) ...
+2026-11-04T18:47:46.1034911Z Setting up xfonts-utils (1:7.7+6build3) ...
+2026-11-04T18:47:46.1086683Z Setting up xfonts-cyrillic (1:1.0.5+nmu1) ...
+2026-11-04T18:47:46.1363438Z Setting up xfonts-scalable (1:1.0.3-1.3) ...
+2026-11-04T18:47:46.1575497Z Processing triggers for man-db (2.12.0-4build2) ...
+2026-11-04T18:47:46.1597722Z Not building database; man-db/auto-update is not 'true'.
+2026-11-04T18:47:46.1614858Z Processing triggers for fontconfig (2.15.0-1.1ubuntu2) ...
+2026-11-04T18:47:46.6817406Z 
+2026-11-04T18:47:46.6818742Z Running kernel seems to be up-to-date.
+2026-11-04T18:47:46.6819308Z 
+2026-11-04T18:47:46.6819558Z No services need to be restarted.
+2026-11-04T18:47:46.6819883Z 
+2026-11-04T18:47:46.6820185Z No containers need to be restarted.
+2026-11-04T18:47:46.6820486Z 
+2026-11-04T18:47:46.6820803Z No user sessions are running outdated binaries.
+2026-11-04T18:47:46.6821133Z 
+2026-11-04T18:47:46.6821483Z No VM guests are running outdated hypervisor (qemu) binaries on this host.
+2026-11-04T18:47:47.4602072Z Downloading Chrome for Testing 156.0.8078.4 (playwright chromium v1248) from https://cdn.playwright.dev/builds/cft/156.0.8078.4/linux64/chrome-linux64.zip
+2026-11-04T18:47:47.8295887Z |                                                                                |   0% of 191.1 MiB
+2026-11-04T18:47:48.1113822Z |■■■■■■■■                                                                        |  10% of 191.1 MiB
+2026-11-04T18:47:48.1744070Z |■■■■■■■■■■■■■■■■                                                                |  20% of 191.1 MiB
+2026-11-04T18:47:48.2604232Z |■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 191.1 MiB
+2026-11-04T18:47:48.3064593Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 191.1 MiB
+2026-11-04T18:47:48.3857859Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 191.1 MiB
+2026-11-04T18:47:48.4815868Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 191.1 MiB
+2026-11-04T18:47:48.5718835Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 191.1 MiB
+2026-11-04T18:47:48.7085537Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 191.1 MiB
+2026-11-04T18:47:48.7769057Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 191.1 MiB
+2026-11-04T18:47:48.8851320Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 191.1 MiB
+2026-11-04T18:47:51.6893243Z Chrome for Testing 156.0.8078.4 (playwright chromium v1248) downloaded to /home/runner/.cache/ms-playwright/chromium-1248
+2026-11-04T18:47:51.6912930Z Downloading FFmpeg (playwright ffmpeg v1013) from https://cdn.playwright.dev/dbazure/download/playwright/builds/ffmpeg/1013/ffmpeg-linux.zip
+2026-11-04T18:47:52.1242754Z |                                                                                |   0% of 2.2 MiB
+2026-11-04T18:47:52.1552023Z |■■■■■■■■                                                                        |  10% of 2.2 MiB
+2026-11-04T18:47:52.1678919Z |■■■■■■■■■■■■■■■■                                                                |  20% of 2.2 MiB
+2026-11-04T18:47:52.1771712Z |■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 2.2 MiB
+2026-11-04T18:47:52.1799302Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 2.2 MiB
+2026-11-04T18:47:52.1834973Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 2.2 MiB
+2026-11-04T18:47:52.1897101Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 2.2 MiB
+2026-11-04T18:47:52.1922895Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 2.2 MiB
+2026-11-04T18:47:52.1941136Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 2.2 MiB
+2026-11-04T18:47:52.1963973Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 2.2 MiB
+2026-11-04T18:47:52.1995928Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 2.2 MiB
+2026-11-04T18:47:52.2435178Z FFmpeg (playwright ffmpeg v1013) downloaded to /home/runner/.cache/ms-playwright/ffmpeg-1013
+2026-11-04T18:47:52.2450373Z Downloading Chrome Headless Shell 156.0.8078.4 (playwright chromium-headless-shell v1248) from https://cdn.playwright.dev/builds/cft/156.0.8078.4/linux64/chrome-headless-shell-linux64.zip
+2026-11-04T18:47:52.6028528Z |                                                                                |   0% of 120 MiB
+2026-11-04T18:47:52.8108653Z |■■■■■■■■                                                                        |  10% of 120 MiB
+2026-11-04T18:47:52.8883832Z |■■■■■■■■■■■■■■■■                                                                |  20% of 120 MiB
+2026-11-04T18:47:52.9292121Z |■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 120 MiB
+2026-11-04T18:47:52.9995092Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 120 MiB
+2026-11-04T18:47:53.0261527Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 120 MiB
+2026-11-04T18:47:53.0573844Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 120 MiB
+2026-11-04T18:47:53.1128927Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 120 MiB
+2026-11-04T18:47:53.1450685Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 120 MiB
+2026-11-04T18:47:53.1705494Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 120 MiB
+2026-11-04T18:47:53.2223338Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 120 MiB
+2026-11-04T18:47:55.3293360Z Chrome Headless Shell 156.0.8078.4 (playwright chromium-headless-shell v1248) downloaded to /home/runner/.cache/ms-playwright/chromium_headless_shell-1248
+2026-11-04T18:47:55.4970225Z ##[group]Run npm run test:m1:docker
+2026-11-04T18:47:55.4970665Z [36;1mnpm run test:m1:docker[0m
+2026-11-04T18:47:55.4986310Z shell: /usr/bin/bash -e {0}
+2026-11-04T18:47:55.4986889Z env:
+2026-11-04T18:47:55.4987198Z   CI: true
+2026-11-04T18:47:55.4987541Z   NEXT_TELEMETRY_DISABLED: 1
+2026-11-04T18:47:55.4988447Z   SUPABASE_HOME: /home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace/.supabase-local/runtime
+2026-11-04T18:47:55.4989173Z ##[endgroup]
+2026-11-04T18:47:55.8197433Z 
+2026-11-04T18:47:55.8217612Z > dental-worldwide-marketplace@0.0.1 test:m1:docker
+2026-11-04T18:47:55.8227461Z > node scripts/m1-docker-smoke.mjs
+2026-11-04T18:47:55.8227945Z 
+2026-11-04T18:48:20.0546070Z PASS m1-start
+2026-11-04T18:48:20.8999560Z PASS m1-status
+2026-11-04T18:48:21.8639903Z PASS m1-migration-check
+2026-11-04T18:48:22.9269039Z PASS m1-security-advisors
+2026-11-04T18:48:22.9270602Z Security advisor result: {"results":[],"message":"db advisors","target":{"kind":"local","host":"127.0.0.1","port":54322}}
+2026-11-04T18:48:22.9271328Z 
+2026-11-04T18:48:23.1033234Z PASS Auth: fictional confirmed identity created without invitation/email
+2026-11-04T18:48:23.1654350Z PASS Auth: invalid password rejected
+2026-11-04T18:48:23.2472328Z PASS Auth: password login and server validation
+2026-11-04T18:48:23.2622494Z PASS Auth: session refresh
+2026-11-04T18:48:23.3359194Z PASS Storage: private bucket and exact-byte upload/download
+2026-11-04T18:48:23.4094648Z PASS Storage: anonymous, public URL and ungranted user reads denied
+2026-11-04T18:48:23.4631813Z PASS Storage: short-lived signed download round trip
+2026-11-04T18:48:23.4885034Z PASS Auth: sign out rejects refresh-token reuse
+2026-11-04T18:48:23.5745315Z PASS Cleanup: fictional object, bucket and identity removed
+2026-11-04T18:48:23.7187626Z PASS M1-02 anonymous RPC denied by database privilege
+2026-11-04T18:48:25.7249944Z PASS M1-02 private tables default deny with RLS and no anonymous execution
+2026-11-04T18:48:26.7279428Z FAIL M1 database/auth: SQL probe 3 failed (private diagnostic retained)
+2026-11-04T18:48:26.7280213Z 
+2026-11-04T18:48:26.7280552Z 1 !== 0
+2026-11-04T18:48:26.7280903Z 
+2026-11-04T18:48:26.7344426Z FAIL scripts/m1-services-test.mjs failed
+2026-11-04T18:48:26.7344972Z 
+2026-11-04T18:48:26.7345421Z 1 !== 0
+2026-11-04T18:48:26.7345721Z 
+2026-11-04T18:48:35.7035779Z PASS m1-fixture-reset
+2026-11-04T18:48:36.6688178Z PASS m1-empty-after-reset
+2026-11-04T18:48:39.0511435Z PASS M1 project stack stopped
+2026-11-04T18:48:39.0514136Z {
+2026-11-04T18:48:39.0514769Z   "result": "FAIL",
+2026-11-04T18:48:39.0515254Z   "database": {
+2026-11-04T18:48:39.0515688Z     "result": "FAIL",
+2026-11-04T18:48:39.0516096Z     "checks": [
+2026-11-04T18:48:39.0516676Z       {
+2026-11-04T18:48:39.0517238Z         "check": "M1-02 anonymous RPC denied by database privilege",
+2026-11-04T18:48:39.0517890Z         "result": "PASS"
+2026-11-04T18:48:39.0518365Z       },
+2026-11-04T18:48:39.0518799Z       {
+2026-11-04T18:48:39.0519442Z         "check": "M1-02 private tables default deny with RLS and no anonymous execution",
+2026-11-04T18:48:39.0520182Z         "result": "PASS"
+2026-11-04T18:48:39.0520683Z       }
+2026-11-04T18:48:39.0521178Z     ],
+2026-11-04T18:48:39.0521585Z     "counts": {
+2026-11-04T18:48:39.0521981Z       "patients": 0,
+2026-11-04T18:48:39.0522507Z       "practices": 1,
+2026-11-04T18:48:39.0522948Z       "sites": 2,
+2026-11-04T18:48:39.0523446Z       "identities": 0
+2026-11-04T18:48:39.0523914Z     },
+2026-11-04T18:48:39.0524344Z     "human": "DEFERRED TO M7"
+2026-11-04T18:48:39.0524843Z   },
+2026-11-04T18:48:39.0525269Z   "api": null,
+2026-11-04T18:48:39.0525772Z   "cleanup": {
+2026-11-04T18:48:39.0526226Z     "fixtures": "PASS",
+2026-11-04T18:48:39.0526865Z     "credentialFiles": "REMOVED"
+2026-11-04T18:48:39.0527456Z   },
+2026-11-04T18:48:39.0527964Z   "human": "DEFERRED TO M7",
+2026-11-04T18:48:39.0528536Z   "independentAcceptance": "PENDING CHAT 06"
+2026-11-04T18:48:39.0529032Z }
+2026-11-04T18:48:39.0620794Z ##[error]Process completed with exit code 1.
+2026-11-04T18:48:39.0668335Z ##[group]Run if [ -f node_modules/supabase/dist/supabase.js ]; then
+2026-11-04T18:48:39.0668749Z [36;1mif [ -f node_modules/supabase/dist/supabase.js ]; then[0m
+2026-11-04T18:48:39.0669062Z [36;1m  mkdir -p .supabase-local[0m
+2026-11-04T18:48:39.0669328Z [36;1m  result=0[0m
+2026-11-04T18:48:39.0669736Z [36;1m  node node_modules/supabase/dist/supabase.js stop > .supabase-local/ci-stop.log 2>&1 || result=$?[0m
+2026-11-04T18:48:39.0670244Z [36;1m  rm -f .supabase-local/connection.json .supabase-local/m1-fixtures.json .env.local[0m
+2026-11-04T18:48:39.0670613Z [36;1m  if [ "$result" -ne 0 ]; then[0m
+2026-11-04T18:48:39.0670991Z [36;1m    echo 'FAIL: project stack cleanup; raw log withheld because it may contain credentials'[0m
+2026-11-04T18:48:39.0671371Z [36;1m    exit "$result"[0m
+2026-11-04T18:48:39.0671614Z [36;1m  fi[0m
+2026-11-04T18:48:39.0671812Z [36;1mfi[0m
+2026-11-04T18:48:39.0685547Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-04T18:48:39.0685977Z env:
+2026-11-04T18:48:39.0686202Z   CI: true
+2026-11-04T18:48:39.0686953Z   NEXT_TELEMETRY_DISABLED: 1
+2026-11-04T18:48:39.0687407Z   SUPABASE_HOME: /home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace/.supabase-local/runtime
+2026-11-04T18:48:39.0687844Z ##[endgroup]
+2026-11-04T18:48:40.0636195Z ##[group]Run node --input-type=module <<'JS'
+2026-11-04T18:48:40.0636744Z [36;1mnode --input-type=module <<'JS'[0m
+2026-11-04T18:48:40.0637278Z [36;1mimport { existsSync, readFileSync, appendFileSync } from 'node:fs';[0m
+2026-11-04T18:48:40.0637661Z [36;1mconst path = '.supabase-local/m1-evidence.json';[0m
+2026-11-04T18:48:40.0638036Z [36;1mconst evidence = existsSync(path) ? JSON.parse(readFileSync(path, 'utf8')) : null;[0m
+2026-11-04T18:48:40.0638435Z [36;1mconst report = {[0m
+2026-11-04T18:48:40.0638715Z [36;1m  source: process.env.GITHUB_SHA,[0m
+2026-11-04T18:48:40.0639014Z [36;1m  job: process.env.JOB_RESULT,[0m
+2026-11-04T18:48:40.0639303Z [36;1m  services: evidence?.result ?? 'NOT PERFORMED',[0m
+2026-11-04T18:48:40.0639571Z [36;1m  evidence,[0m
+2026-11-04T18:48:40.0640008Z [36;1m  limitation: 'M1 fictional-data implementation only. Human checks deferred to M7. Independent acceptance pending Chat 06.'[0m
+2026-11-04T18:48:40.0640437Z [36;1m};[0m
+2026-11-04T18:48:40.0640800Z [36;1mconst json = JSON.stringify(report, null, 2);[0m
+2026-11-04T18:48:40.0641085Z [36;1mconsole.log(json);[0m
+2026-11-04T18:48:40.0641438Z [36;1mappendFileSync(process.env.GITHUB_STEP_SUMMARY, '```json\n' + json + '\n```\n');[0m
+2026-11-04T18:48:40.0641822Z [36;1mJS[0m
+2026-11-04T18:48:40.0654229Z shell: /usr/bin/bash -e {0}
+2026-11-04T18:48:40.0654485Z env:
+2026-11-04T18:48:40.0654705Z   CI: true
+2026-11-04T18:48:40.0654920Z   NEXT_TELEMETRY_DISABLED: 1
+2026-11-04T18:48:40.0655353Z   SUPABASE_HOME: /home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace/.supabase-local/runtime
+2026-11-04T18:48:40.0655819Z   JOB_RESULT: failure
+2026-11-04T18:48:40.0656036Z ##[endgroup]
+2026-11-04T18:48:40.0885865Z {
+2026-11-04T18:48:40.0886753Z   "source": "2428b3f1a4e7f96d5f6a982d8ff9f51df23aeb5d",
+2026-11-04T18:48:40.0887354Z   "job": "failure",
+2026-11-04T18:48:40.0896594Z   "services": "FAIL",
+2026-11-04T18:48:40.0897322Z   "evidence": {
+2026-11-04T18:48:40.0897739Z     "result": "FAIL",
+2026-11-04T18:48:40.0898175Z     "database": {
+2026-11-04T18:48:40.0898558Z       "result": "FAIL",
+2026-11-04T18:48:40.0898976Z       "checks": [
+2026-11-04T18:48:40.0899418Z         {
+2026-11-04T18:48:40.0899899Z           "check": "M1-02 anonymous RPC denied by database privilege",
+2026-11-04T18:48:40.0900382Z           "result": "PASS"
+2026-11-04T18:48:40.0900754Z         },
+2026-11-04T18:48:40.0901097Z         {
+2026-11-04T18:48:40.0906297Z           "check": "M1-02 private tables default deny with RLS and no anonymous execution",
+2026-11-04T18:48:40.0907019Z           "result": "PASS"
+2026-11-04T18:48:40.0907471Z         }
+2026-11-04T18:48:40.0908151Z       ],
+2026-11-04T18:48:40.0908477Z       "counts": {
+2026-11-04T18:48:40.0908796Z         "patients": 0,
+2026-11-04T18:48:40.0909147Z         "practices": 1,
+2026-11-04T18:48:40.0909424Z         "sites": 2,
+2026-11-04T18:48:40.0909680Z         "identities": 0
+2026-11-04T18:48:40.0909975Z       },
+2026-11-04T18:48:40.0910313Z       "human": "DEFERRED TO M7"
+2026-11-04T18:48:40.0910640Z     },
+2026-11-04T18:48:40.0910898Z     "api": null,
+2026-11-04T18:48:40.0911149Z     "cleanup": {
+2026-11-04T18:48:40.0911462Z       "fixtures": "PASS",
+2026-11-04T18:48:40.0911801Z       "credentialFiles": "REMOVED"
+2026-11-04T18:48:40.0912106Z     },
+2026-11-04T18:48:40.0912320Z     "human": "DEFERRED TO M7",
+2026-11-04T18:48:40.0912593Z     "independentAcceptance": "PENDING CHAT 06"
+2026-11-04T18:48:40.0912880Z   },
+2026-11-04T18:48:40.0913307Z   "limitation": "M1 fictional-data implementation only. Human checks deferred to M7. Independent acceptance pending Chat 06."
+2026-11-04T18:48:40.0913777Z }
+2026-11-04T18:48:40.1037678Z Post job cleanup.
+2026-11-04T18:48:40.1728138Z [command]/usr/bin/git version
+2026-11-04T18:48:40.1798857Z git version 2.56.0
+2026-11-04T18:48:40.1840471Z Temporarily overriding HOME='/home/runner/work/_temp/01da830a-5583-4604-a300-29652170667f' before making global git config changes
+2026-11-04T18:48:40.1841327Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-04T18:48:40.1842331Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace
+2026-11-04T18:48:40.1882100Z Removing SSH command configuration
+2026-11-04T18:48:40.1883055Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-04T18:48:40.1929222Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-04T18:48:40.2183330Z Removing HTTP extra header
+2026-11-04T18:48:40.2184212Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-04T18:48:40.2228726Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-04T18:48:40.2530777Z Removing includeIf entries pointing to credentials config files
+2026-11-04T18:48:40.2531946Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-04T18:48:40.2620581Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-04T18:48:40.3112787Z Cleaning up orphan processes

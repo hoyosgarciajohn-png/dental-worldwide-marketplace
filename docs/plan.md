@@ -270,3 +270,6 @@ Chat 06's acceptance/M1 package v1.0 accepts baseline `5d975f5` using tested sou
 
 ## M1 authorization — November 4, 2026
 John subsequently answered "Yes I approve M1 package" to the bounded M1 decision and three 20-minute $0 hosted test runs. This supersedes earlier M1-not-authorized wording only within docs/m1-authorization.md. M2–M7, merges, charges and deployments remain excluded. Security decisions are recorded in docs/m1-security-decisions.md before affected implementation.
+
+## M1 implementation checkpoint — November 4, 2026
+M1 authorized and implemented on draft PR #2; M1 overall acceptance BLOCKED. Third hosted candidate passes actual database/Auth authorization suite and M0 regression, but API/mail stopped at request-origin validation and browser tests were not reached. Origin defect corrected and locally verified after that run. All three approved hosted attempts consumed; active runner removed. See m1-validation-followup.md and m1-execution-evidence.json for exact tested source, evidence, limitations and concrete further-runtime proposal. No fourth execution, merge, deployment or M2 work authorized.

@@ -1,12 +1,13 @@
 import {NextRequest,NextResponse} from 'next/server';
 import {client,config,audit} from '../../../lib/m1-server';
+import {trustedLocalRequest} from '../../../lib/m1-origin';
 export const runtime='nodejs';
 export const dynamic='force-dynamic';
 export async function GET(req:NextRequest){
  const cfg=config(); const secure=new URL(cfg.origin).protocol==='https:';
  let destination='/account#notice=link_invalid';let recovery:{access_token:string;refresh_token:string}|null=null;
  try{
-  if(new URL(req.url).origin!==cfg.origin)throw new Error('invalid_origin');
+  if(!trustedLocalRequest(req,cfg.origin,false))throw new Error('invalid_origin');
   const code=req.nextUrl.searchParams.get('code');const verifier=req.cookies.get('dental_pkce')?.value;
   if(!code||code.length>300||!verifier||verifier.length>1000)throw new Error('invalid_callback');
   const c=client(false,{initial:verifier,onValue:()=>{}});

@@ -13,7 +13,8 @@
     "test:m0:docker": "node scripts/m0-docker-smoke.mjs",
     "test:unit": "node --test scripts/*.test.mjs",
     "test:m1:docker": "node scripts/m1-docker-smoke.mjs",
-    "test:m1:browser": "playwright test"
+    "test:m1:browser": "playwright test",
+    "test:m1:origin": "node scripts/m1-origin-smoke.mjs"
   },
   "keywords": [],
   "author": "",
