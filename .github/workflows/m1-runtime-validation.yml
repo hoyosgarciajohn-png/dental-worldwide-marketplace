@@ -1,6 +1,6 @@
 # DORMANT copy of approved bounded runner; activation consumes one of three M1 runs.
 name: M1 isolated account and access validation
-# Authorized execution 2 of 3: supported default-mail PKCE flow.
+# Authorized execution 3 of 3: single-statement fixture queries and explicit diagnostics.
 on:
   push:
     branches: [m1-accounts-access-20261104]

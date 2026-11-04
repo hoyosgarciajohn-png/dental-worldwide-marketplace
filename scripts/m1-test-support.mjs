@@ -14,6 +14,7 @@ let sqlIndex=0;
 export function sql(query, {failure=false}={}) {
  const result=spawnSync(process.execPath,['node_modules/supabase/dist/supabase.js','db','query',query,'--output-format','json'],{encoding:'utf8',timeout:30000});
  writeFileSync(`.supabase-local/sql-${++sqlIndex}.log`,`${result.stdout||''}${result.stderr||''}`,{mode:0o600});
+ if(result.status!==0&&!failure){const diagnostic=((result.stdout||'')+'\n'+(result.stderr||'')).split('\n').filter(l=>/error|failed|syntax|statement/i.test(l)).map(l=>l.replace(/[A-Za-z0-9_\-.]{32,}/g,'[redacted]')).join('\n').slice(-1400);if(diagnostic)console.error(diagnostic);}
  if(failure){assert.notEqual(result.status,0,'Expected SQL denial');return;}
  assert.equal(result.status,0,`SQL probe ${sqlIndex} failed (private diagnostic retained)`);
  return result.stdout;
