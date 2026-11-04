@@ -1,4 +1,4 @@
-# Execution 1 of at most 3; owner approved November 4, 2026.
+# Execution 2 of at most 3; owner approved November 4, 2026.
 name: M0 isolated runtime validation
 on:
   push:
@@ -16,7 +16,7 @@ jobs:
     env:
       CI: 'true'
       NEXT_TELEMETRY_DISABLED: '1'
-      SUPABASE_HOME: ${{ runner.temp }}/dental-m0-supabase
+      SUPABASE_HOME: ${{ github.workspace }}/.supabase-local/runtime
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
