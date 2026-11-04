@@ -1,5 +1,7 @@
 # M0 independent acceptance handoff — November 4, 2026
 
+Update after receipt of Chat 06's report: the earlier baseline is independently accepted. Only the subsequent test-hardening delta needs focused closure; do not repeat the full review below. Final run/job metadata is now completed/success. See `docs/m0-acceptance-reconciliation.md` for exact accepted source, delta, finding disposition and the prepared M1 decision.
+
 Prepared by the implementation author for Chat 06. This document is a review task, not an independent verdict. User authorization remains bounded M0 at USD 0 new external charges.
 
 ## Candidate and evidence

@@ -264,3 +264,6 @@ The later Chat 06 report, Dental_Chat06_Independent_Planning_Review_v1.0.md (Lib
 
 ## M0 hosted-runner exception — November 4, 2026
 John explicitly approved the prepared bounded GitHub-hosted test run. This permits the actual local Supabase Docker stack on a standard Ubuntu runner in the existing private repository, at most three executions of 20 minutes, fictional data only and USD 0 new external charges. Keep the account-wide USD 0 Actions block unchanged. No hosted Supabase service, deployment, paid API, real data or later milestone is authorized. Approval authorizes execution, not a PASS. See docs/m0-runtime-host-proposal.md.
+
+## M0 independent acceptance received — November 4, 2026
+Chat 06's acceptance/M1 package v1.0 accepts baseline `5d975f5` using tested source `5eb647e`. The later `31fb04e`/`ba6bca5` test-hardening delta has successful runtime evidence and now completed/success provider job metadata, but needs focused independent closure. Preserve baseline acceptance and exact source boundaries. See `docs/m0-acceptance-reconciliation.md` for findings and the concrete M1 approval scope. M1 remains prepared, not authorized; no additional runner allowance, merge or deployment is implied. Human checks remain deferred to live M7.

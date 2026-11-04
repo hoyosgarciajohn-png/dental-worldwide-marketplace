@@ -1,7 +1,7 @@
 {
   "date": "2026-11-04",
   "scope": "M0 local foundation only",
-  "overall": "TECHNICAL_CHECKS_PASS; FORMAL_ACCEPTANCE_PENDING",
+  "overall": "BASELINE_INDEPENDENTLY_ACCEPTED; LATEST_TEST_HARDENING_DELTA_PENDING_FOCUSED_REVIEW",
   "download_blocker": "RESOLVED",
   "artifact_verification": [
     {
@@ -64,7 +64,8 @@
     "settings_changed": false
   },
   "current_evidence": "docs/m0-hosted-runtime-evidence.json",
-  "provider_final_status": "Attempt 2 completed/success; attempt 3 metadata pending despite complete successful log",
+  "provider_final_status": "Attempt 2 and attempt 3 jobs completed/success; earlier reporting discrepancy resolved",
   "hosted_attempts_used": 3,
-  "hosted_attempts_remaining": 0
+  "hosted_attempts_remaining": 0,
+  "acceptance_record": "docs/m0-acceptance-reconciliation.md"
 }

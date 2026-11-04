@@ -1,5 +1,7 @@
 # M0 setup evidence — November 4, 2026
 
+Current reconciliation: Chat 06 independently accepted baseline `5d975f5`. The later test-hardening successor `ba6bca5` passed its hosted execution; final provider job metadata now agrees (completed/success), and only focused independent review of that delta remains. M1 is prepared, not authorized. See `docs/m0-acceptance-reconciliation.md`; historical pending statements below are superseded only to this extent.
+
 Latest: corrected M0 technical checks PASS from attempt 3's complete execution log. Attempt 2's provider-status discrepancy is resolved. Attempt 3 provider status and independent M0 acceptance remain pending; see the final section. Earlier BLOCKED entries describe historical host limits.
 
 Overall: BLOCKED. Current prerequisite is a host with a usable non-root UID/GID or Docker; artifact download is now resolved. Foundation checks passed; actual Supabase DB/Auth/Storage acceptance has not run. This is not an M0 PASS or live-readiness verdict.
