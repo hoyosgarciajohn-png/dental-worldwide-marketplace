@@ -1,6 +1,6 @@
 # M0 setup evidence — November 4, 2026
 
-Overall: BLOCKED. Foundation checks passed; actual Supabase DB/Auth/Storage acceptance has not run. This is not an M0 PASS or live-readiness verdict.
+Overall: BLOCKED. Current prerequisite is a host with a usable non-root UID/GID or Docker; artifact download is now resolved. Foundation checks passed; actual Supabase DB/Auth/Storage acceptance has not run. This is not an M0 PASS or live-readiness verdict.
 
 ## Authorization
 John authorized bounded M0 setup with fictional data and USD 0 new external charges. M1–M6 features, paid services and live deployment are excluded.
@@ -35,3 +35,22 @@ No hosted database, paid API, messaging, subscriptions, real records, clinical c
 - https://supabase.com/docs/guides/local-development
 - https://supabase.com/docs/guides/local-development/docker-and-native-runtimes
 - https://supabase.com/docs/guides/local-development/running-multiple-local-projects
+
+
+## Runtime recovery attempt — November 4, 2026
+
+The original download blocker is RESOLVED. curl through the configured host proxy downloaded all five required Linux service archives and manifests from the official Supabase release URLs. Every archive and manifest matched supabase/supabase.lock SHA-256 pins. Supabase's unmodified CLI consumed these bytes through its source-supported SUPABASE_INTERNAL_SLIM_RELEASES_URL setting on a loopback-only static mirror and performed its own integrity checks. No package code, checksum verification, TLS setting, network policy or PostgreSQL root check was disabled.
+
+Native startup then hit two host prerequisites. First, /workspace is world-writable; a dedicated /var/lib runtime home avoided changing those shared permissions. Next, chown failed when handing the database directory to the configured non-root account. An isolated identity probe returned errno 22. Both /proc/self/uid_map and gid_map contain only `0 0 1`: the host exposes only uid/gid 0 in this process namespace. The named oai account exists in passwd but uid/gid 1001 cannot be selected here. There is no Docker executable or socket. Running the official PostgreSQL executable with --version succeeded (PostgreSQL 17.11); starting its database as root remains unsupported. Failed local stack was stopped successfully.
+
+**Current verdict: M0 BLOCKED by host identity/runtime capability, not artifact availability.** Actual SQL query, Auth login and Storage object acceptance remain NOT PERFORMED. No smoke implementation is counted as executed. Historical build/TypeScript/HTTP PASS remains scoped to the prior verified source.
+
+Prepared test automation (syntax-checked only):
+- scripts/m0-artifact-cache.py downloads only selected official service artifacts and rejects any pinned digest mismatch.
+- scripts/m0-local-runtime.py checks the non-root prerequisite, uses a loopback artifact mirror, runs actual SQL and Auth/Storage checks after startup, and stops only this project's stack. On this host its guard exits 2 BLOCKED before any service check. Requires Python 3.11+ and Linux; root hosts also require a suitable non-root account and trusted M0_SUPABASE_HOME.
+- scripts/m0-docker-smoke.mjs provides the corresponding automated path for an existing supported Docker development host, including Windows. It has not run here because Docker is absent.
+- scripts/m0-services-smoke.mjs creates an isolated fictional identity without sending email; checks bad/good password, server validation, refresh and sign-out refresh-token rejection; creates a private fictional bucket/object; checks byte equality, denied anonymous/public/ungranted-user access, signed download, and cleanup. These remain NOT PERFORMED. It rejects non-loopback targets and keeps keys in ignored files. No application roles or tenant policy is implemented.
+
+@supabase/supabase-js 2.119.0 added as an exact test-only development dependency, with updated lockfile. JS syntax checks and Python compilation passed. No M1–M6 feature development, cloud provisioning, telemetry-disable retry, real data or external charges. No test credential printed or committed.
+
+Required environment change: run the same source on an already available Docker-capable development host, or a supported Linux host with a usable non-root UID/GID and safe runtime directories. The automated checks then run without patient/provider participation. Host access is a development prerequisite; human acceptance checks remain deferred to M7.

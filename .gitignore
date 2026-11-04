@@ -10,3 +10,5 @@ supabase/.temp/
 supabase/.branches/
 *.log
 *.tsbuildinfo
+__pycache__/
+*.pyc
