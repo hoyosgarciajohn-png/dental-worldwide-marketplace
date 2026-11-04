@@ -1,0 +1,102 @@
+{
+  "date": "2026-11-04",
+  "scope": "M0 foundation only; fictional data",
+  "technical_checks": "PASS_FROM_COMPLETED_JOB_LOG",
+  "formal_acceptance": "PENDING_FINAL_STATUS_RECONCILIATION_AND_REVIEW",
+  "source_sha": "5eb647e4b3eaf007c9b2c14844d5da392ccee6aa",
+  "source_tree": "78ad88d4377dc9cf11cd05601ecb2364bbf67612",
+  "run_url": "https://github.com/hoyosgarciajohn-png/dental-worldwide-marketplace/actions/runs/41877608651",
+  "run_id": 41877608651,
+  "job_id": 126741249655,
+  "job_log_sha256": "fc9f727fd456d3be10c29a5042201acdbe7ce95e50b77ddf2ffdc34b29a24a9a",
+  "job_logged_start_utc": "2026-11-04T17:26:49Z",
+  "job_logged_end_utc": "2026-11-04T17:27:45Z",
+  "runtime": {
+    "os": "Ubuntu 24.04.5",
+    "node": "24.22.1",
+    "npm": "11.19.1",
+    "docker": "28.0.4",
+    "runner": "2.338.2",
+    "supabase_cli": "3.0.0 from locked install"
+  },
+  "foundation_checks": {
+    "locked_npm_ci": "PASS: 79 packages installed",
+    "typecheck": "PASS",
+    "production_build": "PASS",
+    "http_smoke": "PASS",
+    "docker_start_status": "PASS",
+    "sql": {
+      "m0_probe": 1,
+      "database": "postgres",
+      "auth_schema": 1,
+      "storage_schema": 1
+    },
+    "project_stack_stop": "PASS: shell step completed before success summary",
+    "connection_credentials_removal": "PASS: cleanup shell completed"
+  },
+  "service_checks": [
+    {
+      "check": "Auth: fictional confirmed identity created without invitation/email",
+      "result": "PASS"
+    },
+    {
+      "check": "Auth: invalid password rejected",
+      "result": "PASS"
+    },
+    {
+      "check": "Auth: password login and server validation",
+      "result": "PASS"
+    },
+    {
+      "check": "Auth: session refresh",
+      "result": "PASS"
+    },
+    {
+      "check": "Storage: private bucket and exact-byte upload/download",
+      "result": "PASS"
+    },
+    {
+      "check": "Storage: anonymous, public URL and ungranted user reads denied",
+      "result": "PASS"
+    },
+    {
+      "check": "Storage: short-lived signed download round trip",
+      "result": "PASS"
+    },
+    {
+      "check": "Auth: sign out rejects refresh-token reuse",
+      "result": "PASS"
+    },
+    {
+      "check": "Cleanup: fictional object, bucket and identity removed",
+      "result": "PASS"
+    }
+  ],
+  "attempts": [
+    {
+      "number": 1,
+      "source_sha": "3df51d8c984b334aefaf0dd877842498e1386531",
+      "run_id": 41877132535,
+      "result": "INVALID_WORKFLOW: runner context unavailable in job env; no job created"
+    },
+    {
+      "number": 2,
+      "source_sha": "5eb647e4b3eaf007c9b2c14844d5da392ccee6aa",
+      "run_id": 41877608651,
+      "result": "ALL_CHECKS_PASS_IN_LOG; provider metadata still queued"
+    }
+  ],
+  "status_discrepancy": "Run/job APIs and browser still show queued with no steps, while downloadable job log contains full execution, success summary and post-job cleanup. Do not represent provider final conclusion or independent acceptance as verified.",
+  "billing_observed": {
+    "billable_actions_usd": 0,
+    "included_compute_used_usd": 0.27,
+    "included_compute_total_usd": 12,
+    "actions_budget_usd": 0,
+    "settings_changed": false,
+    "limitation": "Billing UI may lag; no spending limit raised"
+  },
+  "human_acceptance": "DEFERRED TO M7 / NOT PERFORMED",
+  "independent_acceptance": "NOT PERFORMED",
+  "workspace_limitation": "ChatGPT workspace still lacks usable non-root UID and Docker; tests executed on approved ephemeral GitHub runner",
+  "limits": "No application roles, tenant policies, clinical workflows, browser acceptance or live readiness established"
+}

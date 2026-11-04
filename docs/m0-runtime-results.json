@@ -1,7 +1,7 @@
 {
   "date": "2026-11-04",
   "scope": "M0 local foundation only",
-  "overall": "BLOCKED",
+  "overall": "TECHNICAL_CHECKS_PASS; FORMAL_ACCEPTANCE_PENDING",
   "download_blocker": "RESOLVED",
   "artifact_verification": [
     {
@@ -46,15 +46,15 @@
   "failed_stack_stop": "PASS",
   "syntax_checks": "PASS: JS parsing and Python compilation only",
   "typecheck": "PASS",
-  "actual_database_query": "NOT PERFORMED",
-  "actual_auth_smoke": "NOT PERFORMED",
-  "actual_storage_smoke": "NOT PERFORMED",
-  "docker_path": "NOT PERFORMED: engine unavailable",
+  "actual_database_query": "PASS on approved GitHub runner",
+  "actual_auth_smoke": "PASS on approved GitHub runner",
+  "actual_storage_smoke": "PASS on approved GitHub runner",
+  "docker_path": "PASS on approved GitHub runner",
   "human_acceptance": "DEFERRED TO M7",
   "external_charges_usd": 0,
   "host_recheck": "UNCHANGED: Docker unavailable; only UID/GID 0 mapped",
   "user_namespace_probe": "BLOCKED: mapping write rejected (Operation not permitted)",
-  "host_alternative": "PREPARED ONLY: GitHub Actions standard Ubuntu runner; owner host-scope approval pending",
+  "host_alternative": "OWNER APPROVED AND EXECUTED",
   "proposed_workflow_validation": "PASS: YAML syntax and bounded trigger, permission, timeout and pinned action controls; not executed",
   "github_billing_observed": {
     "included_compute_used_usd": 0,
@@ -62,5 +62,7 @@
     "actions_overage_budget_usd": 0,
     "usage_blocked": true,
     "settings_changed": false
-  }
+  },
+  "current_evidence": "docs/m0-hosted-runtime-evidence.json",
+  "provider_final_status": "PENDING RECONCILIATION: queued metadata conflicts with complete successful log"
 }
