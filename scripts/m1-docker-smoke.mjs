@@ -3,7 +3,7 @@ import {spawnSync,spawn} from 'node:child_process';
 import {mkdirSync,writeFileSync,readFileSync,rmSync,existsSync} from 'node:fs';
 import {cleanupProject} from './runtime-cleanup.mjs';
 mkdirSync('.supabase-local',{recursive:true,mode:0o700});
-const cli='node_modules/supabase/dist/supabase.js';let server,ready=false,failure,cleanup=false;
+const cli='node_modules/supabase/dist/supabase.js';let server,ready=false,failure,cleanup=false,browserResult='NOT PERFORMED';
 function command(args,name,timeout=240000){const r=spawnSync(process.execPath,[cli,...args],{encoding:'utf8',timeout});writeFileSync(`.supabase-local/${name}.log`,`${r.stdout||''}${r.stderr||''}`,{mode:0o600});if(r.status!==0){const diagnostic=((r.stdout||'')+'\n'+(r.stderr||'')).split('\n').filter(l=>/error|failed|syntax|migration/i.test(l)).map(l=>l.replace(/[A-Za-z0-9_\-.]{32,}/g,'[redacted]')).join('\n').slice(-1800);if(diagnostic)console.error(diagnostic);throw new Error(`${name} failed (private log retained)`);}console.log(`PASS ${name}`);return r.stdout;}
 function run(script,timeout=240000){const r=spawnSync(process.execPath,[script],{stdio:'inherit',timeout});assert.equal(r.status,0,`${script} failed`);}
 try{
@@ -19,8 +19,8 @@ try{
  const env={...process.env,SUPABASE_URL:cfg.API_URL,SUPABASE_ANON_KEY:cfg.ANON_KEY||cfg.PUBLISHABLE_KEY,SUPABASE_SERVICE_ROLE_KEY:cfg.SERVICE_ROLE_KEY||cfg.SECRET_KEY,APP_ORIGIN:'http://127.0.0.1:3000'};
  server=spawn(process.execPath,['node_modules/next/dist/bin/next','start','--hostname','127.0.0.1','--port','3000'],{env,stdio:['ignore','pipe','pipe']});
  await new Promise((resolve,reject)=>{server.stdout.on('data',b=>{if(b.toString().includes('Ready'))resolve();});server.on('error',reject);server.on('exit',()=>reject(new Error('Local web server exited')));setTimeout(()=>reject(new Error('Local web server timeout')),20000).unref();});
- run('scripts/m1-api-test.mjs',180000);
- const browser=spawnSync(process.execPath,['node_modules/@playwright/test/cli.js','test'],{stdio:'inherit',timeout:180000});assert.equal(browser.status,0,'M1 browser checks failed');console.log('PASS M1-07 six desktop/mobile bilingual and role browser cases');
+ try{run('scripts/m1-api-test.mjs',180000);}catch(e){failure??=e;console.error(`FAIL API suite: ${e.message}; independent browser checks will still run`);}
+ const browser=spawnSync(process.execPath,['node_modules/@playwright/test/cli.js','test'],{stdio:'inherit',timeout:180000});browserResult=browser.status===0?'PASS':'FAIL';assert.equal(browser.status,0,'M1 browser checks failed');console.log('PASS M1-07 six desktop/mobile bilingual and role browser cases');
 }catch(e){failure=e;console.error(`FAIL ${e.message}`);}
 finally{
  server?.kill('SIGTERM');
@@ -30,7 +30,7 @@ finally{
  finally{rmSync('.supabase-local/m1-fixtures.json',{force:true});rmSync('.env.local',{force:true});}
  assert.equal(existsSync('.supabase-local/connection.json'),false);assert.equal(existsSync('.supabase-local/m1-fixtures.json'),false);
  const read=path=>existsSync(path)?JSON.parse(readFileSync(path,'utf8')):null;
- const evidence={result:failure?'FAIL':'PASS',database:read('.supabase-local/m1-services-evidence.json'),api:read('.supabase-local/m1-api-evidence.json'),cleanup:{fixtures:cleanup?'PASS':'NOT VERIFIED',credentialFiles:'REMOVED'},human:'DEFERRED TO M7',independentAcceptance:'PENDING CHAT 06'};
+ const evidence={result:failure?'FAIL':'PASS',database:read('.supabase-local/m1-services-evidence.json'),api:read('.supabase-local/m1-api-evidence.json'),browser:{result:browserResult,configuredCases:6},cleanup:{fixtures:cleanup?'PASS':'NOT VERIFIED',credentialFiles:'REMOVED'},human:'DEFERRED TO M7',independentAcceptance:'PENDING CHAT 06'};
  writeFileSync('.supabase-local/m1-evidence.json',JSON.stringify(evidence,null,2));console.log(JSON.stringify(evidence,null,2));
 }
 if(failure)process.exitCode=1;
