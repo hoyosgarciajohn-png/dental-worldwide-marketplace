@@ -30,7 +30,7 @@ export function totp(secret,time=Date.now()) {
  const key=Buffer.from((bits.match(/.{8}/g)||[]).map(b=>parseInt(b,2)));const counter=Buffer.alloc(8);counter.writeBigUInt64BE(BigInt(Math.floor(time/30000)));
  const h=createHmac('sha1',key).update(counter).digest();const offset=h[19]&15;return String((h.readUInt32BE(offset)&0x7fffffff)%1000000).padStart(6,'0');
 }
-export async function mfa(c){const f=ok(await c.auth.mfa.enroll({factorType:'totp',friendlyName:'FICTIONAL automated check'}),'MFA enroll');ok(await c.auth.mfa.challengeAndVerify({factorId:f.id,code:totp(f.totp.secret)}),'MFA verify');await allow(c,'mfa.complete');return f;}
+export async function mfa(c){await new Promise(resolve=>setTimeout(resolve,4100));const f=ok(await c.auth.mfa.enroll({factorType:'totp',friendlyName:'FICTIONAL automated check'}),'MFA enroll');ok(await c.auth.mfa.challengeAndVerify({factorId:f.id,code:totp(f.totp.secret)}),'MFA verify');await allow(c,'mfa.complete');return f;}
 export async function api(action,payload={},cookies='',headers={}) {
  const response=await fetch('http://127.0.0.1:3000/api/m1',{method:'POST',headers:{origin:'http://127.0.0.1:3000','content-type':'application/json',...(cookies?{cookie:cookies}:{}),...headers},body:JSON.stringify({action,payload}),redirect:'error'});
  return {status:response.status,body:await response.json(),cookies:response.headers.getSetCookie().map(c=>c.split(';')[0]).join('; '),headers:response.headers};

@@ -12,10 +12,19 @@ export function config() {
   if (!url || !key || !secret || new URL(url).hostname !== '127.0.0.1' || new URL(origin).hostname !== '127.0.0.1') throw new SafeFailure('service_unavailable', 503);
   return { url, key, secret, origin };
 }
-export function client(privileged = false): SupabaseClient {
+export function client(privileged = false, pkce?: { initial?: string; onValue: (value: string | null) => void }): SupabaseClient {
   const c = config();
+  const memory = new Map<string,string>();
+  const verifierKey = 'dental-m1-pkce-code-verifier';
+  if (pkce?.initial) memory.set(verifierKey,pkce.initial);
   return createClient(c.url, privileged ? c.secret : c.key, {
-    auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false },
+    auth: { persistSession: !!pkce, autoRefreshToken: false, detectSessionInUrl: false,
+      ...(pkce ? {flowType:'pkce' as const,storageKey:'dental-m1-pkce',storage:{
+        getItem:(key:string)=>memory.get(key)??null,
+        setItem:(key:string,value:string)=>{memory.set(key,value);if(key===verifierKey)pkce.onValue(value);},
+        removeItem:(key:string)=>{memory.delete(key);if(key===verifierKey)pkce.onValue(null);}
+      }} : {})
+    },
     global: { fetch: (input, init) => {
       const target = new URL(typeof input === 'string' ? input : input instanceof URL ? input.href : input.url);
       if (target.origin !== new URL(c.url).origin) throw new SafeFailure('service_unavailable', 503);
@@ -50,7 +59,7 @@ export function passwordValue(value: unknown) {
 }
 export const fields: Record<string, string[]> = {
   'auth.signup': ['email','password'], 'auth.signin': ['email','password'], 'auth.recovery': ['email'],
-  'auth.verify': ['token_hash'], 'auth.password': ['token_hash','password'], 'auth.signout': [],
+  'auth.password': ['password'], 'auth.signout': [],
   'mfa.enroll': [], 'mfa.verify': ['factor_id','code'], 'mfa.list': [],
   'session.me': [], 'access.directory': [], 'grant.list': [], 'membership.list': [], 'fixture.list': [], 'fixture.read': ['id'], 'fixture.export': ['id'], 'fixture.enqueue': ['id'], 'fixture.run': ['id'], 'fixture.create': ['site_id','category','body'],
   'fixture.update': ['id','body'], 'grant.set': ['id','organization_id','user_id','category','actions'],

@@ -4,7 +4,7 @@ import {mkdirSync,writeFileSync,readFileSync,rmSync,existsSync} from 'node:fs';
 import {cleanupProject} from './runtime-cleanup.mjs';
 mkdirSync('.supabase-local',{recursive:true,mode:0o700});
 const cli='node_modules/supabase/dist/supabase.js';let server,ready=false,failure,cleanup=false;
-function command(args,name,timeout=240000){const r=spawnSync(process.execPath,[cli,...args],{encoding:'utf8',timeout});writeFileSync(`.supabase-local/${name}.log`,`${r.stdout||''}${r.stderr||''}`,{mode:0o600});if(r.status!==0){const diagnostic=(r.stderr||'').split('\n').filter(l=>/error|failed|syntax|migration/i.test(l)).map(l=>l.replace(/[A-Za-z0-9_\-.]{32,}/g,'[redacted]')).join('\n').slice(-1800);if(diagnostic)console.error(diagnostic);throw new Error(`${name} failed (private log retained)`);}console.log(`PASS ${name}`);return r.stdout;}
+function command(args,name,timeout=240000){const r=spawnSync(process.execPath,[cli,...args],{encoding:'utf8',timeout});writeFileSync(`.supabase-local/${name}.log`,`${r.stdout||''}${r.stderr||''}`,{mode:0o600});if(r.status!==0){const diagnostic=((r.stdout||'')+'\n'+(r.stderr||'')).split('\n').filter(l=>/error|failed|syntax|migration/i.test(l)).map(l=>l.replace(/[A-Za-z0-9_\-.]{32,}/g,'[redacted]')).join('\n').slice(-1800);if(diagnostic)console.error(diagnostic);throw new Error(`${name} failed (private log retained)`);}console.log(`PASS ${name}`);return r.stdout;}
 function run(script,timeout=240000){const r=spawnSync(process.execPath,[script],{stdio:'inherit',timeout});assert.equal(r.status,0,`${script} failed`);}
 try{
  assert.equal(spawnSync('docker',['version','--format','{{.Server.Version}}'],{encoding:'utf8',timeout:15000}).status,0,'Docker engine required');

@@ -94,7 +94,7 @@ declare
  allowed boolean:=false; data jsonb:='{}'::jsonb; reason text:='forbidden'; perms text[];
 begin
  if u is null then return jsonb_build_object('ok',false,'code','unauthenticated'); end if;
- if p_action not in ('session.open','session.me','session.revoke','mfa.complete','access.directory','grant.list','membership.list','fixture.list','fixture.read','fixture.export','fixture.enqueue','fixture.run','fixture.create','fixture.update','grant.set','grant.withdraw','membership.set','assignment.set','account.state','factor.reset','audit.list') then
+ if p_action not in ('recovery.check','session.open','session.me','session.revoke','mfa.complete','access.directory','grant.list','membership.list','fixture.list','fixture.read','fixture.export','fixture.enqueue','fixture.run','fixture.create','fixture.update','grant.set','grant.withdraw','membership.set','assignment.set','account.state','factor.reset','audit.list') then
   perform m1.audit(u,'request.invalid',null,null,false); return jsonb_build_object('ok',false,'code','invalid_request');
  end if;
  select * into a from m1.accounts where id=u;
@@ -105,6 +105,10 @@ begin
  select created_at into auth_created from auth.sessions where id=sid and user_id=u;
  if auth_created is null or auth_created<a.valid_after then
   perform m1.audit(u,p_action,null,null,false); return jsonb_build_object('ok',false,'code','session_expired');
+ end if;
+ if p_action='recovery.check' then
+  allowed:=exists(select 1 from jsonb_array_elements(coalesce(auth.jwt()->'amr','[]'::jsonb)) x where x->>'method'='otp');
+  perform m1.audit(u,p_action,u,null,allowed); return jsonb_build_object('ok',allowed,'data','{}'::jsonb,'code','link_invalid');
  end if;
  if p_action='session.open' then
   if not exists(select 1 from jsonb_array_elements(coalesce(auth.jwt()->'amr','[]'::jsonb)) x where x->>'method'='password') then

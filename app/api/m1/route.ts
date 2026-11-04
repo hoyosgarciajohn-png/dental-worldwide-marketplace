@@ -5,7 +5,7 @@ export const dynamic = 'force-dynamic';
 
 export async function POST(req: NextRequest) {
   let tokens: Tokens | null | undefined;
-  let secure = false;
+  let secure = false; let verifier: string | null | undefined; let clearRecovery = false;
   const reply = (body: object, status = 200) => {
     const response = NextResponse.json(body, { status, headers: { 'Cache-Control':'no-store, private','Referrer-Policy':'no-referrer','X-Content-Type-Options':'nosniff' } });
     if (tokens !== undefined) {
@@ -13,6 +13,8 @@ export async function POST(req: NextRequest) {
         response.cookies.set(name, value, { httpOnly:true, sameSite:'strict', secure, path:'/', maxAge:tokens ? 43200 : 0 });
       }
     }
+    if (verifier !== undefined) response.cookies.set('dental_pkce',verifier||'',{httpOnly:true,sameSite:'lax',secure,path:'/',maxAge:verifier?900:0});
+    if (clearRecovery) for(const name of ['dental_recovery_access','dental_recovery_refresh']) response.cookies.set(name,'',{httpOnly:true,sameSite:'strict',secure,path:'/',maxAge:0});
     return response;
   };
   try {
@@ -27,19 +29,19 @@ export async function POST(req: NextRequest) {
     let input; try { input = JSON.parse(raw); } catch { throw new SafeFailure('invalid_request',400); }
     const { action, payload = {} } = input;
     validate(action, payload);
-    const c = client();
+    const c = client(false,['auth.signup','auth.recovery'].includes(action)?{onValue:value=>{verifier=value;}}:undefined);
     if (['auth.signup','auth.signin','auth.recovery'].includes(action)) {
       const email = emailValue(payload.email);
       await rateLimit(email);
       if (action === 'auth.recovery') {
-        const result = await c.auth.resetPasswordForEmail(email, { redirectTo: cfg.origin + '/account' });
+        const result = await c.auth.resetPasswordForEmail(email, { redirectTo: cfg.origin + '/auth/callback' });
         await audit(action, null, !result.error);
         // Same public result for existing and absent accounts, including provider refusals.
         return reply({ ok:true, message:'check_local_mail' });
       }
       const password = passwordValue(payload.password);
       if (action === 'auth.signup') {
-        const result = await c.auth.signUp({ email,password });
+        const result = await c.auth.signUp({ email,password,options:{emailRedirectTo:cfg.origin+'/auth/callback'} });
         await audit(action, null, !result.error);
         return reply({ ok:true, message:'check_local_mail' });
       }
@@ -50,19 +52,21 @@ export async function POST(req: NextRequest) {
       tokens = result.data.session;
       return reply({ok:true,data});
     }
-    if (action === 'auth.verify' || action === 'auth.password') {
-      if (typeof payload.token_hash !== 'string' || !/^[a-f0-9]{40,128}$/i.test(payload.token_hash)) throw new SafeFailure('link_invalid',400);
-      const password = action === 'auth.password' ? passwordValue(payload.password) : null;
-      const result = await c.auth.verifyOtp({ token_hash:payload.token_hash, type:action==='auth.verify'?'signup':'recovery' });
-      await audit(action, result.error ? null : result.data.user?.id || null, !result.error);
-      if (result.error) throw new SafeFailure('link_invalid',400);
-      if (password) {
-        const update = await c.auth.updateUser({password});
-        if (update.error) throw new SafeFailure('recovery_failed',400);
-        await audit('auth.password',result.data.user.id,true);
-      }
+    if (action === 'auth.password') {
+      const password = passwordValue(payload.password);
+      const access = req.cookies.get('dental_recovery_access')?.value;
+      const refresh = req.cookies.get('dental_recovery_refresh')?.value;
+      if (!access || !refresh) throw new SafeFailure('link_invalid',400);
+      let exp = 0; try { exp = JSON.parse(Buffer.from(access.split('.')[1],'base64url').toString()).exp; } catch {}
+      if (!exp || exp * 1000 <= Date.now()) { clearRecovery=true; throw new SafeFailure('link_invalid',400); }
+      const recovered = await c.auth.setSession({access_token:access,refresh_token:refresh});
+      if (recovered.error || !recovered.data.user) { clearRecovery=true; throw new SafeFailure('link_invalid',400); }
+      try { await rpc(c,'recovery.check'); } catch { clearRecovery=true; throw new SafeFailure('link_invalid',400); }
+      const update = await c.auth.updateUser({password});
+      if (update.error) throw new SafeFailure('recovery_failed',400);
+      await audit('auth.password',recovered.data.user.id,true);
       await c.auth.signOut({scope:'global'});
-      tokens = null;
+      tokens=null; clearRecovery=true;
       return reply({ok:true,message:'sign_in_again'});
     }
     const access_token = req.cookies.get('dental_access')?.value;

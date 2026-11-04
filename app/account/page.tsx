@@ -23,7 +23,7 @@ export default function AccountPage() {
  }
  async function run(work:()=>Promise<void>){setBusy(true);setNotice('');setError(false);try{await work();}catch(e){setError(true);setNotice(e instanceof Error&&e.message in words.en?e.message:'service_unavailable');}finally{setBusy(false);}}
  async function refresh(){setRecords([]);const [r,g,p]=await Promise.all([request('fixture.list'),request('grant.list'),request('access.directory')]);setRecords(r.data);setGrants(g.data);setPeople(p.data);}
- useEffect(()=>{const saved=localStorage.getItem('dental_language');if(saved==='es')setLang('es');const hash=new URLSearchParams(location.hash.slice(1));for(const kind of ['signup','recovery']){const value=hash.get(kind);if(value){setLink({kind,hash:value});history.replaceState(null,'',location.pathname);return;}}request('session.me').then(r=>setMe(r.data)).catch(()=>{});},[]);
+ useEffect(()=>{const saved=localStorage.getItem('dental_language');if(saved==='es')setLang('es');const hash=new URLSearchParams(location.hash.slice(1));const message=hash.get('notice');if(message){setNotice(message in words.en?message:'link_invalid');history.replaceState(null,'',location.pathname);return;}for(const kind of ['recovery']){const value=hash.get(kind);if(value){setLink({kind,hash:value});history.replaceState(null,'',location.pathname);return;}}request('session.me').then(r=>setMe(r.data)).catch(()=>{});},[]);
  useEffect(()=>{document.documentElement.lang=lang;localStorage.setItem('dental_language',lang);},[lang]);
  const roles=me?.memberships.map(m=>m.role)||[];const admin=roles.some(r=>['platform_admin','practice_admin'].includes(r));const platform=roles.includes('platform_admin');
  const form=(event:FormEvent<HTMLFormElement>)=>{event.preventDefault();return Object.fromEntries(new FormData(event.currentTarget).entries()) as Record<string,string>;};
@@ -39,7 +39,7 @@ export default function AccountPage() {
   {!me?<section className="auth-card">
    {!link&&<nav aria-label={lang==='en'?'Account actions':'Acciones de cuenta'} className="tab-row">{['signin','signup','recovery'].map(v=><button type="button" key={v} aria-pressed={mode===v} onClick={()=>{setMode(v);setNotice('');}}>{text(v)}</button>)}</nav>}
    <h2>{link?text(link.kind==='signup'?'completeVerify':'completeRecovery'):text(mode)}</h2>
-   <form onSubmit={e=>{const f=form(e);run(async()=>{let r;if(link){r=await request(link.kind==='signup'?'auth.verify':'auth.password',{token_hash:link.hash,...(link.kind==='recovery'?{password:f.password}:{})});setLink(null);setMode('signin');}else{r=await request(`auth.${mode}`,{email:f.email,...(mode!=='recovery'?{password:f.password}:{})});}if(r.data?.user_id){clearPrivate();setMe(r.data);}setNotice(r.message||'success');});}}>
+   <form onSubmit={e=>{const f=form(e);run(async()=>{let r;if(link){r=await request('auth.password',{password:f.password});setLink(null);setMode('signin');}else{r=await request(`auth.${mode}`,{email:f.email,...(mode!=='recovery'?{password:f.password}:{})});}if(r.data?.user_id){clearPrivate();setMe(r.data);}setNotice(r.message||'success');});}}>
     {!link&&<label>{t.email}<input name="email" type="email" autoComplete="email" placeholder="patient@example.test" required/></label>}
     {(!link&&mode!=='recovery'||link?.kind==='recovery')&&<label>{link?t.newPassword:t.password}<input name="password" type="password" minLength={12} maxLength={128} autoComplete={mode==='signin'&&!link?'current-password':'new-password'} required/></label>}
     <button disabled={busy}>{t.submit}</button>
