@@ -1,0 +1,76 @@
+# Execution 1 of at most 3; owner approved November 4, 2026.
+name: M0 isolated runtime validation
+on:
+  push:
+    branches: [m0-runtime-validation-20261104]
+    paths: [.github/workflows/m0-runtime-validation.yml]
+permissions:
+  contents: read
+concurrency:
+  group: dental-m0-runtime-validation
+  cancel-in-progress: false
+jobs:
+  foundation:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      CI: 'true'
+      NEXT_TELEMETRY_DISABLED: '1'
+      SUPABASE_HOME: ${{ runner.temp }}/dental-m0-supabase
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          package-manager-cache: false
+      - name: Record exact source and runtime
+        run: |
+          git rev-parse HEAD
+          node --version
+          npm --version
+          docker version --format '{{.Server.Version}}'
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Foundation build and HTTP checks
+        run: |
+          npm run typecheck
+          npm run build
+          npm run test:http
+      - name: Actual local SQL, Auth and private Storage checks
+        run: npm run test:m0:docker
+      - name: Stop only this project and remove connection credentials
+        if: always()
+        shell: bash
+        run: |
+          if [ -f node_modules/supabase/dist/supabase.js ]; then
+            mkdir -p .supabase-local
+            result=0
+            node node_modules/supabase/dist/supabase.js stop > .supabase-local/ci-stop.log 2>&1 || result=$?
+            rm -f .supabase-local/connection.json
+            if [ "$result" -ne 0 ]; then
+              echo 'FAIL: project stack cleanup; raw log withheld because it may contain credentials'
+              exit "$result"
+            fi
+          fi
+      - name: Publish sanitized evidence in the job summary
+        if: always()
+        env:
+          JOB_RESULT: ${{ job.status }}
+        run: |
+          node --input-type=module <<'JS'
+          import { existsSync, readFileSync, appendFileSync } from 'node:fs';
+          const path = '.supabase-local/service-smoke-evidence.json';
+          const evidence = existsSync(path) ? JSON.parse(readFileSync(path, 'utf8')) : null;
+          const report = {
+            source: process.env.GITHUB_SHA,
+            job: process.env.JOB_RESULT,
+            services: evidence?.result ?? 'NOT PERFORMED',
+            checks: evidence?.checks ?? [],
+            limitation: 'M0 infrastructure only. Human checks deferred to M7. No live-readiness or independent acceptance claim.'
+          };
+          const json = JSON.stringify(report, null, 2);
+          console.log(json);
+          appendFileSync(process.env.GITHUB_STEP_SUMMARY, '```json\n' + json + '\n```\n');
+          JS

@@ -12,3 +12,5 @@ Authority: docs/plan.md. Only M0 is authorized as of November 4, 2026.
 | M0-06 | Record approvals, limits and truthful blockers | checkpoint report |
 
 M0-04 cannot pass using mocks or a remote cloud service. No application patient, practice or payment entities are implemented here. R-001–R-022 and Q-001–Q-020 remain later-module requirements. R-003 must deny affected new requests and confirmations; R-020 synthetic subscription ledger belongs to M5.
+
+Approved host exception, November 4, 2026: M0-04 may be executed using actual Supabase services local to the bounded GitHub-hosted runner described in docs/m0-runtime-host-proposal.md. Mocks and remote hosted database services still cannot satisfy it.

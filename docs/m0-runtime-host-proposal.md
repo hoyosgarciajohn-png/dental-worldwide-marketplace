@@ -1,4 +1,4 @@
-# M0 runtime host change — prepared, not activated
+# M0 runtime host change — owner approved
 
 November 4, 2026. M0 remains BLOCKED; SQL, Auth and Storage checks remain NOT PERFORMED.
 
@@ -22,7 +22,7 @@ The owner's GitHub billing UI showed GitHub Free, included compute USD 0 used of
 
 Recheck allowance and the existing blocking budget immediately before activation. If GitHub refuses the run, keep it blocked; do not raise the budget, add payment details, make the repository public, or substitute a paid runner. Maximum authorized new external charge remains USD 0. Recheck billable usage after the runs.
 
-## Required owner decision
+## Owner decision — approved November 4, 2026
 
 Approve only this bounded GitHub-hosted test-runner exception to M0's local-host scope and AGENTS.md's no-cloud-provisioning rule. All existing M0 data, cost and release boundaries remain. Approval would authorize executing these prepared checks, not declare them passed. Until approval, no workflow is activated and no cloud runner is requested.
 
@@ -39,3 +39,5 @@ Required: exact source SHA; successful locked install/build/HTTP results; real S
 - https://github.com/actions/setup-node/releases/tag/v7.1.0
 
 Prepared validation: YAML parsed and trigger/permission/timeout/action-pin controls inspected. This validates the proposal's structure, not GitHub execution or Supabase integration.
+
+John subsequently answered "yes, approve" to the concrete proposal. The bounded exception is now authorized; earlier pending-approval wording is historical. Actual execution and results must still be recorded.
