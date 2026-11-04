@@ -1,0 +1,883 @@
+﻿2026-11-04T20:07:19.8369409Z Current runner version: '2.338.2'
+2026-11-04T20:07:19.8407922Z ##[group]Runner Image Provisioner
+2026-11-04T20:07:19.8409469Z Hosted Compute Agent
+2026-11-04T20:07:19.8410407Z Version: 20261021.618
+2026-11-04T20:07:19.8411612Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+2026-11-04T20:07:19.8412870Z Build Date: 2026-10-21T00:45:21Z
+2026-11-04T20:07:19.8413945Z Worker ID: {31615c8b-952f-4a37-9f08-4538355d68d9}
+2026-11-04T20:07:19.8415303Z Region: eastus
+2026-11-04T20:07:19.8416678Z Cloud: Azure
+2026-11-04T20:07:19.8417711Z ##[endgroup]
+2026-11-04T20:07:19.8420096Z ##[group]Operating System
+2026-11-04T20:07:19.8421717Z Ubuntu
+2026-11-04T20:07:19.8422703Z 24.04.5
+2026-11-04T20:07:19.8423541Z LTS
+2026-11-04T20:07:19.8424466Z ##[endgroup]
+2026-11-04T20:07:19.8425366Z ##[group]Runner Image
+2026-11-04T20:07:19.8426803Z Image: ubuntu-24.04
+2026-11-04T20:07:19.8427931Z Version: 20261025.353.1
+2026-11-04T20:07:19.8430128Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261025.353/images/ubuntu/Ubuntu2404-Readme.md
+2026-11-04T20:07:19.8432863Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261025.353
+2026-11-04T20:07:19.8434735Z ##[endgroup]
+2026-11-04T20:07:19.8437031Z ##[group]GITHUB_TOKEN Permissions
+2026-11-04T20:07:19.8440113Z Contents: read
+2026-11-04T20:07:19.8441083Z Metadata: read
+2026-11-04T20:07:19.8442115Z ##[endgroup]
+2026-11-04T20:07:19.8445336Z Secret source: Actions
+2026-11-04T20:07:19.8447347Z Cache mode: write
+2026-11-04T20:07:19.8448963Z Prepare workflow directory
+2026-11-04T20:07:19.9277811Z Prepare all required actions
+2026-11-04T20:07:19.9354045Z Getting action download info
+2026-11-04T20:07:20.2086317Z Download action repository 'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+2026-11-04T20:07:20.3457324Z Download action repository 'actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1' (SHA:949feb2413d6458794dcd2491c4babbbce0c15c1)
+2026-11-04T20:07:20.5359916Z Complete job name: foundation
+2026-11-04T20:07:20.6226261Z ##[group]Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+2026-11-04T20:07:20.6227538Z with:
+2026-11-04T20:07:20.6227995Z   persist-credentials: false
+2026-11-04T20:07:20.6228689Z   repository: hoyosgarciajohn-png/dental-worldwide-marketplace
+2026-11-04T20:07:20.6232836Z   token: ***
+2026-11-04T20:07:20.6233278Z   ssh-strict: true
+2026-11-04T20:07:20.6233715Z   ssh-user: git
+2026-11-04T20:07:20.6234133Z   clean: true
+2026-11-04T20:07:20.6234568Z   sparse-checkout-cone-mode: true
+2026-11-04T20:07:20.6235090Z   fetch-depth: 1
+2026-11-04T20:07:20.6235509Z   fetch-tags: false
+2026-11-04T20:07:20.6235948Z   show-progress: true
+2026-11-04T20:07:20.6236583Z   lfs: false
+2026-11-04T20:07:20.6236994Z   submodules: false
+2026-11-04T20:07:20.6237435Z   set-safe-directory: true
+2026-11-04T20:07:20.6237918Z   allow-unsafe-pr-checkout: false
+2026-11-04T20:07:20.6238712Z env:
+2026-11-04T20:07:20.6239106Z   CI: true
+2026-11-04T20:07:20.6239514Z   NEXT_TELEMETRY_DISABLED: 1
+2026-11-04T20:07:20.6240554Z   SUPABASE_HOME: /home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace/.supabase-local/runtime
+2026-11-04T20:07:20.6241566Z ##[endgroup]
+2026-11-04T20:07:20.9172323Z Syncing repository: hoyosgarciajohn-png/dental-worldwide-marketplace
+2026-11-04T20:07:21.0372775Z ##[group]Getting Git version info
+2026-11-04T20:07:21.0374553Z Working directory is '/home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace'
+2026-11-04T20:07:21.0377316Z [command]/usr/bin/git version
+2026-11-04T20:07:21.0378185Z git version 2.56.0
+2026-11-04T20:07:21.0381092Z ##[endgroup]
+2026-11-04T20:07:21.0388348Z Temporarily overriding HOME='/home/runner/work/_temp/04cd8fe7-2efd-45c8-b52c-8ea361c5641d' before making global git config changes
+2026-11-04T20:07:21.0390623Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-04T20:07:21.0392980Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace
+2026-11-04T20:07:21.0397226Z Deleting the contents of '/home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace'
+2026-11-04T20:07:21.0399736Z ##[group]Determining repository object format
+2026-11-04T20:07:21.0401506Z ##[endgroup]
+2026-11-04T20:07:21.0403130Z ##[group]Initializing the repository
+2026-11-04T20:07:21.0404927Z [command]/usr/bin/git init /home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace
+2026-11-04T20:07:21.0407338Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-11-04T20:07:21.0408906Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-11-04T20:07:21.0410446Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-11-04T20:07:21.0411764Z hint: call:
+2026-11-04T20:07:21.0412436Z hint:
+2026-11-04T20:07:21.0413219Z hint: 	git config --global init.defaultBranch <name>
+2026-11-04T20:07:21.0414205Z hint:
+2026-11-04T20:07:21.0415239Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-11-04T20:07:21.0417126Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-11-04T20:07:21.0418391Z hint:
+2026-11-04T20:07:21.0419055Z hint: 	git branch -m <name>
+2026-11-04T20:07:21.0419813Z hint:
+2026-11-04T20:07:21.0420868Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-11-04T20:07:21.0422960Z Initialized empty Git repository in /home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace/.git/
+2026-11-04T20:07:21.0426724Z [command]/usr/bin/git remote add origin https://github.com/hoyosgarciajohn-png/dental-worldwide-marketplace
+2026-11-04T20:07:21.0429649Z ##[endgroup]
+2026-11-04T20:07:21.0430955Z ##[group]Disabling automatic garbage collection
+2026-11-04T20:07:21.0431995Z [command]/usr/bin/git config --local gc.auto 0
+2026-11-04T20:07:21.0434257Z ##[endgroup]
+2026-11-04T20:07:21.0435492Z ##[group]Setting up auth
+2026-11-04T20:07:21.0436878Z Removing SSH command configuration
+2026-11-04T20:07:21.0438222Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-04T20:07:21.0441685Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-04T20:07:21.1059465Z Removing HTTP extra header
+2026-11-04T20:07:21.1061516Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-04T20:07:21.1110988Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-04T20:07:21.1391108Z Removing includeIf entries pointing to credentials config files
+2026-11-04T20:07:21.1395703Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-04T20:07:21.1453152Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-04T20:07:21.1724334Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-8140962c-2980-4963-874d-e26c7feeda90.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-11-04T20:07:21.1790946Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace/.git.path /home/runner/work/_temp/git-credentials-8140962c-2980-4963-874d-e26c7feeda90.config
+2026-11-04T20:07:21.1840385Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-8140962c-2980-4963-874d-e26c7feeda90.config
+2026-11-04T20:07:21.1890463Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-8140962c-2980-4963-874d-e26c7feeda90.config
+2026-11-04T20:07:21.1941506Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-8140962c-2980-4963-874d-e26c7feeda90.config
+2026-11-04T20:07:21.1990073Z ##[endgroup]
+2026-11-04T20:07:21.1991703Z ##[group]Fetching the repository
+2026-11-04T20:07:21.1999546Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +1f6de519f7f59a0ef4b713cea91fab6ae84824fa:refs/remotes/origin/m1-accounts-access-20261104
+2026-11-04T20:07:21.4963329Z From https://github.com/hoyosgarciajohn-png/dental-worldwide-marketplace
+2026-11-04T20:07:21.4967486Z  * [new ref]         1f6de519f7f59a0ef4b713cea91fab6ae84824fa -> origin/m1-accounts-access-20261104
+2026-11-04T20:07:21.4974606Z [command]/usr/bin/git branch --list --remote origin/m1-accounts-access-20261104
+2026-11-04T20:07:21.5010693Z   origin/m1-accounts-access-20261104
+2026-11-04T20:07:21.5021614Z [command]/usr/bin/git rev-parse refs/remotes/origin/m1-accounts-access-20261104
+2026-11-04T20:07:21.5062518Z 1f6de519f7f59a0ef4b713cea91fab6ae84824fa
+2026-11-04T20:07:21.5069743Z ##[endgroup]
+2026-11-04T20:07:21.5073001Z ##[group]Determining the checkout info
+2026-11-04T20:07:21.5076732Z ##[endgroup]
+2026-11-04T20:07:21.5079083Z [command]/usr/bin/git sparse-checkout disable
+2026-11-04T20:07:21.5148928Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-11-04T20:07:21.5200587Z ##[group]Checking out the ref
+2026-11-04T20:07:21.5205169Z [command]/usr/bin/git checkout --progress --force -B m1-accounts-access-20261104 refs/remotes/origin/m1-accounts-access-20261104
+2026-11-04T20:07:21.5350842Z Switched to a new branch 'm1-accounts-access-20261104'
+2026-11-04T20:07:21.5361266Z branch 'm1-accounts-access-20261104' set up to track 'origin/m1-accounts-access-20261104'.
+2026-11-04T20:07:21.5371637Z ##[endgroup]
+2026-11-04T20:07:21.5428265Z [command]/usr/bin/git log -1 --format=%H
+2026-11-04T20:07:21.5473747Z 1f6de519f7f59a0ef4b713cea91fab6ae84824fa
+2026-11-04T20:07:21.5485424Z ##[group]Removing auth
+2026-11-04T20:07:21.5488755Z Removing SSH command configuration
+2026-11-04T20:07:21.5494069Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-04T20:07:21.5542031Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-04T20:07:21.5811992Z Removing HTTP extra header
+2026-11-04T20:07:21.5816453Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-04T20:07:21.5867538Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-04T20:07:21.6139258Z Removing includeIf entries pointing to credentials config files
+2026-11-04T20:07:21.6158859Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-04T20:07:21.6194850Z includeif.gitdir:/home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace/.git.path
+2026-11-04T20:07:21.6203420Z includeif.gitdir:/home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace/.git/worktrees/*.path
+2026-11-04T20:07:21.6207885Z includeif.gitdir:/github/workspace/.git.path
+2026-11-04T20:07:21.6219209Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-11-04T20:07:21.6230989Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace/.git.path
+2026-11-04T20:07:21.6252250Z /home/runner/work/_temp/git-credentials-8140962c-2980-4963-874d-e26c7feeda90.config
+2026-11-04T20:07:21.6290864Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-8140962c\-2980\-4963\-874d\-e26c7feeda90\.config
+2026-11-04T20:07:21.6341386Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace/.git/worktrees/*.path
+2026-11-04T20:07:21.6398719Z /home/runner/work/_temp/git-credentials-8140962c-2980-4963-874d-e26c7feeda90.config
+2026-11-04T20:07:21.6413907Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-8140962c\-2980\-4963\-874d\-e26c7feeda90\.config
+2026-11-04T20:07:21.6463713Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-11-04T20:07:21.6504269Z /github/runner_temp/git-credentials-8140962c-2980-4963-874d-e26c7feeda90.config
+2026-11-04T20:07:21.6532329Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-8140962c\-2980\-4963\-874d\-e26c7feeda90\.config
+2026-11-04T20:07:21.6567980Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-11-04T20:07:21.6610771Z /github/runner_temp/git-credentials-8140962c-2980-4963-874d-e26c7feeda90.config
+2026-11-04T20:07:21.6623209Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-8140962c\-2980\-4963\-874d\-e26c7feeda90\.config
+2026-11-04T20:07:21.6671906Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-04T20:07:21.6942756Z Removing credentials config '/home/runner/work/_temp/git-credentials-8140962c-2980-4963-874d-e26c7feeda90.config'
+2026-11-04T20:07:21.6958589Z ##[endgroup]
+2026-11-04T20:07:21.7431784Z ##[group]Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+2026-11-04T20:07:21.7433456Z with:
+2026-11-04T20:07:21.7434266Z   node-version-file: .nvmrc
+2026-11-04T20:07:21.7435291Z   package-manager-cache: false
+2026-11-04T20:07:21.7436632Z   check-latest: false
+2026-11-04T20:07:21.7446617Z   token: ***
+2026-11-04T20:07:21.7447468Z env:
+2026-11-04T20:07:21.7448205Z   CI: true
+2026-11-04T20:07:21.7449078Z   NEXT_TELEMETRY_DISABLED: 1
+2026-11-04T20:07:21.7451229Z   SUPABASE_HOME: /home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace/.supabase-local/runtime
+2026-11-04T20:07:21.7453472Z ##[endgroup]
+2026-11-04T20:07:21.8862237Z Node version file is not JSON file
+2026-11-04T20:07:21.8877281Z Node version file is not TOML file
+2026-11-04T20:07:21.8878421Z Resolved .nvmrc as 24.22.1
+2026-11-04T20:07:21.8891485Z Found in cache @ /opt/hostedtoolcache/node/24.22.1/x64
+2026-11-04T20:07:22.0012342Z ##[group]Environment details
+2026-11-04T20:07:22.4544782Z node: v24.22.1
+2026-11-04T20:07:22.4548202Z npm: 11.19.1
+2026-11-04T20:07:22.4549338Z yarn: 1.22.22
+2026-11-04T20:07:22.4551271Z ##[endgroup]
+2026-11-04T20:07:22.4717743Z ##[group]Run git rev-parse HEAD
+2026-11-04T20:07:22.4718356Z [36;1mgit rev-parse HEAD[0m
+2026-11-04T20:07:22.4718840Z [36;1mnode --version[0m
+2026-11-04T20:07:22.4719294Z [36;1mnpm --version[0m
+2026-11-04T20:07:22.4719816Z [36;1mdocker version --format '{{.Server.Version}}'[0m
+2026-11-04T20:07:22.4751957Z shell: /usr/bin/bash -e {0}
+2026-11-04T20:07:22.4752455Z env:
+2026-11-04T20:07:22.4752858Z   CI: true
+2026-11-04T20:07:22.4753271Z   NEXT_TELEMETRY_DISABLED: 1
+2026-11-04T20:07:22.4754081Z   SUPABASE_HOME: /home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace/.supabase-local/runtime
+2026-11-04T20:07:22.4754921Z ##[endgroup]
+2026-11-04T20:07:22.4851742Z 1f6de519f7f59a0ef4b713cea91fab6ae84824fa
+2026-11-04T20:07:22.4896433Z v24.22.1
+2026-11-04T20:07:22.5713642Z 11.19.1
+2026-11-04T20:07:22.6747742Z 28.0.4
+2026-11-04T20:07:22.6812256Z ##[group]Run npm ci --no-audit --no-fund
+2026-11-04T20:07:22.6812834Z [36;1mnpm ci --no-audit --no-fund[0m
+2026-11-04T20:07:22.6834516Z shell: /usr/bin/bash -e {0}
+2026-11-04T20:07:22.6834961Z env:
+2026-11-04T20:07:22.6835373Z   CI: true
+2026-11-04T20:07:22.6835766Z   NEXT_TELEMETRY_DISABLED: 1
+2026-11-04T20:07:22.6836859Z   SUPABASE_HOME: /home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace/.supabase-local/runtime
+2026-11-04T20:07:22.6837670Z ##[endgroup]
+2026-11-04T20:07:38.6305019Z 
+2026-11-04T20:07:38.6306435Z added 79 packages in 16s
+2026-11-04T20:07:38.7125791Z ##[group]Run npm run test:unit
+2026-11-04T20:07:38.7126946Z [36;1mnpm run test:unit[0m
+2026-11-04T20:07:38.7127351Z [36;1mnpm run typecheck[0m
+2026-11-04T20:07:38.7127738Z [36;1mnpm run build[0m
+2026-11-04T20:07:38.7128008Z [36;1mnpm run test:http[0m
+2026-11-04T20:07:38.7128245Z [36;1mnpm run test:m1:origin[0m
+2026-11-04T20:07:38.7149391Z shell: /usr/bin/bash -e {0}
+2026-11-04T20:07:38.7149646Z env:
+2026-11-04T20:07:38.7149836Z   CI: true
+2026-11-04T20:07:38.7150043Z   NEXT_TELEMETRY_DISABLED: 1
+2026-11-04T20:07:38.7150601Z   SUPABASE_HOME: /home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace/.supabase-local/runtime
+2026-11-04T20:07:38.7151154Z ##[endgroup]
+2026-11-04T20:07:38.8295999Z 
+2026-11-04T20:07:38.8297635Z > dental-worldwide-marketplace@0.0.1 test:unit
+2026-11-04T20:07:38.8299141Z > node --test scripts/*.test.mjs
+2026-11-04T20:07:38.8299901Z 
+2026-11-04T20:07:38.9438411Z ✔ Auth requires the expected service code and client-error status (2.784792ms)
+2026-11-04T20:07:38.9457707Z ✔ Storage accepts explicit or legacy masked denials (0.344154ms)
+2026-11-04T20:07:38.9478085Z ✔ Storage never treats network, server, throttling or malformed-request failures as denials (2.72988ms)
+2026-11-04T20:07:39.1867478Z ✔ real NextRequest accepts exact loopback Host and Origin despite framework URL normalization (5.509993ms)
+2026-11-04T20:07:39.1884544Z ✔ foreign, missing, null and loopback-alias origins are rejected (3.166898ms)
+2026-11-04T20:07:39.1900199Z ✔ foreign authority cannot be repaired with client-selected forwarded headers (2.910858ms)
+2026-11-04T20:07:39.1918918Z ✔ GET callback allows absent Origin but still enforces the exact authority (0.60382ms)
+2026-11-04T20:07:39.2755200Z ✔ cleanup removes credentials and reports success (2.463391ms)
+2026-11-04T20:07:39.2780044Z ✔ cleanup removes credentials and reports nonzero (0.794397ms)
+2026-11-04T20:07:39.2799473Z ✔ cleanup removes credentials and reports timeout (0.591407ms)
+2026-11-04T20:07:39.2822193Z ✔ cleanup removes credentials and reports spawn failure (0.531625ms)
+2026-11-04T20:07:39.2831619Z ✔ cleanup removes credentials and reports log write failure (0.685624ms)
+2026-11-04T20:07:39.2987827Z ℹ tests 12
+2026-11-04T20:07:39.2992064Z ℹ suites 0
+2026-11-04T20:07:39.3017090Z ℹ pass 12
+2026-11-04T20:07:39.3026898Z ℹ fail 0
+2026-11-04T20:07:39.3035349Z ℹ cancelled 0
+2026-11-04T20:07:39.3066792Z ℹ skipped 0
+2026-11-04T20:07:39.3072626Z ℹ todo 0
+2026-11-04T20:07:39.3097073Z ℹ duration_ms 428.92818
+2026-11-04T20:07:39.4927002Z 
+2026-11-04T20:07:39.4967335Z > dental-worldwide-marketplace@0.0.1 typecheck
+2026-11-04T20:07:39.4987180Z > next typegen && tsc --noEmit
+2026-11-04T20:07:39.5041192Z 
+2026-11-04T20:07:39.8304911Z Generating route types...
+2026-11-04T20:07:39.8603527Z ✓ Types generated successfully
+2026-11-04T20:07:40.7056926Z 
+2026-11-04T20:07:40.7081325Z > dental-worldwide-marketplace@0.0.1 build
+2026-11-04T20:07:40.7082221Z > next build
+2026-11-04T20:07:40.7100568Z 
+2026-11-04T20:07:41.0906763Z ▲ Next.js 16.4.5 (Turbopack)
+2026-11-04T20:07:41.1497714Z ✓ Running next.config.ts took 56ms
+2026-11-04T20:07:41.1499696Z ⚠ No build cache found. Please configure build caching for faster rebuilds. Read more: https://nextjs.org/docs/messages/no-cache
+2026-11-04T20:07:41.1680312Z 
+2026-11-04T20:07:41.1986562Z   Creating an optimized production build ...
+2026-11-04T20:07:47.5407765Z ✓ Compiled successfully in 6.3s
+2026-11-04T20:07:47.5638170Z   Running TypeScript ...
+2026-11-04T20:07:48.9387600Z   Finished TypeScript in 1392ms ...
+2026-11-04T20:07:48.9404706Z   Collecting page data using 1 worker ...
+2026-11-04T20:07:49.4163963Z   Generating static pages using 1 worker (0/4) ...
+2026-11-04T20:07:49.5577060Z   Generating static pages using 1 worker (1/4) 
+2026-11-04T20:07:49.5579805Z   Generating static pages using 1 worker (2/4) 
+2026-11-04T20:07:49.5587062Z   Generating static pages using 1 worker (3/4) 
+2026-11-04T20:07:49.5588572Z ✓ Generating static pages using 1 worker (4/4) in 143ms
+2026-11-04T20:07:49.5630520Z   Finalizing page optimization ...
+2026-11-04T20:07:49.5756905Z 
+2026-11-04T20:07:49.5764994Z Route (app)
+2026-11-04T20:07:49.5778692Z ┌ ○ /
+2026-11-04T20:07:49.5779368Z ├ ○ /_not-found
+2026-11-04T20:07:49.5780107Z ├ ○ /account
+2026-11-04T20:07:49.5780857Z ├ ƒ /api/m1
+2026-11-04T20:07:49.5781582Z └ ƒ /auth/callback
+2026-11-04T20:07:49.5782060Z 
+2026-11-04T20:07:49.5782268Z 
+2026-11-04T20:07:49.5782870Z ○  (Static)   prerendered as static content
+2026-11-04T20:07:49.5783869Z ƒ  (Dynamic)  server-rendered on demand
+2026-11-04T20:07:49.5784475Z 
+2026-11-04T20:07:49.7477966Z 
+2026-11-04T20:07:49.7486796Z > dental-worldwide-marketplace@0.0.1 test:http
+2026-11-04T20:07:49.7488560Z > node scripts/http-smoke.mjs
+2026-11-04T20:07:49.7490485Z 
+2026-11-04T20:07:50.4367885Z PASS: foundation production HTTP smoke (not browser or database acceptance)
+2026-11-04T20:07:50.5907669Z 
+2026-11-04T20:07:50.5908766Z > dental-worldwide-marketplace@0.0.1 test:m1:origin
+2026-11-04T20:07:50.5912333Z > node scripts/m1-origin-smoke.mjs
+2026-11-04T20:07:50.5913358Z 
+2026-11-04T20:07:51.3188955Z PASS M1 production HTTP request-origin regression: valid unauthenticated requests reach 401; foreign Origin/Host denied; missing callback rejected. No database/auth/mail/browser acceptance.
+2026-11-04T20:07:51.3620322Z ##[group]Run npx --no-install playwright install --with-deps chromium
+2026-11-04T20:07:51.3620863Z [36;1mnpx --no-install playwright install --with-deps chromium[0m
+2026-11-04T20:07:51.3641539Z shell: /usr/bin/bash -e {0}
+2026-11-04T20:07:51.3641785Z env:
+2026-11-04T20:07:51.3641984Z   CI: true
+2026-11-04T20:07:51.3642178Z   NEXT_TELEMETRY_DISABLED: 1
+2026-11-04T20:07:51.3642711Z   SUPABASE_HOME: /home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace/.supabase-local/runtime
+2026-11-04T20:07:51.3643248Z ##[endgroup]
+2026-11-04T20:07:52.2373949Z Installing dependencies...
+2026-11-04T20:07:52.2513233Z Switching to root user to install dependencies...
+2026-11-04T20:07:52.4247540Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+2026-11-04T20:07:52.4792678Z Get:6 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
+2026-11-04T20:07:52.5137716Z Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
+2026-11-04T20:07:52.5184215Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+2026-11-04T20:07:52.5267804Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+2026-11-04T20:07:52.5357532Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+2026-11-04T20:07:52.6897675Z Get:7 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [652 kB]
+2026-11-04T20:07:52.7157807Z Get:8 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [721 kB]
+2026-11-04T20:07:52.8374656Z Get:9 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1408 kB]
+2026-11-04T20:07:52.8506877Z Get:10 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [311 kB]
+2026-11-04T20:07:52.8567418Z Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1707 kB]
+2026-11-04T20:07:52.8757775Z Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [343 kB]
+2026-11-04T20:07:52.8777726Z Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1813 kB]
+2026-11-04T20:07:52.8926859Z Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [412 kB]
+2026-11-04T20:07:52.8987451Z Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse Translation-en [14.3 kB]
+2026-11-04T20:07:52.9977763Z Get:16 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [1155 kB]
+2026-11-04T20:07:53.0020673Z Get:17 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [233 kB]
+2026-11-04T20:07:53.0052411Z Get:18 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1224 kB]
+2026-11-04T20:07:53.0571764Z Get:19 http://azure.archive.ubuntu.com/ubuntu noble-security/universe Translation-en [247 kB]
+2026-11-04T20:07:53.0637885Z Get:20 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1721 kB]
+2026-11-04T20:07:53.0830037Z Get:21 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [394 kB]
+2026-11-04T20:07:53.0852259Z Get:22 http://azure.archive.ubuntu.com/ubuntu noble-security/multiverse Translation-en [12.4 kB]
+2026-11-04T20:07:56.6409545Z Fetched 12.7 MB in 2s (7750 kB/s)
+2026-11-04T20:07:57.7789632Z Reading package lists...
+2026-11-04T20:07:57.8129606Z Reading package lists...
+2026-11-04T20:07:58.0460438Z Building dependency tree...
+2026-11-04T20:07:58.0469745Z Reading state information...
+2026-11-04T20:07:58.2064391Z libasound2t64 is already the newest version (1.2.11-1ubuntu0.3).
+2026-11-04T20:07:58.2065667Z libasound2t64 set to manually installed.
+2026-11-04T20:07:58.2067414Z libatk-bridge2.0-0t64 is already the newest version (2.52.0-1build1).
+2026-11-04T20:07:58.2068578Z libatk-bridge2.0-0t64 set to manually installed.
+2026-11-04T20:07:58.2069605Z libatk1.0-0t64 is already the newest version (2.52.0-1build1).
+2026-11-04T20:07:58.2070485Z libatk1.0-0t64 set to manually installed.
+2026-11-04T20:07:58.2071730Z libatspi2.0-0t64 is already the newest version (2.52.0-1build1).
+2026-11-04T20:07:58.2072362Z libatspi2.0-0t64 set to manually installed.
+2026-11-04T20:07:58.2072947Z libcairo2 is already the newest version (1.18.0-3build1).
+2026-11-04T20:07:58.2073482Z libcairo2 set to manually installed.
+2026-11-04T20:07:58.2074251Z libcups2t64 is already the newest version (2.4.7-1.2ubuntu7.14).
+2026-11-04T20:07:58.2074978Z libcups2t64 set to manually installed.
+2026-11-04T20:07:58.2075558Z libdbus-1-3 is already the newest version (1.14.10-4ubuntu4.1).
+2026-11-04T20:07:58.2076357Z libdbus-1-3 set to manually installed.
+2026-11-04T20:07:58.2077497Z libdrm2 is already the newest version (2.4.125-1ubuntu0.1~24.04.2).
+2026-11-04T20:07:58.2078523Z libdrm2 set to manually installed.
+2026-11-04T20:07:58.2079243Z libgbm1 is already the newest version (25.2.8-0ubuntu0.24.04.4).
+2026-11-04T20:07:58.2079933Z libgbm1 set to manually installed.
+2026-11-04T20:07:58.2080676Z libglib2.0-0t64 is already the newest version (2.80.0-6ubuntu3.10).
+2026-11-04T20:07:58.2081446Z libglib2.0-0t64 set to manually installed.
+2026-11-04T20:07:58.2082179Z libnspr4 is already the newest version (2:4.35-1.1build1).
+2026-11-04T20:07:58.2082860Z libnspr4 set to manually installed.
+2026-11-04T20:07:58.2083536Z libnss3 is already the newest version (2:3.98-1ubuntu0.3).
+2026-11-04T20:07:58.2084198Z libnss3 set to manually installed.
+2026-11-04T20:07:58.2084919Z libpango-1.0-0 is already the newest version (1.52.1+ds-1build1).
+2026-11-04T20:07:58.2085646Z libpango-1.0-0 set to manually installed.
+2026-11-04T20:07:58.2086624Z libx11-6 is already the newest version (2:1.8.7-1ubuntu0.1).
+2026-11-04T20:07:58.2087309Z libx11-6 set to manually installed.
+2026-11-04T20:07:58.2087832Z libxcb1 is already the newest version (1.15-1ubuntu2).
+2026-11-04T20:07:58.2088195Z libxcb1 set to manually installed.
+2026-11-04T20:07:58.2088599Z libxcomposite1 is already the newest version (1:0.4.5-1build3).
+2026-11-04T20:07:58.2089010Z libxcomposite1 set to manually installed.
+2026-11-04T20:07:58.2089425Z libxdamage1 is already the newest version (1:1.1.6-1build1).
+2026-11-04T20:07:58.2090013Z libxdamage1 set to manually installed.
+2026-11-04T20:07:58.2090719Z libxext6 is already the newest version (2:1.3.4-1build2).
+2026-11-04T20:07:58.2091422Z libxext6 set to manually installed.
+2026-11-04T20:07:58.2092532Z libxfixes3 is already the newest version (1:6.0.0-2build1).
+2026-11-04T20:07:58.2093165Z libxfixes3 set to manually installed.
+2026-11-04T20:07:58.2093592Z libxkbcommon0 is already the newest version (1.6.0-1build1).
+2026-11-04T20:07:58.2094006Z libxkbcommon0 set to manually installed.
+2026-11-04T20:07:58.2094415Z libxrandr2 is already the newest version (2:1.5.2-2build1).
+2026-11-04T20:07:58.2094799Z libxrandr2 set to manually installed.
+2026-11-04T20:07:58.2095649Z xvfb is already the newest version (2:21.1.12-1ubuntu1.9).
+2026-11-04T20:07:58.2096879Z fonts-noto-color-emoji is already the newest version (2.047-0ubuntu0.24.04.1).
+2026-11-04T20:07:58.2097737Z libfontconfig1 is already the newest version (2.15.0-1.1ubuntu2).
+2026-11-04T20:07:58.2098175Z libfontconfig1 set to manually installed.
+2026-11-04T20:07:58.2098631Z libfreetype6 is already the newest version (2.13.2+dfsg-1ubuntu0.2).
+2026-11-04T20:07:58.2099255Z libfreetype6 set to manually installed.
+2026-11-04T20:07:58.2100013Z fonts-liberation is already the newest version (1:2.1.5-3).
+2026-11-04T20:07:58.2100840Z fonts-liberation set to manually installed.
+2026-11-04T20:07:58.2101593Z The following additional packages will be installed:
+2026-11-04T20:07:58.2102244Z   xfonts-encodings xfonts-utils
+2026-11-04T20:07:58.2102711Z Recommended packages:
+2026-11-04T20:07:58.2103180Z   fonts-ipafont-mincho fonts-tlwg-loma
+2026-11-04T20:07:58.2280730Z The following NEW packages will be installed:
+2026-11-04T20:07:58.2282100Z   fonts-freefont-ttf fonts-ipafont-gothic fonts-tlwg-loma-otf fonts-unifont
+2026-11-04T20:07:58.2288884Z   fonts-wqy-zenhei xfonts-cyrillic xfonts-encodings xfonts-scalable
+2026-11-04T20:07:58.2289899Z   xfonts-utils
+2026-11-04T20:07:58.2504304Z 0 upgraded, 9 newly installed, 0 to remove and 16 not upgraded.
+2026-11-04T20:07:58.2505509Z Need to get 21.1 MB of archives.
+2026-11-04T20:07:58.2506946Z After this operation, 79.5 MB of additional disk space will be used.
+2026-11-04T20:07:58.2508033Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+2026-11-04T20:07:58.2847222Z Get:2 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-ipafont-gothic all 00303-21ubuntu1 [3513 kB]
+2026-11-04T20:07:58.3234666Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 fonts-freefont-ttf all 20211204+svn4273-2 [5641 kB]
+2026-11-04T20:07:58.3732357Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-tlwg-loma-otf all 1:0.7.3-1 [107 kB]
+2026-11-04T20:07:58.4027614Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-unifont all 1:15.1.01-1build1 [2993 kB]
+2026-11-04T20:07:58.5272949Z Get:6 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-wqy-zenhei all 0.9.45-8 [7472 kB]
+2026-11-04T20:07:58.5865557Z Get:7 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-encodings all 1:1.0.5-0ubuntu2 [578 kB]
+2026-11-04T20:07:58.6080271Z Get:8 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-utils amd64 1:7.7+6build3 [94.4 kB]
+2026-11-04T20:07:58.6253034Z Get:9 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 xfonts-cyrillic all 1:1.0.5+nmu1 [384 kB]
+2026-11-04T20:07:58.6487192Z Get:10 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-scalable all 1:1.0.3-1.3 [304 kB]
+2026-11-04T20:07:58.9362518Z Fetched 21.1 MB in 0s (50.8 MB/s)
+2026-11-04T20:07:58.9628089Z Selecting previously unselected package fonts-ipafont-gothic.
+2026-11-04T20:07:58.9897968Z (Reading database ... 
+2026-11-04T20:07:58.9898794Z (Reading database ... 5%
+2026-11-04T20:07:58.9899505Z (Reading database ... 10%
+2026-11-04T20:07:58.9900270Z (Reading database ... 15%
+2026-11-04T20:07:58.9900718Z (Reading database ... 20%
+2026-11-04T20:07:58.9901177Z (Reading database ... 25%
+2026-11-04T20:07:58.9901601Z (Reading database ... 30%
+2026-11-04T20:07:58.9902025Z (Reading database ... 35%
+2026-11-04T20:07:58.9902439Z (Reading database ... 40%
+2026-11-04T20:07:58.9902855Z (Reading database ... 45%
+2026-11-04T20:07:58.9903268Z (Reading database ... 50%
+2026-11-04T20:07:58.9942894Z (Reading database ... 55%
+2026-11-04T20:07:59.1596730Z (Reading database ... 60%
+2026-11-04T20:07:59.3109091Z (Reading database ... 65%
+2026-11-04T20:07:59.5596809Z (Reading database ... 70%
+2026-11-04T20:07:59.7651804Z (Reading database ... 75%
+2026-11-04T20:07:59.9074506Z (Reading database ... 80%
+2026-11-04T20:08:00.0650723Z (Reading database ... 85%
+2026-11-04T20:08:00.2132193Z (Reading database ... 90%
+2026-11-04T20:08:00.4260721Z (Reading database ... 95%
+2026-11-04T20:08:00.4270500Z (Reading database ... 100%
+2026-11-04T20:08:00.4271439Z (Reading database ... 215504 files and directories currently installed.)
+2026-11-04T20:08:00.4290399Z Preparing to unpack .../0-fonts-ipafont-gothic_00303-21ubuntu1_all.deb ...
+2026-11-04T20:08:00.4420122Z Unpacking fonts-ipafont-gothic (00303-21ubuntu1) ...
+2026-11-04T20:08:00.6927031Z Selecting previously unselected package fonts-freefont-ttf.
+2026-11-04T20:08:00.7069837Z Preparing to unpack .../1-fonts-freefont-ttf_20211204+svn4273-2_all.deb ...
+2026-11-04T20:08:00.7079504Z Unpacking fonts-freefont-ttf (20211204+svn4273-2) ...
+2026-11-04T20:08:00.8036749Z Selecting previously unselected package fonts-tlwg-loma-otf.
+2026-11-04T20:08:00.8179736Z Preparing to unpack .../2-fonts-tlwg-loma-otf_1%3a0.7.3-1_all.deb ...
+2026-11-04T20:08:00.8188331Z Unpacking fonts-tlwg-loma-otf (1:0.7.3-1) ...
+2026-11-04T20:08:00.8439451Z Selecting previously unselected package fonts-unifont.
+2026-11-04T20:08:00.8582709Z Preparing to unpack .../3-fonts-unifont_1%3a15.1.01-1build1_all.deb ...
+2026-11-04T20:08:00.8591395Z Unpacking fonts-unifont (1:15.1.01-1build1) ...
+2026-11-04T20:08:00.9807917Z Selecting previously unselected package fonts-wqy-zenhei.
+2026-11-04T20:08:00.9950615Z Preparing to unpack .../4-fonts-wqy-zenhei_0.9.45-8_all.deb ...
+2026-11-04T20:08:01.0064145Z Unpacking fonts-wqy-zenhei (0.9.45-8) ...
+2026-11-04T20:08:01.5048056Z Selecting previously unselected package xfonts-encodings.
+2026-11-04T20:08:01.5193797Z Preparing to unpack .../5-xfonts-encodings_1%3a1.0.5-0ubuntu2_all.deb ...
+2026-11-04T20:08:01.5214216Z Unpacking xfonts-encodings (1:1.0.5-0ubuntu2) ...
+2026-11-04T20:08:01.5556677Z Selecting previously unselected package xfonts-utils.
+2026-11-04T20:08:01.5699550Z Preparing to unpack .../6-xfonts-utils_1%3a7.7+6build3_amd64.deb ...
+2026-11-04T20:08:01.5707852Z Unpacking xfonts-utils (1:7.7+6build3) ...
+2026-11-04T20:08:01.6107717Z Selecting previously unselected package xfonts-cyrillic.
+2026-11-04T20:08:01.6242578Z Preparing to unpack .../7-xfonts-cyrillic_1%3a1.0.5+nmu1_all.deb ...
+2026-11-04T20:08:01.6250668Z Unpacking xfonts-cyrillic (1:1.0.5+nmu1) ...
+2026-11-04T20:08:01.6639864Z Selecting previously unselected package xfonts-scalable.
+2026-11-04T20:08:01.6781982Z Preparing to unpack .../8-xfonts-scalable_1%3a1.0.3-1.3_all.deb ...
+2026-11-04T20:08:01.6790445Z Unpacking xfonts-scalable (1:1.0.3-1.3) ...
+2026-11-04T20:08:01.7264333Z Setting up fonts-wqy-zenhei (0.9.45-8) ...
+2026-11-04T20:08:01.7402179Z Setting up fonts-freefont-ttf (20211204+svn4273-2) ...
+2026-11-04T20:08:01.7427161Z Setting up fonts-tlwg-loma-otf (1:0.7.3-1) ...
+2026-11-04T20:08:01.7448119Z Setting up xfonts-encodings (1:1.0.5-0ubuntu2) ...
+2026-11-04T20:08:01.7468774Z Setting up fonts-ipafont-gothic (00303-21ubuntu1) ...
+2026-11-04T20:08:01.7537785Z update-alternatives: using /usr/share/fonts/opentype/ipafont-gothic/ipag.ttf to provide /usr/share/fonts/truetype/fonts-japanese-gothic.ttf (fonts-japanese-gothic.ttf) in auto mode
+2026-11-04T20:08:01.7554902Z Setting up fonts-unifont (1:15.1.01-1build1) ...
+2026-11-04T20:08:01.7576493Z Setting up xfonts-utils (1:7.7+6build3) ...
+2026-11-04T20:08:01.7621861Z Setting up xfonts-cyrillic (1:1.0.5+nmu1) ...
+2026-11-04T20:08:01.7948551Z Setting up xfonts-scalable (1:1.0.3-1.3) ...
+2026-11-04T20:08:01.8249471Z Processing triggers for man-db (2.12.0-4build2) ...
+2026-11-04T20:08:01.8271638Z Not building database; man-db/auto-update is not 'true'.
+2026-11-04T20:08:01.8286818Z Processing triggers for fontconfig (2.15.0-1.1ubuntu2) ...
+2026-11-04T20:08:02.6006509Z 
+2026-11-04T20:08:02.6007777Z Running kernel seems to be up-to-date.
+2026-11-04T20:08:02.6008521Z 
+2026-11-04T20:08:02.6009177Z No services need to be restarted.
+2026-11-04T20:08:02.6009787Z 
+2026-11-04T20:08:02.6010224Z No containers need to be restarted.
+2026-11-04T20:08:02.6010722Z 
+2026-11-04T20:08:02.6011206Z No user sessions are running outdated binaries.
+2026-11-04T20:08:02.6011747Z 
+2026-11-04T20:08:02.6012425Z No VM guests are running outdated hypervisor (qemu) binaries on this host.
+2026-11-04T20:08:03.5913507Z Downloading Chrome for Testing 156.0.8078.4 (playwright chromium v1248) from https://cdn.playwright.dev/builds/cft/156.0.8078.4/linux64/chrome-linux64.zip
+2026-11-04T20:08:04.0257444Z |                                                                                |   0% of 191.1 MiB
+2026-11-04T20:08:04.2613643Z |■■■■■■■■                                                                        |  10% of 191.1 MiB
+2026-11-04T20:08:04.3797916Z |■■■■■■■■■■■■■■■■                                                                |  20% of 191.1 MiB
+2026-11-04T20:08:04.5323973Z |■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 191.1 MiB
+2026-11-04T20:08:04.6234527Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 191.1 MiB
+2026-11-04T20:08:04.7459277Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 191.1 MiB
+2026-11-04T20:08:04.8599296Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 191.1 MiB
+2026-11-04T20:08:05.0248647Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 191.1 MiB
+2026-11-04T20:08:05.1928665Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 191.1 MiB
+2026-11-04T20:08:05.2877840Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 191.1 MiB
+2026-11-04T20:08:05.4078316Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 191.1 MiB
+2026-11-04T20:08:09.8633616Z Chrome for Testing 156.0.8078.4 (playwright chromium v1248) downloaded to /home/runner/.cache/ms-playwright/chromium-1248
+2026-11-04T20:08:09.8640274Z Downloading FFmpeg (playwright ffmpeg v1013) from https://cdn.playwright.dev/dbazure/download/playwright/builds/ffmpeg/1013/ffmpeg-linux.zip
+2026-11-04T20:08:10.2618199Z |                                                                                |   0% of 2.2 MiB
+2026-11-04T20:08:10.2655935Z |■■■■■■■■                                                                        |  10% of 2.2 MiB
+2026-11-04T20:08:10.2697310Z |■■■■■■■■■■■■■■■■                                                                |  20% of 2.2 MiB
+2026-11-04T20:08:10.2720397Z |■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 2.2 MiB
+2026-11-04T20:08:10.2744443Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 2.2 MiB
+2026-11-04T20:08:10.2770461Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 2.2 MiB
+2026-11-04T20:08:10.2790807Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 2.2 MiB
+2026-11-04T20:08:10.2806571Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 2.2 MiB
+2026-11-04T20:08:10.2837754Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 2.2 MiB
+2026-11-04T20:08:10.2855323Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 2.2 MiB
+2026-11-04T20:08:10.2866586Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 2.2 MiB
+2026-11-04T20:08:10.3597322Z FFmpeg (playwright ffmpeg v1013) downloaded to /home/runner/.cache/ms-playwright/ffmpeg-1013
+2026-11-04T20:08:10.3603220Z Downloading Chrome Headless Shell 156.0.8078.4 (playwright chromium-headless-shell v1248) from https://cdn.playwright.dev/builds/cft/156.0.8078.4/linux64/chrome-headless-shell-linux64.zip
+2026-11-04T20:08:10.7943606Z |                                                                                |   0% of 120 MiB
+2026-11-04T20:08:10.9775575Z |■■■■■■■■                                                                        |  10% of 120 MiB
+2026-11-04T20:08:11.0921242Z |■■■■■■■■■■■■■■■■                                                                |  20% of 120 MiB
+2026-11-04T20:08:11.1665924Z |■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 120 MiB
+2026-11-04T20:08:11.2778187Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 120 MiB
+2026-11-04T20:08:11.3423155Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 120 MiB
+2026-11-04T20:08:11.3988130Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 120 MiB
+2026-11-04T20:08:11.4905442Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 120 MiB
+2026-11-04T20:08:11.5468770Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 120 MiB
+2026-11-04T20:08:11.5988459Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 120 MiB
+2026-11-04T20:08:11.6838067Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 120 MiB
+2026-11-04T20:08:14.6786792Z Chrome Headless Shell 156.0.8078.4 (playwright chromium-headless-shell v1248) downloaded to /home/runner/.cache/ms-playwright/chromium_headless_shell-1248
+2026-11-04T20:08:14.7189147Z ##[group]Run npm run test:m1:docker
+2026-11-04T20:08:14.7189706Z [36;1mnpm run test:m1:docker[0m
+2026-11-04T20:08:14.7220292Z shell: /usr/bin/bash -e {0}
+2026-11-04T20:08:14.7220721Z env:
+2026-11-04T20:08:14.7221040Z   CI: true
+2026-11-04T20:08:14.7221390Z   NEXT_TELEMETRY_DISABLED: 1
+2026-11-04T20:08:14.7222349Z   SUPABASE_HOME: /home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace/.supabase-local/runtime
+2026-11-04T20:08:14.7223684Z ##[endgroup]
+2026-11-04T20:08:14.8457882Z 
+2026-11-04T20:08:14.8471923Z > dental-worldwide-marketplace@0.0.1 test:m1:docker
+2026-11-04T20:08:14.8472981Z > node scripts/m1-docker-smoke.mjs
+2026-11-04T20:08:14.8473572Z 
+2026-11-04T20:08:34.9038006Z PASS m1-start
+2026-11-04T20:08:35.8836810Z PASS m1-status
+2026-11-04T20:08:36.9791226Z PASS m1-migration-check
+2026-11-04T20:08:38.2368469Z PASS m1-security-advisors
+2026-11-04T20:08:38.2369770Z Security advisor result: {"results":[],"message":"db advisors","target":{"kind":"local","host":"127.0.0.1","port":54322}}
+2026-11-04T20:08:38.2370552Z 
+2026-11-04T20:08:38.4853794Z PASS Auth: fictional confirmed identity created without invitation/email
+2026-11-04T20:08:38.5709785Z PASS Auth: invalid password rejected
+2026-11-04T20:08:38.6730771Z PASS Auth: password login and server validation
+2026-11-04T20:08:38.7000817Z PASS Auth: session refresh
+2026-11-04T20:08:38.8424551Z PASS Storage: private bucket and exact-byte upload/download
+2026-11-04T20:08:38.8834560Z PASS Storage: anonymous, public URL and ungranted user reads denied
+2026-11-04T20:08:38.9116018Z PASS Storage: short-lived signed download round trip
+2026-11-04T20:08:38.9302202Z PASS Auth: sign out rejects refresh-token reuse
+2026-11-04T20:08:39.0175096Z PASS Cleanup: fictional object, bucket and identity removed
+2026-11-04T20:08:39.1832330Z PASS M1-02 anonymous RPC denied by database privilege
+2026-11-04T20:08:41.4787943Z PASS M1-02 private tables default deny with RLS and no anonymous execution
+2026-11-04T20:11:33.6237885Z PASS M1-01 password-authenticated session cannot authorize account recovery
+2026-11-04T20:11:33.6240015Z PASS M1-01 20 actual fictional patient accounts, five practices and ten sites; real TOTP for privileged roles
+2026-11-04T20:11:35.2617362Z PASS M1-02 200 staff/record combinations enforce organization and site boundaries; 20 cross-patient denials and consent prerequisites
+2026-11-04T20:11:35.2941830Z PASS M1-02 owner reassignment, self-selected role and profile-metadata escalation denied
+2026-11-04T20:11:35.3567971Z PASS M1-03 current database membership read/write/removal takes effect with unchanged JWT; practice admin cannot escape site or elevate role
+2026-11-04T20:11:35.5299637Z PASS M1-04 warmed list, export, queued fixture execution, recipient/category/action consent and assignment withdrawal enforced; no blanket administrator clinical access
+2026-11-04T20:11:35.6963244Z PASS M1-05 password alone and unverified TOTP cannot exercise staff access
+2026-11-04T20:11:35.8309094Z PASS M1-03 account deactivation is immediate; reactivation requires a new session and remains visible to administrator
+2026-11-04T20:11:39.2950784Z PASS M1-05 idle and absolute expiry cannot be reset by reopening an old session
+2026-11-04T20:11:39.4747803Z PASS M1-05 global sign-out denies old access JWT immediately and provider refresh replay
+2026-11-04T20:11:43.8377788Z PASS M1-05 lost-factor reset revokes old sessions and requires newly enrolled, verified factor
+2026-11-04T20:11:49.5573202Z PASS M1-06 metadata-only audit read scope, append-only enforcement and fail-closed transaction rollback
+2026-11-04T20:11:49.5631642Z PASS M1-02 direct table/schema bypass denied
+2026-11-04T20:11:49.5636704Z PASS M1 database/auth checks complete; browser and local-mail checks remain separate
+2026-11-04T20:11:51.5770576Z PASS M1-01 API rejects cross-origin, non-fictional email, short passwords, role injection and oversized bodies
+2026-11-04T20:11:52.0414676Z PASS M1-01 captured-mail verification required, single-use token enforced, tokens confined to HttpOnly cookies
+2026-11-04T20:11:52.1906724Z PASS M1-01 actual recovery method accepted, password session substitution denied, recovery cannot open application session
+2026-11-04T20:11:53.7651121Z PASS M1-01 password recovery is neutral, captured locally, single-use, and revokes the old session
+2026-11-04T20:11:54.9340792Z PASS M1-01 actual recovery link expires after the configured 15 minutes; invalid token rejected
+2026-11-04T20:11:54.9743326Z PASS M1-05 BFF sign-out and malformed/old cookie replay denied
+2026-11-04T20:11:58.8658781Z PASS M1-05 atomic account/IP attempt limits, shared recovery bucket, window reset and spoofed proxy-header resistance
+2026-11-04T20:12:00.3759528Z PASS M1-05 BFF authenticator enrollment, invalid code denial and actual TOTP verification
+2026-11-04T20:12:03.4425972Z 
+2026-11-04T20:12:03.4427712Z Running 6 tests using 1 worker
+2026-11-04T20:12:03.4428388Z 
+2026-11-04T20:12:03.9462892Z [1/6] [desktop] › tests/m1-account.spec.ts:4:1 › bilingual navigation, keyboard, registration/recovery forms and responsive width
+2026-11-04T20:12:04.9009751Z [2/6] [desktop] › tests/m1-account.spec.ts:13:1 › actual patient sign-in, fixture scope, private cookies and sign-out
+2026-11-04T20:12:06.0091271Z [3/6] [desktop] › tests/m1-account.spec.ts:23:1 › all seven role workspaces enforce visible control scope with actual authenticated sessions
+2026-11-04T20:12:07.7845602Z [4/6] [mobile] › tests/m1-account.spec.ts:4:1 › bilingual navigation, keyboard, registration/recovery forms and responsive width
+2026-11-04T20:12:08.6010180Z [5/6] [mobile] › tests/m1-account.spec.ts:13:1 › actual patient sign-in, fixture scope, private cookies and sign-out
+2026-11-04T20:12:09.6152374Z [6/6] [mobile] › tests/m1-account.spec.ts:23:1 › all seven role workspaces enforce visible control scope with actual authenticated sessions
+2026-11-04T20:12:11.0013359Z   6 passed (7.7s)
+2026-11-04T20:12:11.0222018Z PASS M1-07 six desktop/mobile bilingual and role browser cases
+2026-11-04T20:12:21.7303408Z PASS m1-fixture-reset
+2026-11-04T20:12:22.8308466Z PASS m1-empty-after-reset
+2026-11-04T20:12:25.3854131Z PASS M1 project stack stopped
+2026-11-04T20:12:25.3860208Z {
+2026-11-04T20:12:25.3860772Z   "result": "PASS",
+2026-11-04T20:12:25.3861506Z   "database": {
+2026-11-04T20:12:25.3862081Z     "result": "PASS",
+2026-11-04T20:12:25.3862646Z     "checks": [
+2026-11-04T20:12:25.3863171Z       {
+2026-11-04T20:12:25.3864004Z         "check": "M1-02 anonymous RPC denied by database privilege",
+2026-11-04T20:12:25.3864849Z         "result": "PASS"
+2026-11-04T20:12:25.3865461Z       },
+2026-11-04T20:12:25.3865996Z       {
+2026-11-04T20:12:25.3867248Z         "check": "M1-02 private tables default deny with RLS and no anonymous execution",
+2026-11-04T20:12:25.3868285Z         "result": "PASS"
+2026-11-04T20:12:25.3868909Z       },
+2026-11-04T20:12:25.3869443Z       {
+2026-11-04T20:12:25.3870431Z         "check": "M1-01 password-authenticated session cannot authorize account recovery",
+2026-11-04T20:12:25.3871487Z         "result": "PASS"
+2026-11-04T20:12:25.3872130Z       },
+2026-11-04T20:12:25.3872666Z       {
+2026-11-04T20:12:25.3873864Z         "check": "M1-01 20 actual fictional patient accounts, five practices and ten sites; real TOTP for privileged roles",
+2026-11-04T20:12:25.3875149Z         "result": "PASS"
+2026-11-04T20:12:25.3875788Z       },
+2026-11-04T20:12:25.3876587Z       {
+2026-11-04T20:12:25.3877966Z         "check": "M1-02 200 staff/record combinations enforce organization and site boundaries; 20 cross-patient denials and consent prerequisites",
+2026-11-04T20:12:25.3879454Z         "result": "PASS"
+2026-11-04T20:12:25.3880064Z       },
+2026-11-04T20:12:25.3880563Z       {
+2026-11-04T20:12:25.3881611Z         "check": "M1-02 owner reassignment, self-selected role and profile-metadata escalation denied",
+2026-11-04T20:12:25.3882763Z         "result": "PASS"
+2026-11-04T20:12:25.3883352Z       },
+2026-11-04T20:12:25.3883877Z       {
+2026-11-04T20:12:25.3888903Z         "check": "M1-03 current database membership read/write/removal takes effect with unchanged JWT; practice admin cannot escape site or elevate role",
+2026-11-04T20:12:25.3891714Z         "result": "PASS"
+2026-11-04T20:12:25.3892285Z       },
+2026-11-04T20:12:25.3892818Z       {
+2026-11-04T20:12:25.3894443Z         "check": "M1-04 warmed list, export, queued fixture execution, recipient/category/action consent and assignment withdrawal enforced; no blanket administrator clinical access",
+2026-11-04T20:12:25.3896723Z         "result": "PASS"
+2026-11-04T20:12:25.3897325Z       },
+2026-11-04T20:12:25.3897864Z       {
+2026-11-04T20:12:25.3898799Z         "check": "M1-05 password alone and unverified TOTP cannot exercise staff access",
+2026-11-04T20:12:25.3899793Z         "result": "PASS"
+2026-11-04T20:12:25.3900372Z       },
+2026-11-04T20:12:25.3900880Z       {
+2026-11-04T20:12:25.3902077Z         "check": "M1-03 account deactivation is immediate; reactivation requires a new session and remains visible to administrator",
+2026-11-04T20:12:25.3903346Z         "result": "PASS"
+2026-11-04T20:12:25.3903935Z       },
+2026-11-04T20:12:25.3904432Z       {
+2026-11-04T20:12:25.3905294Z         "check": "M1-05 idle and absolute expiry cannot be reset by reopening an old session",
+2026-11-04T20:12:25.3906535Z         "result": "PASS"
+2026-11-04T20:12:25.3907135Z       },
+2026-11-04T20:12:25.3907639Z       {
+2026-11-04T20:12:25.3908608Z         "check": "M1-05 global sign-out denies old access JWT immediately and provider refresh replay",
+2026-11-04T20:12:25.3909699Z         "result": "PASS"
+2026-11-04T20:12:25.3910330Z       },
+2026-11-04T20:12:25.3910862Z       {
+2026-11-04T20:12:25.3911891Z         "check": "M1-05 lost-factor reset revokes old sessions and requires newly enrolled, verified factor",
+2026-11-04T20:12:25.3913040Z         "result": "PASS"
+2026-11-04T20:12:25.3913616Z       },
+2026-11-04T20:12:25.3914138Z       {
+2026-11-04T20:12:25.3917020Z         "check": "M1-06 metadata-only audit read scope, append-only enforcement and fail-closed transaction rollback",
+2026-11-04T20:12:25.3918152Z         "result": "PASS"
+2026-11-04T20:12:25.3918643Z       },
+2026-11-04T20:12:25.3919060Z       {
+2026-11-04T20:12:25.3919652Z         "check": "M1-02 direct table/schema bypass denied",
+2026-11-04T20:12:25.3920340Z         "result": "PASS"
+2026-11-04T20:12:25.3920873Z       },
+2026-11-04T20:12:25.3921392Z       {
+2026-11-04T20:12:25.3922243Z         "check": "M1 database/auth checks complete; browser and local-mail checks remain separate",
+2026-11-04T20:12:25.3923138Z         "result": "PASS"
+2026-11-04T20:12:25.3923619Z       }
+2026-11-04T20:12:25.3924035Z     ],
+2026-11-04T20:12:25.3924479Z     "counts": {
+2026-11-04T20:12:25.3924925Z       "patients": 20,
+2026-11-04T20:12:25.3925434Z       "practices": 5,
+2026-11-04T20:12:25.3925946Z       "sites": 10,
+2026-11-04T20:12:25.3937316Z       "identities": 40
+2026-11-04T20:12:25.3937979Z     },
+2026-11-04T20:12:25.3938516Z     "human": "DEFERRED TO M7"
+2026-11-04T20:12:25.3939076Z   },
+2026-11-04T20:12:25.3939537Z   "api": {
+2026-11-04T20:12:25.3940075Z     "result": "PASS",
+2026-11-04T20:12:25.3940607Z     "checks": [
+2026-11-04T20:12:25.3941089Z       {
+2026-11-04T20:12:25.3942181Z         "check": "M1-01 API rejects cross-origin, non-fictional email, short passwords, role injection and oversized bodies",
+2026-11-04T20:12:25.3943309Z         "result": "PASS"
+2026-11-04T20:12:25.3943895Z       },
+2026-11-04T20:12:25.3944450Z       {
+2026-11-04T20:12:25.3945627Z         "check": "M1-01 captured-mail verification required, single-use token enforced, tokens confined to HttpOnly cookies",
+2026-11-04T20:12:25.3950116Z         "result": "PASS"
+2026-11-04T20:12:25.3956836Z       },
+2026-11-04T20:12:25.3957522Z       {
+2026-11-04T20:12:25.3958874Z         "check": "M1-01 actual recovery method accepted, password session substitution denied, recovery cannot open application session",
+2026-11-04T20:12:25.3960300Z         "result": "PASS"
+2026-11-04T20:12:25.3961098Z       },
+2026-11-04T20:12:25.3961701Z       {
+2026-11-04T20:12:25.3963140Z         "check": "M1-01 password recovery is neutral, captured locally, single-use, and revokes the old session",
+2026-11-04T20:12:25.3964423Z         "result": "PASS"
+2026-11-04T20:12:25.3965116Z       },
+2026-11-04T20:12:25.3965732Z       {
+2026-11-04T20:12:25.3967203Z         "check": "M1-01 actual recovery link expires after the configured 15 minutes; invalid token rejected",
+2026-11-04T20:12:25.3968392Z         "result": "PASS"
+2026-11-04T20:12:25.3969321Z       },
+2026-11-04T20:12:25.3969895Z       {
+2026-11-04T20:12:25.3970800Z         "check": "M1-05 BFF sign-out and malformed/old cookie replay denied",
+2026-11-04T20:12:25.3971815Z         "result": "PASS"
+2026-11-04T20:12:25.3972535Z       },
+2026-11-04T20:12:25.3973133Z       {
+2026-11-04T20:12:25.3974469Z         "check": "M1-05 atomic account/IP attempt limits, shared recovery bucket, window reset and spoofed proxy-header resistance",
+2026-11-04T20:12:25.3975857Z         "result": "PASS"
+2026-11-04T20:12:25.3977415Z       },
+2026-11-04T20:12:25.3977984Z       {
+2026-11-04T20:12:25.3978932Z         "check": "M1-05 BFF authenticator enrollment, invalid code denial and actual TOTP verification",
+2026-11-04T20:12:25.3980028Z         "result": "PASS"
+2026-11-04T20:12:25.3980618Z       }
+2026-11-04T20:12:25.3981191Z     ],
+2026-11-04T20:12:25.3981783Z     "human": "DEFERRED TO M7",
+2026-11-04T20:12:25.3982465Z     "mail": "local capture only"
+2026-11-04T20:12:25.3983113Z   },
+2026-11-04T20:12:25.3983887Z   "browser": {
+2026-11-04T20:12:25.3984673Z     "result": "PASS",
+2026-11-04T20:12:25.3985473Z     "configuredCases": 6
+2026-11-04T20:12:25.3986340Z   },
+2026-11-04T20:12:25.3986882Z   "cleanup": {
+2026-11-04T20:12:25.3987405Z     "fixtures": "PASS",
+2026-11-04T20:12:25.3987998Z     "credentialFiles": "REMOVED"
+2026-11-04T20:12:25.3988578Z   },
+2026-11-04T20:12:25.3989061Z   "human": "DEFERRED TO M7",
+2026-11-04T20:12:25.3989755Z   "independentAcceptance": "PENDING CHAT 06"
+2026-11-04T20:12:25.3990364Z }
+2026-11-04T20:12:25.4080384Z ##[group]Run if [ -f node_modules/supabase/dist/supabase.js ]; then
+2026-11-04T20:12:25.4080882Z [36;1mif [ -f node_modules/supabase/dist/supabase.js ]; then[0m
+2026-11-04T20:12:25.4081249Z [36;1m  mkdir -p .supabase-local[0m
+2026-11-04T20:12:25.4081519Z [36;1m  result=0[0m
+2026-11-04T20:12:25.4081966Z [36;1m  node node_modules/supabase/dist/supabase.js stop > .supabase-local/ci-stop.log 2>&1 || result=$?[0m
+2026-11-04T20:12:25.4082650Z [36;1m  rm -f .supabase-local/connection.json .supabase-local/m1-fixtures.json .env.local[0m
+2026-11-04T20:12:25.4083100Z [36;1m  if [ "$result" -ne 0 ]; then[0m
+2026-11-04T20:12:25.4083562Z [36;1m    echo 'FAIL: project stack cleanup; raw log withheld because it may contain credentials'[0m
+2026-11-04T20:12:25.4084026Z [36;1m    exit "$result"[0m
+2026-11-04T20:12:25.4084253Z [36;1m  fi[0m
+2026-11-04T20:12:25.4084441Z [36;1mfi[0m
+2026-11-04T20:12:25.4108356Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-04T20:12:25.4108733Z env:
+2026-11-04T20:12:25.4108927Z   CI: true
+2026-11-04T20:12:25.4109127Z   NEXT_TELEMETRY_DISABLED: 1
+2026-11-04T20:12:25.4109659Z   SUPABASE_HOME: /home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace/.supabase-local/runtime
+2026-11-04T20:12:25.4110205Z ##[endgroup]
+2026-11-04T20:12:26.7018112Z ##[group]Run node --input-type=module <<'JS'
+2026-11-04T20:12:26.7018512Z [36;1mnode --input-type=module <<'JS'[0m
+2026-11-04T20:12:26.7018947Z [36;1mimport { existsSync, readFileSync, appendFileSync } from 'node:fs';[0m
+2026-11-04T20:12:26.7019483Z [36;1mconst path = '.supabase-local/m1-evidence.json';[0m
+2026-11-04T20:12:26.7019986Z [36;1mconst evidence = existsSync(path) ? JSON.parse(readFileSync(path, 'utf8')) : null;[0m
+2026-11-04T20:12:26.7020571Z [36;1mconst report = {[0m
+2026-11-04T20:12:26.7020842Z [36;1m  source: process.env.GITHUB_SHA,[0m
+2026-11-04T20:12:26.7021150Z [36;1m  job: process.env.JOB_RESULT,[0m
+2026-11-04T20:12:26.7021475Z [36;1m  services: evidence?.result ?? 'NOT PERFORMED',[0m
+2026-11-04T20:12:26.7021788Z [36;1m  evidence,[0m
+2026-11-04T20:12:26.7022322Z [36;1m  limitation: 'M1 fictional-data implementation only. Human checks deferred to M7. Independent acceptance pending Chat 06.'[0m
+2026-11-04T20:12:26.7022879Z [36;1m};[0m
+2026-11-04T20:12:26.7023149Z [36;1mconst json = JSON.stringify(report, null, 2);[0m
+2026-11-04T20:12:26.7023459Z [36;1mconsole.log(json);[0m
+2026-11-04T20:12:26.7023850Z [36;1mappendFileSync(process.env.GITHUB_STEP_SUMMARY, '```json\n' + json + '\n```\n');[0m
+2026-11-04T20:12:26.7024462Z [36;1mJS[0m
+2026-11-04T20:12:26.7044359Z shell: /usr/bin/bash -e {0}
+2026-11-04T20:12:26.7044607Z env:
+2026-11-04T20:12:26.7044806Z   CI: true
+2026-11-04T20:12:26.7045005Z   NEXT_TELEMETRY_DISABLED: 1
+2026-11-04T20:12:26.7045545Z   SUPABASE_HOME: /home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace/.supabase-local/runtime
+2026-11-04T20:12:26.7046387Z   JOB_RESULT: success
+2026-11-04T20:12:26.7046615Z ##[endgroup]
+2026-11-04T20:12:26.7379196Z {
+2026-11-04T20:12:26.7380074Z   "source": "1f6de519f7f59a0ef4b713cea91fab6ae84824fa",
+2026-11-04T20:12:26.7380952Z   "job": "success",
+2026-11-04T20:12:26.7381650Z   "services": "PASS",
+2026-11-04T20:12:26.7382300Z   "evidence": {
+2026-11-04T20:12:26.7382892Z     "result": "PASS",
+2026-11-04T20:12:26.7383500Z     "database": {
+2026-11-04T20:12:26.7384028Z       "result": "PASS",
+2026-11-04T20:12:26.7384624Z       "checks": [
+2026-11-04T20:12:26.7385110Z         {
+2026-11-04T20:12:26.7385874Z           "check": "M1-02 anonymous RPC denied by database privilege",
+2026-11-04T20:12:26.7387063Z           "result": "PASS"
+2026-11-04T20:12:26.7387665Z         },
+2026-11-04T20:12:26.7388153Z         {
+2026-11-04T20:12:26.7389106Z           "check": "M1-02 private tables default deny with RLS and no anonymous execution",
+2026-11-04T20:12:26.7390083Z           "result": "PASS"
+2026-11-04T20:12:26.7390729Z         },
+2026-11-04T20:12:26.7391208Z         {
+2026-11-04T20:12:26.7392169Z           "check": "M1-01 password-authenticated session cannot authorize account recovery",
+2026-11-04T20:12:26.7393111Z           "result": "PASS"
+2026-11-04T20:12:26.7393722Z         },
+2026-11-04T20:12:26.7394182Z         {
+2026-11-04T20:12:26.7395411Z           "check": "M1-01 20 actual fictional patient accounts, five practices and ten sites; real TOTP for privileged roles",
+2026-11-04T20:12:26.7396904Z           "result": "PASS"
+2026-11-04T20:12:26.7397461Z         },
+2026-11-04T20:12:26.7397950Z         {
+2026-11-04T20:12:26.7399273Z           "check": "M1-02 200 staff/record combinations enforce organization and site boundaries; 20 cross-patient denials and consent prerequisites",
+2026-11-04T20:12:26.7400600Z           "result": "PASS"
+2026-11-04T20:12:26.7402031Z         },
+2026-11-04T20:12:26.7402589Z         {
+2026-11-04T20:12:26.7403455Z           "check": "M1-02 owner reassignment, self-selected role and profile-metadata escalation denied",
+2026-11-04T20:12:26.7404354Z           "result": "PASS"
+2026-11-04T20:12:26.7404870Z         },
+2026-11-04T20:12:26.7405244Z         {
+2026-11-04T20:12:26.7406663Z           "check": "M1-03 current database membership read/write/removal takes effect with unchanged JWT; practice admin cannot escape site or elevate role",
+2026-11-04T20:12:26.7408289Z           "result": "PASS"
+2026-11-04T20:12:26.7408859Z         },
+2026-11-04T20:12:26.7413118Z         {
+2026-11-04T20:12:26.7414677Z           "check": "M1-04 warmed list, export, queued fixture execution, recipient/category/action consent and assignment withdrawal enforced; no blanket administrator clinical access",
+2026-11-04T20:12:26.7416623Z           "result": "PASS"
+2026-11-04T20:12:26.7417170Z         },
+2026-11-04T20:12:26.7417623Z         {
+2026-11-04T20:12:26.7418431Z           "check": "M1-05 password alone and unverified TOTP cannot exercise staff access",
+2026-11-04T20:12:26.7419405Z           "result": "PASS"
+2026-11-04T20:12:26.7419928Z         },
+2026-11-04T20:12:26.7420374Z         {
+2026-11-04T20:12:26.7421523Z           "check": "M1-03 account deactivation is immediate; reactivation requires a new session and remains visible to administrator",
+2026-11-04T20:12:26.7422700Z           "result": "PASS"
+2026-11-04T20:12:26.7423220Z         },
+2026-11-04T20:12:26.7423656Z         {
+2026-11-04T20:12:26.7424485Z           "check": "M1-05 idle and absolute expiry cannot be reset by reopening an old session",
+2026-11-04T20:12:26.7425339Z           "result": "PASS"
+2026-11-04T20:12:26.7426359Z         },
+2026-11-04T20:12:26.7426855Z         {
+2026-11-04T20:12:26.7427828Z           "check": "M1-05 global sign-out denies old access JWT immediately and provider refresh replay",
+2026-11-04T20:12:26.7428802Z           "result": "PASS"
+2026-11-04T20:12:26.7429317Z         },
+2026-11-04T20:12:26.7429753Z         {
+2026-11-04T20:12:26.7430698Z           "check": "M1-05 lost-factor reset revokes old sessions and requires newly enrolled, verified factor",
+2026-11-04T20:12:26.7431743Z           "result": "PASS"
+2026-11-04T20:12:26.7432300Z         },
+2026-11-04T20:12:26.7432753Z         {
+2026-11-04T20:12:26.7433854Z           "check": "M1-06 metadata-only audit read scope, append-only enforcement and fail-closed transaction rollback",
+2026-11-04T20:12:26.7434954Z           "result": "PASS"
+2026-11-04T20:12:26.7435489Z         },
+2026-11-04T20:12:26.7435998Z         {
+2026-11-04T20:12:26.7438148Z           "check": "M1-02 direct table/schema bypass denied",
+2026-11-04T20:12:26.7438740Z           "result": "PASS"
+2026-11-04T20:12:26.7439090Z         },
+2026-11-04T20:12:26.7439382Z         {
+2026-11-04T20:12:26.7440124Z           "check": "M1 database/auth checks complete; browser and local-mail checks remain separate",
+2026-11-04T20:12:26.7440945Z           "result": "PASS"
+2026-11-04T20:12:26.7441329Z         }
+2026-11-04T20:12:26.7441636Z       ],
+2026-11-04T20:12:26.7441955Z       "counts": {
+2026-11-04T20:12:26.7442313Z         "patients": 20,
+2026-11-04T20:12:26.7442697Z         "practices": 5,
+2026-11-04T20:12:26.7443066Z         "sites": 10,
+2026-11-04T20:12:26.7443440Z         "identities": 40
+2026-11-04T20:12:26.7443807Z       },
+2026-11-04T20:12:26.7444188Z       "human": "DEFERRED TO M7"
+2026-11-04T20:12:26.7444616Z     },
+2026-11-04T20:12:26.7444925Z     "api": {
+2026-11-04T20:12:26.7445276Z       "result": "PASS",
+2026-11-04T20:12:26.7445647Z       "checks": [
+2026-11-04T20:12:26.7445977Z         {
+2026-11-04T20:12:26.7447172Z           "check": "M1-01 API rejects cross-origin, non-fictional email, short passwords, role injection and oversized bodies",
+2026-11-04T20:12:26.7448143Z           "result": "PASS"
+2026-11-04T20:12:26.7448522Z         },
+2026-11-04T20:12:26.7448833Z         {
+2026-11-04T20:12:26.7449704Z           "check": "M1-01 captured-mail verification required, single-use token enforced, tokens confined to HttpOnly cookies",
+2026-11-04T20:12:26.7450251Z           "result": "PASS"
+2026-11-04T20:12:26.7450468Z         },
+2026-11-04T20:12:26.7450645Z         {
+2026-11-04T20:12:26.7451220Z           "check": "M1-01 actual recovery method accepted, password session substitution denied, recovery cannot open application session",
+2026-11-04T20:12:26.7451793Z           "result": "PASS"
+2026-11-04T20:12:26.7452009Z         },
+2026-11-04T20:12:26.7452191Z         {
+2026-11-04T20:12:26.7452892Z           "check": "M1-01 password recovery is neutral, captured locally, single-use, and revokes the old session",
+2026-11-04T20:12:26.7453415Z           "result": "PASS"
+2026-11-04T20:12:26.7453655Z         },
+2026-11-04T20:12:26.7453836Z         {
+2026-11-04T20:12:26.7454289Z           "check": "M1-01 actual recovery link expires after the configured 15 minutes; invalid token rejected",
+2026-11-04T20:12:26.7454769Z           "result": "PASS"
+2026-11-04T20:12:26.7454988Z         },
+2026-11-04T20:12:26.7455168Z         {
+2026-11-04T20:12:26.7455591Z           "check": "M1-05 BFF sign-out and malformed/old cookie replay denied",
+2026-11-04T20:12:26.7455960Z           "result": "PASS"
+2026-11-04T20:12:26.7456752Z         },
+2026-11-04T20:12:26.7456958Z         {
+2026-11-04T20:12:26.7457530Z           "check": "M1-05 atomic account/IP attempt limits, shared recovery bucket, window reset and spoofed proxy-header resistance",
+2026-11-04T20:12:26.7458093Z           "result": "PASS"
+2026-11-04T20:12:26.7458317Z         },
+2026-11-04T20:12:26.7458510Z         {
+2026-11-04T20:12:26.7458957Z           "check": "M1-05 BFF authenticator enrollment, invalid code denial and actual TOTP verification",
+2026-11-04T20:12:26.7459642Z           "result": "PASS"
+2026-11-04T20:12:26.7459863Z         }
+2026-11-04T20:12:26.7460041Z       ],
+2026-11-04T20:12:26.7460260Z       "human": "DEFERRED TO M7",
+2026-11-04T20:12:26.7460546Z       "mail": "local capture only"
+2026-11-04T20:12:26.7460798Z     },
+2026-11-04T20:12:26.7460988Z     "browser": {
+2026-11-04T20:12:26.7461199Z       "result": "PASS",
+2026-11-04T20:12:26.7461433Z       "configuredCases": 6
+2026-11-04T20:12:26.7461651Z     },
+2026-11-04T20:12:26.7461835Z     "cleanup": {
+2026-11-04T20:12:26.7462052Z       "fixtures": "PASS",
+2026-11-04T20:12:26.7462308Z       "credentialFiles": "REMOVED"
+2026-11-04T20:12:26.7462548Z     },
+2026-11-04T20:12:26.7462757Z     "human": "DEFERRED TO M7",
+2026-11-04T20:12:26.7463061Z     "independentAcceptance": "PENDING CHAT 06"
+2026-11-04T20:12:26.7463345Z   },
+2026-11-04T20:12:26.7463899Z   "limitation": "M1 fictional-data implementation only. Human checks deferred to M7. Independent acceptance pending Chat 06."
+2026-11-04T20:12:26.7464442Z }
+2026-11-04T20:12:26.7590390Z Post job cleanup.
+2026-11-04T20:12:26.9269611Z Post job cleanup.
+2026-11-04T20:12:27.0877008Z [command]/usr/bin/git version
+2026-11-04T20:12:27.1065212Z git version 2.56.0
+2026-11-04T20:12:27.1183898Z Temporarily overriding HOME='/home/runner/work/_temp/f0066fd9-e93a-4518-bc7c-2ea32c87c63c' before making global git config changes
+2026-11-04T20:12:27.1211228Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-04T20:12:27.1238012Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/dental-worldwide-marketplace/dental-worldwide-marketplace
+2026-11-04T20:12:27.1312801Z Removing SSH command configuration
+2026-11-04T20:12:27.1319267Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-04T20:12:27.1402536Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-04T20:12:27.1822361Z Removing HTTP extra header
+2026-11-04T20:12:27.1843879Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-04T20:12:27.1854491Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-04T20:12:27.2299246Z Removing includeIf entries pointing to credentials config files
+2026-11-04T20:12:27.2300583Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-04T20:12:27.2395491Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-04T20:12:27.2926954Z Cleaning up orphan processes

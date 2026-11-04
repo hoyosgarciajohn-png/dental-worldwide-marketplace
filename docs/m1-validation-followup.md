@@ -1,49 +1,48 @@
-# M1 review handoff and remaining validation — November 4, 2026
+# M1 automated validation and independent review handoff
 
-**M1 overall acceptance: BLOCKED. Implementation is reviewable in draft PR #2.** The original three hosted executions are consumed. John subsequently approved up to three additional executions (attempts 4–6), at most 20 minutes each and USD 0 new charges. No merge, deployment, real data, external mail, paid services or M2 implementation.
+November 4, 2026. **Automated validation: PASS. Independent M1 acceptance: PENDING CHAT 06.**
 
-## What is implemented
+## Exact evidence
 
-- Bilingual responsive account workspace; signup/contact verification/recovery through local captured email and server-side PKCE; HttpOnly session cookies.
-- Seven roles, site membership and current database authorization; positive and negative patient/practice/site access; explicit recipient/category/action grants and assigned staff.
-- Immediate deactivation, role/grant withdrawal and session revocation; 30-minute idle and 12-hour absolute session limits; privileged TOTP and lost-factor reset.
-- Scoped metadata-only append-only audit, denial events, and fail-closed mutation rollback when audit insertion fails.
-- Minimal fictional record, export and queued-job fixtures solely to exercise access controls. They are not a clinical, messaging, scheduling or production-data module.
+- Tested source: 1f6de519f7f59a0ef4b713cea91fab6ae84824fa; tree fba306870e621d6d1f400b46e7fe6ef80964d0ca.
+- Run 41903522909 / job 126831935371: provider completed/success, one attempt. November 4, 3:07–3:12 p.m. America/New_York.
+- Run: https://github.com/hoyosgarciajohn-png/dental-worldwide-marketplace/actions/runs/41903522909
+- Draft PR #2: https://github.com/hoyosgarciajohn-png/dental-worldwide-marketplace/pull/2 . No merge/deployment.
+- Exact downloaded log: docs/evidence/m1-run5-job.txt; SHA-256 d2c4274f0a87150fb8b7df30f50213f7013890db64dd274fb5aeac3a81052590.
+- Execution ledger: docs/m1-execution-evidence.json, preserving all five runs and failures. Package lock and dependency audit evidence retained.
+- Application, migrations and test scripts are unchanged after this passing source. Final handoff changes only documentation/evidence and removes the active workflow; compare the PR head with the tested source.
 
-## Evidence boundary
+## What actually passed
 
-| Area | Actual evidence | Current status |
-|---|---|---|
-| Last hosted source | `46205d34c49d64bbe0153e0afe3b72711c463efd`, tree `7413cc05e6bf9dd8d2a63c7f7ea1ec82d02760e8` | Run 41891201967 / job 126788754220 completed/failure |
-| Build/static/foundation HTTP | Locked installation, eight then-current unit cases, typecheck, production build, foundation HTTP | PASS on hosted candidate |
-| Database/Auth authorization | 40 identities, 20 fictional patients, five practices, ten sites; 200 staff/record combinations; membership/consent/assignment revocation; MFA/session/audit tests | PASS on hosted candidate |
-| M0 service regression | All nine actual Auth/private Storage/cleanup checks; security advisors returned no findings | PASS on hosted candidate |
-| API and captured mail | First unauthenticated request returned origin_rejected/403 rather than 401 | FAIL; remainder not performed |
-| Desktop/mobile browser suite | Six configured cases, including bilingual/keyboard and seven-role scope | NOT PERFORMED |
-| Cleanup | Database reset, no Auth users/fixture records/Storage objects, project stop, credential-file removal | PASS |
-| Post-run correction | Original Host/scheme verification; strict POST Origin preserved; callback shares authority check | 12 unit cases, typecheck/build, foundation HTTP and actual HTTP guard regression PASS locally |
-| Full corrected candidate | Database, captured mail, recovery, rate limits, BFF MFA and browser flows | NOT RETESTED |
-| Independent review | Chat 06; also retain focused closure of later M0 test-hardening delta | PENDING |
-| Human validation | Live M7 only | DEFERRED / NOT PERFORMED |
+| Area | Verified behavior |
+|---|---|
+| Foundation | Locked installation, all 12 unit cases, typecheck, production build, foundation HTTP and production request-origin regression |
+| Actual services | Supabase local Docker startup, two migrations, security advisors with no reported findings, all nine M0 Auth/private Storage/cleanup checks |
+| Accounts | Signup and mandatory captured-mail verification; neutral password recovery, actual dedicated recovery method, single use, 15-minute expiry, old-session denial after reset; password-session substitution rejected |
+| Isolation | 40 fictional identities, 20 patients, five practices, ten sites; 200 staff/record combinations; own-scope positives and cross-patient/practice/site/anonymous/direct-table denials |
+| Permissions/grants | Trusted current membership/site/action/category; no profile/JWT/owner self-elevation; immediate revocation with old tokens; listings, exports and queued fixtures recheck authorization |
+| Sessions/MFA | Deactivation/reactivation; idle 30-minute and absolute 12-hour boundaries; global sign-out and refresh replay denial; privileged TOTP/enrollment-only denial; restricted lost-factor reset; recovery cannot open an application session |
+| Abuse/audit | Actual 5/account and 20/loopback-peer limits per 15 minutes, window reset and spoofed forwarding-header resistance; scoped append-only metadata audit and rollback when audit insertion fails |
+| Browser | Six passing Chromium cases across desktop 1280×900 and mobile 390×844: bilingual/keyboard/forms/width, actual patient login/scope/logout and visible controls for all seven roles |
+| Cleanup | Fictional DB reset; no Auth users, fixture records or Storage objects; project stopped; connection and fixture credential files removed; five injected cleanup-failure unit cases passed |
 
-The original service PASS belongs to the recorded hosted source. The post-run correction changes the API/callback authority guard, adds regression tests and improves safe test diagnostics. It does not change the migration or database test suite. Reviewers must not treat those local tests as a full corrected-candidate PASS.
+The database evidence contains 16 named entries, including its completion summary; API/mail evidence contains eight named entries. These are grouped checks, not a claim that only 24 assertions ran. No mocks establish service or identity-provider PASS.
 
-## Defect ledger
+## Defects preserved and resolved
 
-1. CLI 3.0.0 experimental stack rejects custom email-template content_path. Confirmed locally. Switched to default captured templates plus server-side PKCE; startup subsequently passed. Actual verification/recovery is still pending.
-2. First fixture SQL write failed in a multi-statement batch. Raw provider reason was not retained in public logs. Splitting those calls was followed by a complete database suite PASS; do not claim a verified original provider error.
-3. Next.js 16.4.5 normalizes loopback hosts in NextRequest.url. Confirmed by local reproduction and installed framework source. Corrected with original Host, scheme and exact POST Origin checks; malicious authority and forwarded-header cases remain denied. Local production HTTP regression PASS.
+1. Attempt 1: CLI 3.0.0 rejects custom email-template content paths. Use default captured templates and server-side PKCE. Actual signup and recovery both passed in the final candidate.
+2. Attempt 2: first fixture SQL write failed in a multi-statement batch; exact original provider error was not exposed. Split statements; later complete DB suites passed. Do not invent the original error.
+3. Attempt 3: NextRequest loopback normalization rejected legitimate API requests. Exact original Host/scheme and strict POST Origin checks fixed it; positive/negative production HTTP and full application tests passed.
+4. Attempt 4: recovery-password update rejected a valid PKCE session because the predicate required otp. A new migration requires the documented recovery method, retaining all session/account/audit logic. Actual provider claims, reset, replay/expiry and password-session substitution tests passed in attempt 5. Reference: https://supabase.com/docs/guides/auth/jwt-fields .
 
-Raw downloaded job logs are saved in docs/evidence/m1-run1-job.txt through m1-run3-job.txt. SHA-256 values, sources, jobs and results are in m1-execution-evidence.json. Logs and source scanned for JWTs, provider key formats and private-key blocks; no matches. Pattern scans are not an exhaustive secret audit.
+## Chat 06 review task
 
-## Additional-runtime scope — approved November 4, 2026
+Independently compare the tested source with the final PR head; verify raw-log hashes, provider success and the structured evidence. Review both migrations, least-privilege RPC/RLS enforcement, current session and consent checks, recovery/PKCE/cookie handling, role/site matrix, rate limits, audit rollback and cleanup paths. Confirm the six browser cases' actual scope; identify any acceptance group still lacking evidence. Carry forward focused closure of later M0 test-hardening findings without rewriting the originally accepted M0 baseline. Record PASS, CONDITIONAL or FAIL with exact sources and unresolved findings. Author tests do not supply the independent verdict.
 
-John approved **up to three additional standard Ubuntu hosted executions, each capped at 20 minutes, USD 0 new external charges**, solely to finish M1 validation and necessary corrections. Preserve the account-wide USD 0 Actions spending block, pinned actions, read-only workflow permissions, local Docker Supabase, captured local mail, fictional records and cleanup. No cache/artifact upload or live services. Count every additional execution, including failures; stop at the limit. Remove the workflow after validation.
+Human usability, accessibility, physical-device, provider and professional checks remain **DEFERRED TO LIVE M7 / NOT PERFORMED**. The two automated viewports are not real-device or WCAG certification. Local default captured emails use provider templates; production delivery, trusted proxy boundaries, clinical/privacy approvals and deployment remain future gates. No real personal/health data or external delivery was used.
 
-Execute within this allowance: activate the dormant template once with an exact source; run the early origin regression, then actual M0/M1 services, signup/recovery/mail, BFF MFA/rate limits and six browser cases. Correct only evidenced M1 defects within the remaining allowance. Preserve each failed and passing result. Remove the workflow, reconcile provider status and billing, and deliver the exact candidate/evidence to Chat 06 for independent acceptance. Do not infer acceptance, required-check compliance or merge permission from author tests.
+## Runtime and cost control
 
-No seventh execution is authorized. If the additional allowance is exhausted without complete validation, preserve the corrected implementation and evidence; M1 stays BLOCKED.
+John approved up to three additional 20-minute standard Ubuntu executions at USD 0 new external charges. Two were used (attempts 4 and 5); five total M1 runs, one unused. Testing stops after success. Active workflow removed; dormant template retained. No background test schedule.
 
-## Financial check
-
-Post-run GitHub UI: USD 0 billable; USD 0.28 of USD 12.00 included compute used, 0 GB of 0.5 GB Actions storage. Actions budget remains USD 0.00/0.00, Usage blocked. Billing data may lag; no billing settings changed.
+GitHub billing observed USD 0 billable, USD 0.35 / USD 12.00 included compute and 0 GB / 0.5 GB storage during the final run. Existing Actions spending block remained USD 0.00 / USD 0.00, Usage blocked; no settings changed. Provider usage may lag. No seventh run, paid service, merge, deployment or M2 implementation is authorized.

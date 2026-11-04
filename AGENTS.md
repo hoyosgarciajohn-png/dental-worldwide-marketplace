@@ -1,5 +1,7 @@
 # Dental Worldwide Marketplace
 
+Current checkpoint: M1 automated validation PASS on source 1f6de519f7f59a0ef4b713cea91fab6ae84824fa (run 41903522909). Independent Chat 06 acceptance remains pending. Five M1 executions used; the sixth is unused. Active workflow removed; do not consume unused capacity without a concrete M1 validation need. No merge or deployment authorized.
+
 ## Authorized scope
 M0 and bounded M1 approved by John on November 4, 2026 ("Yes I approve M1 package"). Read docs/m1-security-decisions.md and docs/m1-authorization.md. M1 covers accounts, roles/site memberships, permissions, sessions/recovery/revocation, privileged TOTP and audit controls, with minimal fictional authorization fixtures. M2–M7, merging and deployment remain unauthorized. Fictional data exclusively; new external charges USD 0. No real messages, paid requests or hosted database provisioning.
 

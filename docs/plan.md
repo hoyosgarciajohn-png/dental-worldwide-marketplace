@@ -276,3 +276,6 @@ M1 authorized and implemented on draft PR #2; M1 overall acceptance BLOCKED. Thi
 
 ## Additional M1 runtime approval — November 4, 2026
 John approved up to three further standard Ubuntu executions (M1 attempts 4–6), 20 minutes each, USD 0 new external charges, solely to finish M1 validation and necessary corrections. Stop early on success. Existing fictional-data/isolation/cleanup constraints and human deferral remain. No seventh run, merge, deployment or M2 work is authorized.
+
+## M1 automated validation complete — November 4, 2026
+Source 1f6de519f7f59a0ef4b713cea91fab6ae84824fa passed all executed M1-01–07 automated suites in run 41903522909 / job 126831935371, provider completed/success. All six browser cases and actual signup/verification/recovery/rate-limit/MFA tests passed; fixture/stack/credential cleanup passed. Fifth M1 execution completed; sixth unused. Active workflow removed. No further routine test run is needed. Next gate: independent Chat 06 evidence/source review and focused later-M0-hardening closure. This author result is not independent M1 acceptance or permission to merge/deploy/start M2.
