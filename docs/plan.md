@@ -259,5 +259,8 @@ A1–A4 remain unchanged. No conditional verdict is converted to PASS by the pla
 ## M0 authorization supplement — November 4, 2026
 John answered yes to the bounded M0 authorization request. M0 setup is authorized within USD 0 new external charges. M1–M6 and A6 remain ungranted. This supplement supersedes earlier statements that M0 has not been authorized, without broadening any other approval.
 
+## Independent planning closure reconciliation — November 4, 2026
+The later Chat 06 report, Dental_Chat06_Independent_Planning_Review_v1.0.md (Library libfile_0658756c98b481918e838f3bfff0fb97, stored version 2), closes F-01, F-02 and F-03 FOR PLANNING against consolidated-plan stored version 5. It supersedes the earlier pending-planning-closure status above. This is not independent M0 software acceptance; runtime/security/browser/recovery/load acceptance was NOT RUN in that report. M1 security decisions and future approvals remain required before affected implementation.
+
 ## M0 hosted-runner exception — November 4, 2026
 John explicitly approved the prepared bounded GitHub-hosted test run. This permits the actual local Supabase Docker stack on a standard Ubuntu runner in the existing private repository, at most three executions of 20 minutes, fictional data only and USD 0 new external charges. Keep the account-wide USD 0 Actions block unchanged. No hosted Supabase service, deployment, paid API, real data or later milestone is authorized. Approval authorizes execution, not a PASS. See docs/m0-runtime-host-proposal.md.

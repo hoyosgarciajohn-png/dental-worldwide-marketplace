@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const local = new URL('../.supabase-local/', import.meta.url);
@@ -33,4 +33,7 @@ try {
 } finally {
   const stopped = spawnSync(process.execPath, [cli, 'stop'], { cwd: root, encoding: 'utf8', timeout: 30000 });
   writeFileSync(new URL('docker-stop.log', local), `${stopped.stdout ?? ''}${stopped.stderr ?? ''}`, { mode: 0o600 });
+  rmSync(new URL('connection.json', local), { force: true });
+  assert.equal(stopped.status, 0, 'Project stack cleanup failed; check ignored local log');
+  console.log('PASS docker-stop and local credential removal');
 }

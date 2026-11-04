@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { randomBytes, randomUUID } from 'node:crypto';
 import { readFile, writeFile } from 'node:fs/promises';
 import { createClient } from '@supabase/supabase-js';
+import { authRejected, storageDenied } from './m0-denial-assertions.mjs';
 
 // Test-only local service checks. This does not implement application authentication or authorization.
 const config = JSON.parse(await readFile(new URL('../.supabase-local/connection.json', import.meta.url), 'utf8'));
@@ -13,7 +14,7 @@ assert.ok(secret && publicKey, 'Local keys required');
 const localFetch = (input, init) => {
   const target = new URL(typeof input === 'string' ? input : input instanceof URL ? input.href : input.url);
   assert.equal(target.origin, new URL(url).origin, 'No outbound service requests allowed');
-  return fetch(input, { ...init, signal: AbortSignal.timeout(20000) });
+  return fetch(input, { ...init, redirect: 'error', signal: AbortSignal.timeout(20000) });
 };
 const options = { auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false }, global: { fetch: localFetch } };
 const admin = createClient(url, secret, options);
@@ -34,7 +35,7 @@ try {
   const created = ok(await admin.auth.admin.createUser({ email, password, email_confirm: true }), 'create fictional identity');
   userId = created.user.id;
   pass('Auth: fictional confirmed identity created without invitation/email');
-  assert.ok((await member.auth.signInWithPassword({ email, password: `${password}-wrong` })).error);
+  authRejected((await member.auth.signInWithPassword({ email, password: `${password}-wrong` })).error, ['invalid_credentials'], 'invalid password');
   pass('Auth: invalid password rejected');
   const signedIn = ok(await member.auth.signInWithPassword({ email, password }), 'password login');
   assert.equal(signedIn.user.id, userId);
@@ -52,10 +53,11 @@ try {
   const downloaded = ok(await admin.storage.from(bucket).download(objectPath), 'private object download');
   assert.deepEqual(Buffer.from(await downloaded.arrayBuffer()), bytes);
   pass('Storage: private bucket and exact-byte upload/download');
-  assert.ok((await anonymous.storage.from(bucket).download(objectPath)).error);
-  assert.ok((await member.storage.from(bucket).download(objectPath)).error);
+  storageDenied((await anonymous.storage.from(bucket).download(objectPath)).error, 'anonymous read');
+  storageDenied((await member.storage.from(bucket).download(objectPath)).error, 'ungranted user read');
   const publicAttempt = await localFetch(`${url}/storage/v1/object/public/${bucket}/${objectPath}`);
-  assert.notEqual(publicAttempt.status, 200);
+  const publicError = await publicAttempt.json();
+  storageDenied({ ...publicError, status: publicAttempt.status }, 'public URL read');
   pass('Storage: anonymous, public URL and ungranted user reads denied');
   const signed = ok(await admin.storage.from(bucket).createSignedUrl(objectPath, 60), 'temporary signed URL');
   const signedResponse = await localFetch(signed.signedUrl);
@@ -64,7 +66,7 @@ try {
   pass('Storage: short-lived signed download round trip');
   ok(await member.auth.signOut({ scope: 'global' }), 'sign out');
   const replay = await anonymous.auth.refreshSession({ refresh_token: refreshToken });
-  assert.ok(replay.error, 'Revoked refresh credential must fail');
+  authRejected(replay.error, ['refresh_token_not_found', 'refresh_token_already_used'], 'revoked refresh credential');
   pass('Auth: sign out rejects refresh-token reuse');
 } catch (error) { failure = error; }
 finally {

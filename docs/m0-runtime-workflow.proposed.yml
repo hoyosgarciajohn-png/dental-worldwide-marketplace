@@ -36,6 +36,7 @@ jobs:
         run: npm ci --no-audit --no-fund
       - name: Foundation build and HTTP checks
         run: |
+          node --test scripts/m0-denial-assertions.test.mjs
           npm run typecheck
           npm run build
           npm run test:http
