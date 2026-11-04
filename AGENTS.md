@@ -1,13 +1,13 @@
 # Dental Worldwide Marketplace
 
 ## Authorized scope
-M0 foundation only, approved by John on November 4, 2026. M1–M6 features and M7 live activity are not authorized. Use fictional data exclusively. New external charges: USD 0. Never deploy, provision cloud resources, contact others, make paid API requests, or process real patients or payments under M0.
+M0 and bounded M1 approved by John on November 4, 2026 ("Yes I approve M1 package"). Read docs/m1-security-decisions.md and docs/m1-authorization.md. M1 covers accounts, roles/site memberships, permissions, sessions/recovery/revocation, privileged TOTP and audit controls, with minimal fictional authorization fixtures. M2–M7, merging and deployment remain unauthorized. Fictional data exclusively; new external charges USD 0. No real messages, paid requests or hosted database provisioning.
 
 ## Workflow
 Use develop and task branches; prepare reviewable changes. Preserve main. Read docs/plan.md and docs/requirements.md before edits. Install from package-lock.json with npm ci. Run typecheck, build, and appropriate setup checks. Report commands, actual output, source commit and blockers. Missing dependencies or mocks never establish integration PASS. Do not silently broaden scope to close a blocker.
 
 ## Security and data
-Never commit credentials, .env files, runtime DB/object files or patient data. Bind local services to loopback. Use .env.example with empty keys. Do not create clinical tables, roles, uploads or billing modules during M0. Database migrations and fixtures require matching authorization and security decisions. Do not put privileged keys in NEXT_PUBLIC_ variables or browser code.
+Never commit credentials, .env files, runtime DB/object files or patient data. Bind local services to loopback. Use .env.example with empty keys. M1 permits the scoped security schema and fictional authorization fixtures, not clinical workflows, uploads or billing. Database migrations and fixtures require recorded security decisions. Do not put privileged keys in NEXT_PUBLIC_ variables or browser code.
 
 ## Decisions and acceptance
 Human checks stay NOT PERFORMED until live M7. Author corrections are not independent review. Before M1: record role/session/recovery/audit/revocation decisions. Before M3: file limits, rates, quarantine/download rules. Before M5: continuity permissions. Before M6 recovery: revocation reconciliation and fail-closed decisions. Preserve plan precedence and approval history.
@@ -17,3 +17,6 @@ Use version-matched official Next.js and Supabase documentation. Supabase CLI na
 
 ## Approved M0 hosted-runner exception — November 4, 2026
 John answered "yes, approve" to docs/m0-runtime-host-proposal.md. Use only the existing private GitHub repository and standard Ubuntu test runner, actual Supabase local Docker services, fictional data, no new external charges, unchanged USD 0 Actions spending block, at most three executions and 20 minutes each. This narrow exception supersedes the no-cloud-provisioning sentence above only for these tests. No deployment, hosted Supabase project, paid runner, billing change or later milestone is authorized. Remove the active workflow after testing; preserve evidence.
+
+## Approved M1 hosted-runner exception — November 4, 2026
+John approved the M1 package including up to three NEW standard Ubuntu test executions of at most 20 minutes each. Existing private repository, actual local Docker Supabase with captured local mail only, pinned actions, read-only workflow permissions, no artifact/cache uploads, sanitized logs and cleanup; retain the USD 0 Actions hard stop. M0's separate allowance is exhausted. Count every M1 workflow execution including validation failures. No fourth attempt without new authorization. Keep independent review truthful; author tests are not an independent verdict.

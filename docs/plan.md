@@ -267,3 +267,6 @@ John explicitly approved the prepared bounded GitHub-hosted test run. This permi
 
 ## M0 independent acceptance received — November 4, 2026
 Chat 06's acceptance/M1 package v1.0 accepts baseline `5d975f5` using tested source `5eb647e`. The later `31fb04e`/`ba6bca5` test-hardening delta has successful runtime evidence and now completed/success provider job metadata, but needs focused independent closure. Preserve baseline acceptance and exact source boundaries. See `docs/m0-acceptance-reconciliation.md` for findings and the concrete M1 approval scope. M1 remains prepared, not authorized; no additional runner allowance, merge or deployment is implied. Human checks remain deferred to live M7.
+
+## M1 authorization — November 4, 2026
+John subsequently answered "Yes I approve M1 package" to the bounded M1 decision and three 20-minute $0 hosted test runs. This supersedes earlier M1-not-authorized wording only within docs/m1-authorization.md. M2–M7, merges, charges and deployments remain excluded. Security decisions are recorded in docs/m1-security-decisions.md before affected implementation.

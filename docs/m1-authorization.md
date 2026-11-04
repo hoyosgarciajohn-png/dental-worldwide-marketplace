@@ -1,0 +1,11 @@
+# M1 authorization — November 4, 2026
+
+John answered **Yes I approve M1 package** to the explicit Command Center decision for Chat 06's M1 package v1.0 at USD 0 new external charges, including up to three 20-minute standard Ubuntu test runs. Package: https://chatgpt.com/library?file_id=libfile_89e0fa430e2c819183bfcda4efeed151&account_id=personal
+
+Scope: accounts/contact verification/recovery with captured local mail, roles/site memberships, current database-enforced permissions, sessions/revocation, privileged TOTP and scoped audit controls. Minimal fictional records exist only to test authorization. At least 20 fictional patients and five practices with two sites each. Automated M1-01–07 acceptance; all human checks deferred to M7. No real records/delivery, payment, deployment, merge or M2–M7 implementation.
+
+Source branch: m1-accounts-access-20261104 from develop 17e939952e9cb0896a63e0b3a8d26337a22e9dcc, tree a80a1851b05d52ed9047c67e447b19826c5b740e. Main preserved. M0 baseline accepted by Chat 06; later test-hardening delta retains focused independent review as an explicit acceptance item. Author cannot issue that verdict. M0-QA-02 failure-path tests are required before runner reuse. M0-QA-03 configuration values are recorded separately before coding.
+
+M1 hosted allowance: 3 total executions, <=20 minutes each, standard Ubuntu, existing private repository, local Docker Supabase and captured mail, unchanged USD 0 spending block, pinned actions/read-only permission, no artifact/cache upload, fixture/stack/credential cleanup. No fourth attempt. The M0 allowance is exhausted and never reused. Run ledger will record exact source, run/job, result and cleanup; no initial run claimed.
+
+Preflight before M1 attempt 1: GitHub billing UI confirms Actions USD 0.00/0.00 Usage blocked; USD 0 billable usage; USD 0.27 of USD 12.00 included compute consumed. No billing settings changed. Attempt 1 is activated with this candidate; exact execution identity and verdict will follow retrieved evidence. The M0 cleanup failure tests passed five cases before runner reuse.
