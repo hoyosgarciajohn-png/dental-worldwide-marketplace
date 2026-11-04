@@ -51,5 +51,16 @@
   "actual_storage_smoke": "NOT PERFORMED",
   "docker_path": "NOT PERFORMED: engine unavailable",
   "human_acceptance": "DEFERRED TO M7",
-  "external_charges_usd": 0
+  "external_charges_usd": 0,
+  "host_recheck": "UNCHANGED: Docker unavailable; only UID/GID 0 mapped",
+  "user_namespace_probe": "BLOCKED: mapping write rejected (Operation not permitted)",
+  "host_alternative": "PREPARED ONLY: GitHub Actions standard Ubuntu runner; owner host-scope approval pending",
+  "proposed_workflow_validation": "PASS: YAML syntax and bounded trigger, permission, timeout and pinned action controls; not executed",
+  "github_billing_observed": {
+    "included_compute_used_usd": 0,
+    "included_compute_total_usd": 12,
+    "actions_overage_budget_usd": 0,
+    "usage_blocked": true,
+    "settings_changed": false
+  }
 }
