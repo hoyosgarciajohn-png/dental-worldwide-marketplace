@@ -1,0 +1,37 @@
+{
+  "name": "dental-worldwide-marketplace",
+  "version": "0.0.1",
+  "description": "Private M0 foundation; fictional data only",
+  "scripts": {
+    "dev": "next dev --hostname 127.0.0.1",
+    "build": "next build",
+    "start": "next start --hostname 127.0.0.1",
+    "typecheck": "next typegen && tsc --noEmit",
+    "preflight": "node scripts/preflight.mjs",
+    "test:http": "node scripts/http-smoke.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "UNLICENSED",
+  "type": "module",
+  "dependencies": {
+    "next": "16.4.5",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.1",
+    "@tailwindcss/postcss": "4.3.4",
+    "@types/node": "26.6.6",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "supabase": "3.0.0",
+    "tailwindcss": "4.3.4",
+    "typescript": "7.0.2"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=24.22.1 <25"
+  },
+  "packageManager": "npm@11.9.0"
+}
