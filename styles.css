@@ -293,3 +293,16 @@ details.card{margin:14px 0;padding:0}summary{font-weight:600;cursor:pointer;padd
 .btn.coral{background:linear-gradient(135deg,var(--coral),#ff9a6b);color:#fff}
 .btn.coral:hover{background:#e86a48;box-shadow:0 10px 24px #ff7a5944}
 .sun-chip{display:inline-block;background:var(--sun);color:#7a5a00;border-radius:99px;padding:2px 10px;font-size:.78rem;font-weight:700}
+
+/* v7 overlays: tint only behind the text, the rest of the photo stays full colour */
+.hero-bg,.pagehead img.bg,.phero img.bg,.cta img.bg,.band img.bg,.authgrid>.pic img,.city img{filter:none}
+.hero-bg{object-position:right center}
+.hero-ov,.pagehead::after,.phero::after{background:linear-gradient(90deg,rgba(4,46,60,.85) 0%,rgba(4,46,60,.55) 35%,rgba(4,46,60,0) 60%)}
+.hero h1,.hero .lead,.pagehead h1,.pagehead p,.phero h1,.phero p,.cta h2,.cta p,.band blockquote{text-shadow:0 2px 14px rgba(0,0,0,.35)}
+.cta::after,.band::after{background:radial-gradient(ellipse 55% 60% at 50% 50%,rgba(4,46,60,.85) 0%,rgba(4,46,60,.55) 50%,rgba(4,46,60,0) 100%)}
+.authgrid>.pic::after,.city::after{background:linear-gradient(180deg,rgba(4,46,60,0) 45%,rgba(4,46,60,.55) 70%,rgba(4,46,60,.88) 100%)}
+@media(max-width:900px){
+.hero-bg{height:100%;object-position:70% center}
+.hero-ov,.pagehead::after,.phero::after{background:linear-gradient(180deg,rgba(4,46,60,.25) 0%,rgba(4,46,60,.7) 45%,rgba(4,46,60,.92) 100%)}
+.cta::after,.band::after{background:linear-gradient(180deg,rgba(4,46,60,.55),rgba(4,46,60,.85))}
+}
