@@ -67,10 +67,12 @@ test('delayed ordinary responses cannot replace a newer authenticated actor',asy
   await page.route(`**${endpoint}`,async route=>{
    if(captured||route.request().postDataJSON()?.action!=='session.me'){await route.continue();return;}
    captured=true;
-   // Preserve the old request as sent. Hold its completion across an account switch.
-   const originalHeaders=await route.request().allHeaders();entered();await gate;
-   const response=await route.fetch({headers:originalHeaders});
+   // Obtain the real old-actor BFF response before changing the browser cookie jar.
+   // WebKit may select its current cookie jar when route.fetch runs, even when
+   // request.allHeaders was captured earlier. Delay delivery, not authentication.
+   const response=await route.fetch();
    cookieNames=response.headersArray().filter(h=>h.name.toLowerCase()==='set-cookie').map(h=>h.value.split('=',1)[0]);
+   entered();await gate;
    await route.fulfill({response});
   });
   try{

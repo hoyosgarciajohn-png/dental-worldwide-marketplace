@@ -1,3 +1,4 @@
+# Validation attempt 6: deterministic delayed responses and unambiguous journal replay.
 # Validation attempt 5: stable actor cookies and exact CLI stack identity for recovery.
 # Validation attempt 4: Auth recovery gate, accessible labels/contrast and isolated browser fixtures.
 # Validation attempt 3: one bounded retry for the observed stack-owner startup timeout.

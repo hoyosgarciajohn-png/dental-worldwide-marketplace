@@ -1,9 +1,9 @@
 {
   "status": "CORRECTION_AND_RETEST_IN_PROGRESS",
   "scope": "M2\u2013M6 fictional marketplace candidate",
-  "source_commit": "aeca56b0e0acf8604f29dfce8026537813ffb947",
-  "tree": "49e39b45283a62529616ec9e82142f3c079b8cbe",
-  "local_commit": "228bbc26008891f26eeeb0312a065541b418e787",
+  "source_commit": "019f14e489fe76683961e504ebbf244881883185",
+  "tree": "821130bf700da7aafbcd4008254b27475835d543",
+  "local_commit": "16dfe5eed9296fcfa4d3ff95f1be0fd751d31f85",
   "lock_sha256": "3969692d7226cb6654e33ddfae7d694a2ec2ea37640157e60e68f1cf3186bb2e",
   "runs": [
     {
@@ -54,6 +54,18 @@
       "load": "SKIPPED",
       "log_path": "docs/evidence/market-run4-integration.txt",
       "log_sha256": "d94deb8e1134d07da3d408461d910a7d146bd93bbf7b7ccef879e8728063fd02"
+    },
+    {
+      "attempt": 5,
+      "run_id": 42073181997,
+      "integration_job_id": 127406302380,
+      "branch": "validation-marketplace-05-20261105",
+      "source": "019f14e489fe76683961e504ebbf244881883185",
+      "status": "FAIL",
+      "reason": "M0/M1 and marketplace services/API passed.39/40 marketplace tests passed; WebKit delayed-response regression returned a different actor than its intended old request. Actual database/Auth/private-object restore reached journal replay, which failed on ambiguous PL/pgSQL column reference j. Load skipped.",
+      "load": "SKIPPED",
+      "log_path": "docs/evidence/market-run5-integration.txt",
+      "log_sha256": "6c5ae08b44ef7187ea78a286a0070ab348b343a82a97950b8fbeffba2f16a643"
     }
   ],
   "local_checks": {
@@ -65,7 +77,7 @@
     "postgres_parser": "PASS; not actual runtime acceptance",
     "managed_visual_preview": "HTTPS v2 owner-private home/workspace and role/language switching verified."
   },
-  "charges": "USD0 new external charges; existing spending block unchanged",
+  "charges": "USD0 billable observed at17:22UTC; USD0.82/$12 included compute and0GB/0.5GB storage displayed. Reporting may lag. Existing spending block unchanged.",
   "public_launch": "NOT AUTHORIZED",
   "human_checks": "DEFERRED TO M7 / NOT PERFORMED",
   "source_checkpoint_note": "GitHub update_ref internal errors; full snapshot retained on checkpoint-marketplace-20261105, actual test candidate on immutable validation branch. main/develop preserved.",

@@ -102,15 +102,15 @@ begin
  get diagnostics changes=row_count;if changes<>1 then raise exception 'recovery_row_missing';end if;
 end$$;
 create function market.recovery_reconcile() returns bigint language plpgsql security definer set search_path='' as $$
-declare cp market.recovery_checkpoint%rowtype;j market.recovery_journal%rowtype;n bigint:=0;begin
+declare cp market.recovery_checkpoint%rowtype;journal_event market.recovery_journal%rowtype;n bigint:=0;begin
  perform 1 from market.runtime_state where id and not protected_access_enabled and not recovery_recording for update;
  if not found then raise exception 'recovery_not_locked';end if;
  select * into strict cp from market.recovery_checkpoint where id for update;
  if cp.started_at is null then raise exception 'recovery_not_started';end if;
  if cp.auth_security_digest is distinct from market.auth_security_digest() then raise exception 'auth_recovery_not_reconciled';end if;
  if cp.expected_entries<>(select count(*) from market.recovery_journal where seq>cp.snapshot_seq and seq<=cp.target_seq) or cp.expected_digest is distinct from (select md5(coalesce(string_agg(to_jsonb(j)::text,'' order by seq),'')) from market.recovery_journal j where seq>cp.snapshot_seq and seq<=cp.target_seq) then raise exception 'recovery_history_incomplete';end if;
- for j in select * from market.recovery_journal where seq>cp.snapshot_seq and seq<=cp.target_seq order by seq loop
-  perform market.apply_security_state(j.table_name,j.row_key,j.security_state,j.deleted);n:=n+1;
+ for journal_event in select * from market.recovery_journal where seq>cp.snapshot_seq and seq<=cp.target_seq order by seq loop
+  perform market.apply_security_state(journal_event.table_name,journal_event.row_key,journal_event.security_state,journal_event.deleted);n:=n+1;
  end loop;
  update market.recovery_checkpoint set replayed_seq=target_seq,reconciled_at=clock_timestamp() where id;
  -- Explicit second action opens the gate; a failed/partial replay never does.
