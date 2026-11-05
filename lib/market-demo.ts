@@ -112,7 +112,7 @@ export function demoAction(state:DemoState,role:DemoRole,site:string,action:stri
    }else if(staff&&p.status==='attended'&&a.status==='confirmed')a.status='attended'; // Explicit demo clock simulation in UI.
    else throw Error('invalid_transition');a.version++;
   }else if(action==='handoff.save'){
-   if(!staff||c.appointment?.status!=='attended')throw Error('attendance_required');c.handoff={text:text(p.text),contact:'fictional-support@example.test',followUp:date(p.followUp),ack:false};
+   if(!staff||c.appointment?.status!=='attended')throw Error('attendance_required');c.handoff={text:text(p.text),contact:'fictional-support@example.test',followUp:date(p.followUp).slice(0,10),ack:false};
   }else if(action==='handoff.ack'){if(!own||!c.handoff)throw Error('forbidden');c.handoff.ack=true;}
   else if(action==='support.create'){
    if(!['administrative','financial','clinical'].includes(p.category))throw Error('invalid_request');c.support.push({id:id(),category:p.category,status:p.category==='clinical'?'escalated':'open',text:text(p.text)});

@@ -1,0 +1,58 @@
+# Bounded UI-only regression: calendar dates and Cali timestamp display.
+name: Dental calendar date validation
+on:
+  push:
+    branches: ['validation-dates-*']
+    paths: [.github/workflows/date-validation.yml]
+permissions:
+  contents: read
+concurrency:
+  group: dental-calendar-date-validation
+  cancel-in-progress: false
+jobs:
+  date-ui:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      CI: 'true'
+      NEXT_TELEMETRY_DISABLED: '1'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          package-manager-cache: false
+      - name: Record exact source and runtime
+        run: |
+          git rev-parse HEAD
+          node --version
+          npm --version
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Typecheck and build
+        run: |
+          npm run typecheck
+          npm run build
+      - name: Install pinned browser engines
+        run: npx --no-install playwright install --with-deps chromium firefox webkit
+      - name: Run actual date browser cases across all five projects
+        run: node scripts/date-browser-test.mjs
+      - name: Report bounded result and clean temporary files
+        if: always()
+        env:
+          JOB_RESULT: ${{ job.status }}
+        run: |
+          node --input-type=module <<'JS'
+          import {existsSync,readFileSync,appendFileSync,rmSync} from 'node:fs';
+          const path='.date-validation/evidence.json';
+          const evidence=existsSync(path)?JSON.parse(readFileSync(path,'utf8')):null;
+          const report={source:process.env.GITHUB_SHA,job:process.env.JOB_RESULT,evidence,scope:'UI calendar-date regression only; does not rerun or replace M0–M6 service/recovery/load acceptance.'};
+          const json=JSON.stringify(report,null,2);
+          console.log(json);
+          appendFileSync(process.env.GITHUB_STEP_SUMMARY,'```json\n'+json+'\n```\n');
+          rmSync('.date-validation',{recursive:true,force:true});
+          rmSync('test-results',{recursive:true,force:true});
+          rmSync('playwright-report',{recursive:true,force:true});
+          JS
