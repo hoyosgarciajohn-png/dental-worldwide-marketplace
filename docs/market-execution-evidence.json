@@ -18,6 +18,18 @@
       "load": "SKIPPED",
       "log_path": "docs/evidence/market-run1-integration.txt",
       "log_sha256": "5c4928f03712761e91f0e863ef8b45f231a2fb98f2cd18d59af8e2bad0511858"
+    },
+    {
+      "attempt": 2,
+      "run_id": 42064772205,
+      "integration_job_id": 127375745565,
+      "branch": "validation-marketplace-02-20261105",
+      "source": "b3081a2bd0fb974a0b9488f427b9d8be45589c17",
+      "status": "FAIL",
+      "reason": "Supabase CLI stack-owner startup timeout after10seconds; no application tests executed.",
+      "load": "SKIPPED",
+      "log_path": "docs/evidence/market-run2-integration.txt",
+      "log_sha256": "09799e99f2b04bea73d386c8c46852248a9d97c5e99f5cc8a7014e3bdce9bf99"
     }
   ],
   "local_checks": {
@@ -40,6 +52,6 @@
     "deployment_id": "appgdep_6aecad85bf808191b16ca0977ccf4986",
     "status": "PRIVATE_DEPLOYMENT_SUCCEEDED",
     "scope": "Static browser-local fictional demonstration; no production backend",
-    "observed": "HTTPS homepage and workspace loaded; fictional enquiry saved and visible to practice role. English/Spanish rendering checked on managed preview."
+    "observed": "HTTPS homepage/workspace loaded; fictional enquiry saved, visible to practice, estimate issued, patient revision acceptance enabled appointment request. English/Spanish rendering checked on managed preview. Browser-only simulation."
   }
 }

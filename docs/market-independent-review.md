@@ -41,3 +41,9 @@ The load script now seeds 20 owned cases across ten sites with related messages/
 ## First actual run disposition
 
 The first run is preserved as a failed attempt, not relabelled as acceptance. The duplicate-MFA fixture must be corrected without removing distinct-session concurrency coverage. Later source and test fixes require a new immutable tested candidate. The private-fictional candidate review remains PENDING.
+
+## Second candidate prepared
+
+The corrected candidate is remote `b3081a2bd0fb974a0b9488f427b9d8be45589c17`, local `dfb6f9dafb6d15a6f71ec7e83ae388d2c4e74045`, tree `5d57209c6ba17ad71e7d28b26dffd727dab2b057`. The independent reviewer verified the local tree and lockfile SHA256 `3969692d7226cb6654e33ddfae7d694a2ec2ea37640157e60e68f1cf3186bb2e`. The test correction challenges the already verified MFA factor on a new login and explicitly asserts different Auth session IDs; it preserves concurrent-session coverage. This candidate also includes immediate protected-state clearing during connected refresh and the stronger regressions.
+
+Saved first-run log `docs/evidence/market-run1-integration.txt` exactly matches the reviewer's separately fetched provider log (180,815 characters). Its independently computed SHA256 is `5c4928f03712761e91f0e863ef8b45f231a2fb98f2cd18d59af8e2bad0511858`. The failed first attempt is retained. Second-candidate service/browser/recovery/load evidence is still pending; no acceptance verdict is issued here.
