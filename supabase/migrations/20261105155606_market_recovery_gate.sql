@@ -59,6 +59,21 @@ end$$;
 revoke all on function m1.dispatch_before_market_recovery(text,jsonb) from public,anon,authenticated,service_role;
 revoke all on function m1.dispatch(text,jsonb) from public,anon,authenticated,service_role;
 grant execute on function m1.dispatch(text,jsonb) to authenticated;
+-- Auth APIs bypass the application BFF. Quiesce their security writes too.
+-- Shared locks drain in-flight writes before recovery_begin obtains its exclusive
+-- lock. Only the privileged restore's explicit session_replication_role=replica
+-- bypasses these ordinary triggers; service-role Auth API calls remain blocked.
+create function market.auth_recovery_write_guard() returns trigger language plpgsql security definer set search_path='' as $$begin
+ perform 1 from market.runtime_state where id for share;
+ if not coalesce((select protected_access_enabled from market.runtime_state where id),false) then raise exception 'auth_recovery_locked';end if;
+ if tg_level='STATEMENT' then return null;end if;return coalesce(new,old);
+end$$;
+do $$declare t record;begin
+ for t in select tablename from pg_tables where schemaname='auth' and tablename not in('schema_migrations','audit_log_entries') order by tablename loop
+  execute format('create trigger auth_recovery_write_gate before insert or update or delete on auth.%I for each row execute function market.auth_recovery_write_guard()',t.tablename);
+  execute format('create trigger auth_recovery_truncate_gate before truncate on auth.%I for each statement execute function market.auth_recovery_write_guard()',t.tablename);
+ end loop;
+end$$;
 -- Current Auth security state must be retained independently at gate closure.
 -- A stale Auth backup cannot reopen access merely by replaying application grants.
 create function market.auth_security_digest() returns text language plpgsql security definer set search_path='' as $$
@@ -110,4 +125,4 @@ create function market.recovery_open() returns void language plpgsql security de
  if cp.reconciled_at is null or cp.replayed_seq<>cp.target_seq or latest<>cp.target_seq or cp.expected_entries<>(select count(*) from market.recovery_journal where seq>cp.snapshot_seq and seq<=cp.target_seq) or cp.expected_digest is distinct from (select md5(coalesce(string_agg(to_jsonb(j)::text,'' order by seq),'')) from market.recovery_journal j where seq>cp.snapshot_seq and seq<=cp.target_seq) then raise exception 'recovery_not_reconciled';end if;
  update market.runtime_state set protected_access_enabled=true,recovery_recording=true where id;
 end$$;
-revoke all on function market.auth_security_digest(),market.capture_recovery_state(),market.recovery_begin(bigint),market.apply_security_state(text,jsonb,jsonb,boolean),market.recovery_reconcile(),market.recovery_open() from public,anon,authenticated,service_role;
+revoke all on function market.auth_recovery_write_guard(),market.auth_security_digest(),market.capture_recovery_state(),market.recovery_begin(bigint),market.apply_security_state(text,jsonb,jsonb,boolean),market.recovery_reconcile(),market.recovery_open() from public,anon,authenticated,service_role;

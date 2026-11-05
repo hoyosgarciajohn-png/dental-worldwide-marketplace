@@ -42,10 +42,10 @@ const before=Date.now();try{
   // Explicit untouched M1 browser suite MUST precede all marketplace mutations.
   m1Browser=browser('playwright.config.ts','tests/m1-account.spec.ts');assert.equal(m1Browser,'PASS','M1 original regression failed');
   run('scripts/market-services-test.mjs',300000);run('scripts/market-api-test.mjs',180000);
-  marketBrowser=browser('playwright.market.config.ts');assert.equal(marketBrowser,'PASS','Marketplace connected browser/accessibility checks failed');
+  marketBrowser=browser('playwright.market.config.ts');if(marketBrowser!=='PASS'){failure??=new Error('Marketplace connected browser/accessibility checks failed');console.error('FAIL marketplace browser checks; independent recovery checks will still run and overall result remains FAIL');}
   run('scripts/market-recovery-test.mjs',300000);
  }else run('scripts/market-load-test.mjs',660000);
-}catch(e){failure=e;console.error(`FAIL ${sanitize(e.message)}`);}
+}catch(e){failure??=e;console.error(`FAIL ${sanitize(e.message)}`);}
 finally{
  server?.kill('SIGTERM');
  try{if(ready){command(['db','reset','--no-seed','--yes'],'market-fixture-reset');command(['db','query','--read-only',"select 1 / ((not exists(select 1 from auth.users) and not exists(select 1 from m1.fixture_records) and not exists(select 1 from market.enquiries) and not exists(select 1 from storage.objects))::int) as empty_after_reset",'--output-format','json'],'market-empty-after-reset');cleanup=true;}}

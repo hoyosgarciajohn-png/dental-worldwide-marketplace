@@ -30,6 +30,18 @@
       "load": "SKIPPED",
       "log_path": "docs/evidence/market-run2-integration.txt",
       "log_sha256": "09799e99f2b04bea73d386c8c46852248a9d97c5e99f5cc8a7014e3bdce9bf99"
+    },
+    {
+      "attempt": 3,
+      "run_id": 42065865806,
+      "integration_job_id": 127379636375,
+      "branch": "validation-marketplace-03-20261105",
+      "source": "9cab44904737ea11475b2142484253fc51be33a3",
+      "status": "FAIL",
+      "reason": "M2\u2013M5 actual service/API checks passed; browser contrast, role-label and test-cookie isolation failures; recovery/load not reached.",
+      "load": "SKIPPED",
+      "log_path": "docs/evidence/market-run3-integration.txt",
+      "log_sha256": "0283c96ed4a863bc0b2406f4d9f0be56e58b4ffc854fc282553aac35805fbcd5"
     }
   ],
   "local_checks": {
@@ -53,5 +65,11 @@
     "status": "PRIVATE_DEPLOYMENT_SUCCEEDED",
     "scope": "Static browser-local fictional demonstration; no production backend",
     "observed": "HTTPS homepage/workspace loaded; fictional enquiry saved, visible to practice, estimate issued, patient revision acceptance enabled appointment request. English/Spanish rendering checked on managed preview. Browser-only simulation."
+  },
+  "repository_privacy": {
+    "observed_before": "Public viaGitHub REST andUI onNovember5; contradictedapprovedprivatebaseline. Changeactor/timeunknown.",
+    "corrected": "Restoredprivateviarepositorysettings; UIconfirmedprivate.",
+    "security_features_observed_before": "Dependencygraph/Dependabotalerts/updates/AIscansoff; CodeQL notconfigured; SecretProtectionnotenabled. No additional securitysetting changed.",
+    "exposure_limits": "Source and fictional sanitizedlogs werepublicbeforecorrection; no realpatientrecords or credentials intentionallycommitted. Exactthirdpartyaccessunknown. No claimofretroactiveerasure."
   }
 }
