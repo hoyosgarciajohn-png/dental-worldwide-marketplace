@@ -226,6 +226,26 @@
     return data;
   }
 
+
+  async function listAdmins() {
+    const client = sb();
+    if (!client) return [];
+    const { data, error } = await client.rpc("list_admins");
+    if (error) throw error;
+    return data || [];
+  }
+
+  async function setAdmin(email, makeAdmin) {
+    const client = sb();
+    if (!client) throw new Error("setup");
+    const { data, error } = await client.rpc("set_admin", {
+      target_email: String(email || "").trim(),
+      make_admin: !!makeAdmin
+    });
+    if (error) throw error;
+    return data;
+  }
+
   async function adminVerifyClinic(id, verified) {
     const client = sb();
     if (!client) throw new Error("setup");
@@ -263,6 +283,6 @@
     mapClinicRow, fetchVerifiedClinics, getMyClinic, upsertClinic, uploadClinicPhoto, signedUrl,
     createQuoteRequest, listMyQuotes, replyToQuote, sendMessage, listMessages,
     saveClinic, unsaveClinic, listSavedClinics, uploadPatientRecord, listPatientRecords,
-    adminListClinics, adminVerifyClinic, submitClinicForApproval, startCheckout, openPortal, planAllows, planMaxPhotos
+    adminListClinics, adminVerifyClinic, listAdmins, setAdmin, submitClinicForApproval, startCheckout, openPortal, planAllows, planMaxPhotos
   };
 })(window);

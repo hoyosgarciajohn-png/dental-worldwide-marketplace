@@ -44,7 +44,7 @@ const HTML_EN={
 "sign_in_a082": "<a href=\"signin.html\">Sign In</a>",
 "cities_f517": "Cities",
 "2026_sonrisaconnect_operated_by_481c": "© 2026 SonrisaConnect, operated by John J Hoyos · <a href=\"mailto:support@sonrisaconnect.com\">support@sonrisaconnect.com</a> · <a href=\"privacy.html\">Privacy</a> · <a href=\"terms.html\">Terms</a> · <a href=\"help.html\">Help</a> · <a href=\"pricing.html\">Pricing</a>",
-"sonrisaconnect_is_a_marketplace_d7b7": "SonrisaConnect is a marketplace, not a medical provider, and gives no medical advice. Practice profiles, prices and reviews shown are illustrative samples while we onboard our first practices. Photos are AI-generated illustrations.",
+"sonrisaconnect_is_a_marketplace_d7b7": "SonrisaConnect is a marketplace, not a medical provider, and gives no medical advice. Practice profiles, prices and reviews shown are illustrative samples while we onboard our first practices. Stock photos illustrate the patient journey; clinic profiles are samples while we onboard practices.",
 "for_practices_sonrisaconnect_45b1": "For Practices · SonrisaConnect",
 "clinic_owner_reviewing_an_8aa9": "Clinic owner reviewing an analytics dashboard on a large monitor in his dental practice",
 "colombian_dental_team_in_c870": "Colombian dental team in white coats and teal scrubs smiling together",
@@ -580,6 +580,15 @@ const HTML_EN={
 "submit_listing_lead_v32": "You need a verified email and phone before we can review your clinic. After you submit, an admin can publish you to the directory.",
 "submit_for_approval_v33": "Submit for approval",
 "submit_listing_ok_v34": "Submitted for review."
+,"admins_section_c10": "Administrators"
+,"admins_section_lead_c11": "Only the principal owner can add or remove administrators. New admins must already have a confirmed SonrisaConnect account."
+,"admins_email_c12": "Email"
+,"admins_name_c13": "Name"
+,"admins_role_c14": "Role"
+,"admins_empty_c15": "No administrators found."
+,"admins_add_label_c16": "Add administrator by email"
+,"admins_add_ph_c17": "name@example.com"
+,"admins_add_btn_c18": "Add admin"
 };
 const HTML_ES={
 "find_a_practice_sonrisaconnect_ec7a": "Buscar clínica · SonrisaConnect",
@@ -621,7 +630,7 @@ const HTML_ES={
 "sign_in_a082": "<a href=\"signin.html\">Ingresar</a>",
 "cities_f517": "Ciudades",
 "2026_sonrisaconnect_operated_by_481c": "© 2026 SonrisaConnect, operado por John J Hoyos · <a href=\"mailto:support@sonrisaconnect.com\">support@sonrisaconnect.com</a> · <a href=\"privacy.html\">Privacidad</a> · <a href=\"terms.html\">Términos</a> · <a href=\"help.html\">Ayuda</a> · <a href=\"pricing.html\">Precios</a>",
-"sonrisaconnect_is_a_marketplace_d7b7": "SonrisaConnect es un marketplace, no un prestador de servicios de salud, y no ofrece consejo médico. Los perfiles, precios y reseñas que se muestran son ejemplos ilustrativos mientras vinculamos a nuestras primeras clínicas. Las fotos son ilustraciones generadas con IA.",
+"sonrisaconnect_is_a_marketplace_d7b7": "SonrisaConnect es un marketplace, no un prestador de servicios de salud, y no ofrece consejo médico. Los perfiles, precios y reseñas que se muestran son ejemplos ilustrativos mientras vinculamos a nuestras primeras clínicas. Las fotos de stock ilustran el viaje del paciente; los perfiles de clínicas son ejemplos mientras incorporamos consultorios.",
 "for_practices_sonrisaconnect_45b1": "Para clínicas · SonrisaConnect",
 "clinic_owner_reviewing_an_8aa9": "Dueño de una clínica revisando un panel de estadísticas en un monitor grande de su consultorio",
 "colombian_dental_team_in_c870": "Equipo odontológico colombiano con batas blancas y uniformes verde azulado, sonriendo",
@@ -1157,6 +1166,15 @@ const HTML_ES={
 "submit_listing_lead_v32": "Necesitas correo y teléfono verificados antes de que revisemos tu clínica. Después de enviar, un administrador puede publicarte en el directorio.",
 "submit_for_approval_v33": "Enviar para aprobación",
 "submit_listing_ok_v34": "Enviado a revisión."
+,"admins_section_c10": "Administradores"
+,"admins_section_lead_c11": "Solo el propietario principal puede agregar o quitar administradores. Los nuevos admins deben tener una cuenta confirmada en SonrisaConnect."
+,"admins_email_c12": "Correo"
+,"admins_name_c13": "Nombre"
+,"admins_role_c14": "Rol"
+,"admins_empty_c15": "No hay administradores."
+,"admins_add_label_c16": "Agregar administrador por correo"
+,"admins_add_ph_c17": "nombre@ejemplo.com"
+,"admins_add_btn_c18": "Agregar admin"
 };
 /* ---- Strings used by app.js (dynamic content, validation, modals). {name} = placeholder. ---- */
 const JS_EN={
@@ -1280,6 +1298,13 @@ const JS_EN={
 "js.badgePhoneShort": "Phone",
 "js.badgeAdmin": "Admin verified clinic",
 "js.badgeAdminShort": "Verified"
+,"js.adminOwner": "Principal owner"
+,"js.adminYou": "You"
+,"js.adminRemove": "Remove"
+,"js.adminRemoveConfirm": "Remove admin access for {email}?"
+,"js.adminRemovedOk": "Administrator removed."
+,"js.adminAddedOk": "Administrator added: {email}"
+,"js.adminEmailInvalid": "Enter a valid email address."
 };
 const JS_ES={
 "js.waMessage":"Hola, SonrisaConnect. Tengo una pregunta.",
@@ -1402,6 +1427,13 @@ const JS_ES={
 "js.badgePhoneShort": "Teléfono",
 "js.badgeAdmin": "Clínica verificada por admin",
 "js.badgeAdminShort": "Verificada"
+,"js.adminOwner": "Propietario principal"
+,"js.adminYou": "Tú"
+,"js.adminRemove": "Quitar"
+,"js.adminRemoveConfirm": "¿Quitar el acceso de administrador a {email}?"
+,"js.adminRemovedOk": "Administrador eliminado."
+,"js.adminAddedOk": "Administrador agregado: {email}"
+,"js.adminEmailInvalid": "Ingresa un correo válido."
 };
 /* ---- Spanish versions of the mock data in app.js (same order as PRACTICES / CITIES). ---- */
 const DATA_ES={

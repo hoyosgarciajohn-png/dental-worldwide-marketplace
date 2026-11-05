@@ -288,6 +288,76 @@
       $("#adminEmpty").hidden = false;
       $("#adminEmpty").textContent = e.message || e;
     }
+
+    // Principal owner: manage administrators
+    const sec = $("#adminsSection");
+    if (sec && auth.profile && auth.profile.is_owner) {
+      sec.hidden = false;
+      const msg = $("#adminsMsg");
+      const showMsg = (text, ok) => {
+        if (!msg) return;
+        msg.textContent = text || "";
+        msg.className = "admin-msg " + (ok ? "okmsg" : (text ? "err" : ""));
+      };
+      const paintAdmins = async () => {
+        const atb = $("#adminsTable tbody");
+        try {
+          const admins = SCAuth.configured() ? await SCApi.listAdmins() : [];
+          $("#adminsEmpty").hidden = admins.length > 0;
+          atb.innerHTML = admins.map(a => {
+            const email = (a.email || "").replace(/</g, "&lt;");
+            const name = (a.full_name || "—").replace(/</g, "&lt;");
+            const badges = [];
+            if (a.is_owner) badges.push(`<span class="badge owner-badge">${t("js.adminOwner")}</span>`);
+            if (a.id === auth.user.id) badges.push(`<span class="badge you-badge">${t("js.adminYou")}</span>`);
+            const canRemove = !a.is_owner && a.id !== auth.user.id;
+            return `<tr>
+              <td>${email}</td>
+              <td>${name}</td>
+              <td>${badges.join(" ") || (a.role || "admin")}</td>
+              <td>${canRemove
+                ? `<button type="button" class="btn ghost sm" data-remove-admin="${email}">${t("js.adminRemove")}</button>`
+                : "—"}</td>
+            </tr>`;
+          }).join("");
+          atb.querySelectorAll("[data-remove-admin]").forEach(b => b.onclick = async () => {
+            if (!confirm(t("js.adminRemoveConfirm", { email: b.dataset.removeAdmin }))) return;
+            showMsg("");
+            try {
+              await SCApi.setAdmin(b.dataset.removeAdmin, false);
+              showMsg(t("js.adminRemovedOk"), true);
+              await paintAdmins();
+            } catch (err) {
+              showMsg(err.message || String(err), false);
+            }
+          });
+        } catch (err) {
+          $("#adminsEmpty").hidden = false;
+          $("#adminsEmpty").textContent = err.message || err;
+        }
+      };
+      await paintAdmins();
+      const addBtn = $("#adminAddBtn");
+      if (addBtn) addBtn.onclick = async () => {
+        const email = ($("#adminEmailInput").value || "").trim();
+        showMsg("");
+        if (!email || !email.includes("@")) {
+          showMsg(t("js.adminEmailInvalid"), false);
+          return;
+        }
+        addBtn.disabled = true;
+        try {
+          await SCApi.setAdmin(email, true);
+          $("#adminEmailInput").value = "";
+          showMsg(t("js.adminAddedOk", { email }), true);
+          await paintAdmins();
+        } catch (err) {
+          showMsg(err.message || String(err), false);
+        } finally {
+          addBtn.disabled = false;
+        }
+      };
+    }
   }
 
   if (page === "dashboard-clinic") clinicDash();
