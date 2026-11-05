@@ -22,23 +22,23 @@ const PHOTO_ALT=[
 "Two oral surgeons performing guided implant surgery in a modern surgical suite"];
 // shared photos used to fill each profile gallery (rotated per practice)
 const SHARED=[
-["images/operatory.jpg","Modern dental operatory with a white chair and teal accent wall"],
-["images/tech.jpg","Intraoral 3D scanner, dental instruments and ceramic crowns"],
-["images/reception.jpg","Bright clinic reception with a smiling receptionist"],
-["images/team.jpg","The clinical team in white coats and teal scrubs"]];
+["operatory.jpg","Modern dental operatory with a white chair and teal accent wall"],
+["tech.jpg","Intraoral 3D scanner, dental instruments and ceramic crowns"],
+["reception.jpg","Bright clinic reception with a smiling receptionist"],
+["team.jpg","The clinical team in white coats and teal scrubs"]];
 PRACTICES.forEach((p,i)=>{
   p.id=i+1;p.start=Math.min(...Object.values(p.prices));
-  p.image=`images/practice-${i+1}.jpg`;p.imageAlt=`${p.name}: ${PHOTO_ALT[i]}`;
+  p.image=`practice-${i+1}.jpg`;p.imageAlt=`${p.name}: ${PHOTO_ALT[i]}`;
   p.gallery=[[p.image,p.imageAlt],SHARED[i%4].slice(),SHARED[(i+2)%4].slice()];
 });
 const US={cleaning:120,implants:4000,veneers:1500,crowns:1200,rootcanal:1100};
 const CITIES=[
-{name:"Cartagena",img:"images/city-cartagena.jpg",alt:"Colorful colonial houses and flower balconies in Cartagena at sunset",blurb:"Caribbean coast and a walled colonial city."},
-{name:"Medellín",img:"images/city-medellin.jpg",alt:"Medellín skyline with towers among green mountains at dusk",blurb:"The city of eternal spring."},
-{name:"Bogotá",img:"images/city-bogota.jpg",alt:"Bogotá skyline with the Monserrate hill and Andes at sunrise",blurb:"Cosmopolitan capital in the Andes."},
-{name:"Cali",img:"images/city-cali.jpg",alt:"Palm-lined plaza with a white church in Cali",blurb:"Sunny, friendly and very affordable."},
-{name:"Barranquilla",img:"images/city-barranquilla.jpg",alt:"Riverside promenade with palm trees in Barranquilla",blurb:"Riverside port, a short flight from Miami."}];
-const AVATARS=[["images/patient-1.jpg","Smiling woman in her fifties, patient reviewer"],["images/patient-2.jpg","Smiling man in a blue shirt, patient reviewer"],["images/patient-3.jpg","Smiling woman with long dark hair, patient reviewer"],["images/patient-4.jpg","Smiling bearded man with glasses, patient reviewer"]];
+{name:"Cartagena",img:"city-cartagena.jpg",alt:"Colorful colonial houses and flower balconies in Cartagena at sunset",blurb:"Caribbean coast and a walled colonial city."},
+{name:"Medellín",img:"city-medellin.jpg",alt:"Medellín skyline with towers among green mountains at dusk",blurb:"The city of eternal spring."},
+{name:"Bogotá",img:"city-bogota.jpg",alt:"Bogotá skyline with the Monserrate hill and Andes at sunrise",blurb:"Cosmopolitan capital in the Andes."},
+{name:"Cali",img:"city-cali.jpg",alt:"Palm-lined plaza with a white church in Cali",blurb:"Sunny, friendly and very affordable."},
+{name:"Barranquilla",img:"city-barranquilla.jpg",alt:"Riverside promenade with palm trees in Barranquilla",blurb:"Riverside port, a short flight from Miami."}];
+const AVATARS=[["patient-1.jpg","Smiling woman in her fifties, patient reviewer"],["patient-2.jpg","Smiling man in a blue shirt, patient reviewer"],["patient-3.jpg","Smiling woman with long dark hair, patient reviewer"],["patient-4.jpg","Smiling bearded man with glasses, patient reviewer"]];
 
 const $=s=>document.querySelector(s),qs=new URLSearchParams(location.search);
 const stars=r=>"★".repeat(Math.round(r))+"☆".repeat(5-Math.round(r));
