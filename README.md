@@ -10,7 +10,7 @@ For current results and exact source, read `docs/market-execution-evidence.json`
 ## Marketplace validation
 On an authorized Docker development host, use the pinned Node/npm versions, `npm ci`, `npm run build`, and install the pinned Playwright Chromium, Firefox and WebKit engines. Then `MARKET_PHASE=full npm run test:market:docker` executes actual isolated services, original foundation/account regression, marketplace browser/API checks and recovery. `MARKET_PHASE=load npm run test:market:docker` executes the separate ten-minute authenticated read load phase. Each phase creates only fictional fixtures and resets/stops its project. Keep connection, fixture, snapshot and credential files private; only sanitized evidence survives cleanup.
 
-The scanner bridge is deliberately simulated and enabled only in isolated tests with `MARKET_ALLOW_SIMULATED_SCAN=1`. Never treat this as malware protection. External notifications and payment processing are disabled. Human, professional, live-provider and production recovery checks remain deferred.
+The scanner bridge is deliberately simulated and enabled only in isolated tests with `MARKET_ALLOW_SIMULATED_SCAN=1`. Never treat this as malware protection. External notifications and payment processing are disabled. Human, professional, live-provider and production recovery checks remain deferred in `docs/live-validation-queue.md`.
 
 ## Setup
 Use Node 24.22.1 and npm 11.9.0. Run `npm ci`, `npm run preflight`, `npm run typecheck`, and `npm run build`. Start the local app with `npm run dev`; it binds to 127.0.0.1:3000. No external fonts, analytics, AI or paid services are configured.

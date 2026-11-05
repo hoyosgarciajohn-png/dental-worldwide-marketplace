@@ -1,9 +1,9 @@
 {
   "status": "CORRECTION_AND_RETEST_IN_PROGRESS",
   "scope": "M2\u2013M6 fictional marketplace candidate",
-  "source_commit": "d7542f50c29dadf14926bfda4f88a3945dc1d401",
-  "tree": "d60bf3cbeb75bb374f466ce989b6a66fcd8fe5da",
-  "local_commit": "562b099",
+  "source_commit": "aeca56b0e0acf8604f29dfce8026537813ffb947",
+  "tree": "49e39b45283a62529616ec9e82142f3c079b8cbe",
+  "local_commit": "228bbc26008891f26eeeb0312a065541b418e787",
   "lock_sha256": "3969692d7226cb6654e33ddfae7d694a2ec2ea37640157e60e68f1cf3186bb2e",
   "runs": [
     {
@@ -42,6 +42,18 @@
       "load": "SKIPPED",
       "log_path": "docs/evidence/market-run3-integration.txt",
       "log_sha256": "0283c96ed4a863bc0b2406f4d9f0be56e58b4ffc854fc282553aac35805fbcd5"
+    },
+    {
+      "attempt": 4,
+      "run_id": 42069045509,
+      "integration_job_id": 127391447218,
+      "branch": "validation-marketplace-04-20261105",
+      "source": "aeca56b0e0acf8604f29dfce8026537813ffb947",
+      "status": "FAIL",
+      "reason": "M0/M1 and marketplace services/API passed; 32/35 browser cases passed. Three Chromium role-denial checks returned HTTP200 instead of403. Recovery could not identify its project database container, so restore and load remain unverified.",
+      "load": "SKIPPED",
+      "log_path": "docs/evidence/market-run4-integration.txt",
+      "log_sha256": "d94deb8e1134d07da3d408461d910a7d146bd93bbf7b7ccef879e8728063fd02"
     }
   ],
   "local_checks": {
@@ -51,7 +63,7 @@
     "http": "PASS",
     "origin": "PASS",
     "postgres_parser": "PASS; not actual runtime acceptance",
-    "managed_visual_preview": "Home and workspace English/Spanish rendered. Interaction check pending HTTPS preview."
+    "managed_visual_preview": "HTTPS v2 owner-private home/workspace and role/language switching verified."
   },
   "charges": "USD0 new external charges; existing spending block unchanged",
   "public_launch": "NOT AUTHORIZED",
@@ -60,16 +72,18 @@
   "private_preview": {
     "url": "https://dental-worldwide-owner-preview.sappydrum2.chatgpt.site",
     "site_id": "appgprj_6aecaad6d9388191b1b9915563289e9b",
-    "source_commit": "1d89b4f6201407a24e0860606b53c06802533ac1",
-    "deployment_id": "appgdep_6aecad85bf808191b16ca0977ccf4986",
+    "source_commit": "319fa1725c123125047d2dcaf11e1cd60eccd280",
+    "deployment_id": "appgdep_6aecb4d19ba481919b8c74e29ecc9454",
     "status": "PRIVATE_DEPLOYMENT_SUCCEEDED",
     "scope": "Static browser-local fictional demonstration; no production backend",
-    "observed": "HTTPS homepage/workspace loaded; fictional enquiry saved, visible to practice, estimate issued, patient revision acceptance enabled appointment request. English/Spanish rendering checked on managed preview. Browser-only simulation."
+    "observed": "HTTPS home and workspace, saved fictional enquiry and accepted estimate; exact accessible role selector and English/Spanish practice workspace verified after v2 deployment. Browser-local simulation only.",
+    "version": 2,
+    "access": "Owner only; custom allowlist contains one owner and no groups or external visitors."
   },
   "repository_privacy": {
-    "observed_before": "Public viaGitHub REST andUI onNovember5; contradictedapprovedprivatebaseline. Changeactor/timeunknown.",
-    "corrected": "Restoredprivateviarepositorysettings; UIconfirmedprivate.",
-    "security_features_observed_before": "Dependencygraph/Dependabotalerts/updates/AIscansoff; CodeQL notconfigured; SecretProtectionnotenabled. No additional securitysetting changed.",
-    "exposure_limits": "Source and fictional sanitizedlogs werepublicbeforecorrection; no realpatientrecords or credentials intentionallycommitted. Exactthirdpartyaccessunknown. No claimofretroactiveerasure."
+    "observed_before": "GitHub API and UI returned public on November5, contrary to the approved private baseline. Change actor and exposure duration are unknown.",
+    "corrected": "Restored to private through GitHub settings; API and independent reviewer confirmed private:true. Provider updated_at 2026-11-05T16:51:02Z.",
+    "security_features_observed_before": "Dependency graph, Dependabot alerts/updates and AI scans off; CodeQL and Secret Protection not configured. No additional security setting changed.",
+    "exposure_limits": "Source and fictional sanitized logs were public before correction. No real patient data or credentials intentionally committed; targeted pattern scans found none. Exact third-party access is unknown, and no retroactive erasure is claimed."
   }
 }

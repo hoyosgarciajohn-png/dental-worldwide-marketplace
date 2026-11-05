@@ -12,7 +12,7 @@ export function config() {
   if (!url || !key || !secret || new URL(url).hostname !== '127.0.0.1' || new URL(origin).hostname !== '127.0.0.1') throw new SafeFailure('service_unavailable', 503);
   return { url, key, secret, origin };
 }
-export function client(privileged = false, pkce?: { initial?: string; onValue: (value: string | null) => void }): SupabaseClient {
+function scopedClient(privileged = false, pkce?: { initial?: string; onValue: (value: string | null) => void }, bearer?: string): SupabaseClient {
   const c = config();
   const memory = new Map<string,string>();
   const verifierKey = 'dental-m1-pkce-code-verifier';
@@ -25,12 +25,31 @@ export function client(privileged = false, pkce?: { initial?: string; onValue: (
         removeItem:(key:string)=>{memory.delete(key);if(key===verifierKey)pkce.onValue(null);}
       }} : {})
     },
-    global: { fetch: (input, init) => {
+    global: { ...(bearer ? {headers:{Authorization:`Bearer ${bearer}`}} : {}), fetch: (input, init) => {
       const target = new URL(typeof input === 'string' ? input : input instanceof URL ? input.href : input.url);
       if (target.origin !== new URL(c.url).origin) throw new SafeFailure('service_unavailable', 503);
+      // A bearer-only client may verify its supplied JWT, never refresh or mutate Auth.
+      // This also fails closed if a future SDK version attempts an implicit refresh.
+      const method = (init?.method || (input instanceof Request ? input.method : 'GET')).toUpperCase();
+      if (bearer && target.pathname.startsWith('/auth/v1/') && (target.pathname !== '/auth/v1/user' || method !== 'GET')) throw new SafeFailure('session_expired',401);
       return fetch(input, { ...init, redirect: 'error', cache: 'no-store', signal: AbortSignal.timeout(15000) });
     } },
   });
+}
+export function client(privileged = false, pkce?: { initial?: string; onValue: (value: string | null) => void }): SupabaseClient {
+  return scopedClient(privileged,pkce);
+}
+/**
+ * Request-scoped client for ordinary authenticated API calls. Call
+ * auth.getUser(accessToken) to verify with Auth, then rpc(...) for current DB checks.
+ * No refresh token is accepted, no session is installed, and the supplied bearer
+ * remains fixed for every RPC. Auth endpoints other than GET /user are blocked.
+ * Do not use setSession/getSession/signIn/MFA methods on this client; explicit
+ * authentication operations use client() instead. This helper never sets cookies.
+ */
+export function bearerClient(accessToken: string): SupabaseClient {
+  if (!accessToken || accessToken.length > 16384 || /[\s\x00-\x1f\x7f]/.test(accessToken)) throw new SafeFailure('session_expired',401);
+  return scopedClient(false,undefined,accessToken);
 }
 export async function rpc(c: SupabaseClient, action: string, payload = {}) {
   const result = await c.rpc('m1_dispatch', { p_action: action, p_payload: payload });

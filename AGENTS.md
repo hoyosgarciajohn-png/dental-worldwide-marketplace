@@ -1,7 +1,9 @@
 # Current authority — November 5, 2026
 John approved autonomous implementation through the complete approved scope, fixes, automated fictional-data tests, independent review and an owner-private preview. This supersedes older milestone-only restrictions below. USD 0 new external charges; no real data/messages/payments/public release. Preserve main/develop. Necessary standard Ubuntu/local Docker tests are authorized with the unchanged USD0 spending block and max20min per job; diagnose failures and stop after success. Use docs/implementation-authorization.md. The master guide explicitly requests coordinated Codex delegation; bounded implementation/review subagents are authorized. Root owns integration, remote checkpoints and publishing an owner-private fictional preview. No production patient service is authorized.
 
-# Dental Worldwide Marketplace
+# Historical M0/M1 authority and evidence
+
+The entries below preserve decisions made before the current autonomous authority above. Their old pending-review and milestone-only limits are historical; consult the current execution ledger and independent review for present status.
 
 Current checkpoint: M1 automated validation PASS on source 1f6de519f7f59a0ef4b713cea91fab6ae84824fa (run 41903522909). Independent Chat 06 acceptance remains pending. Five M1 executions used; the sixth is unused. Active workflow removed; do not consume unused capacity without a concrete M1 validation need. No merge or deployment authorized.
 

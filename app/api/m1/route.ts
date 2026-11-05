@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { audit, client, config, emailValue, passwordValue, rateLimit, rpc, SafeFailure, validate, type Tokens } from '../../../lib/m1-server';
+import { audit, client, bearerClient, config, emailValue, passwordValue, rateLimit, rpc, SafeFailure, validate, type Tokens } from '../../../lib/m1-server';
 import { trustedLocalRequest } from '../../../lib/m1-origin';
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
     let input; try { input = JSON.parse(raw); } catch { throw new SafeFailure('invalid_request',400); }
     const { action, payload = {} } = input;
     validate(action, payload);
-    const c = client(false,['auth.signup','auth.recovery'].includes(action)?{onValue:value=>{verifier=value;}}:undefined);
+    let c = client(false,['auth.signup','auth.recovery'].includes(action)?{onValue:value=>{verifier=value;}}:undefined);
     if (['auth.signup','auth.signin','auth.recovery'].includes(action)) {
       const email = emailValue(payload.email);
       await rateLimit(email);
@@ -73,11 +73,16 @@ export async function POST(req: NextRequest) {
     const access_token = req.cookies.get('dental_access')?.value;
     const refresh_token = req.cookies.get('dental_refresh')?.value;
     if (!access_token || !refresh_token) throw new SafeFailure('unauthenticated',401);
-    const restored = await c.auth.setSession({access_token,refresh_token});
-    if (restored.error || !restored.data.session) { tokens=null; throw new SafeFailure('session_expired',401); }
-    const validated = await c.auth.getUser();
-    if (validated.error) { tokens=null; throw new SafeFailure('session_expired',401); }
-    tokens=restored.data.session;
+    // Explicit authentication operations may use the provider's session methods.
+    // Ordinary application requests use only the presented bearer, with no refresh
+    // and no Set-Cookie on success or failure, so late responses cannot change actor.
+    const explicitAuth = action === 'auth.signout' || action.startsWith('mfa.');
+    if (explicitAuth) {
+      const restored = await c.auth.setSession({access_token,refresh_token});
+      if (restored.error || !restored.data.session) throw new SafeFailure('session_expired',401);
+    } else c = bearerClient(access_token);
+    const validated = explicitAuth ? await c.auth.getUser() : await c.auth.getUser(access_token);
+    if (validated.error || !validated.data.user) throw new SafeFailure('session_expired',401);
     if (action === 'auth.signout') {
       await rpc(c,'session.revoke');
       await c.auth.signOut({scope:'global'});
@@ -118,7 +123,6 @@ export async function POST(req: NextRequest) {
     return reply({ok:true,data});
   } catch (error) {
     const safe = error instanceof SafeFailure ? error : new SafeFailure('service_unavailable',503);
-    if (['session_expired','account_unavailable','unauthenticated'].includes(safe.code)) tokens=null;
     return reply({ok:false,code:safe.code},safe.status);
   }
 }
