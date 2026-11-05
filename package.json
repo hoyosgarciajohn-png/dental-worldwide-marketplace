@@ -1,7 +1,7 @@
 {
   "name": "dental-worldwide-marketplace",
-  "version": "0.0.1",
-  "description": "Private M0 foundation; fictional data only",
+  "version": "0.2.0",
+  "description": "Private fictional-data Dental Worldwide Marketplace candidate",
   "scripts": {
     "dev": "next dev --hostname 127.0.0.1",
     "build": "next build",
@@ -13,20 +13,23 @@
     "test:m0:docker": "node scripts/m0-docker-smoke.mjs",
     "test:unit": "node --test scripts/*.test.mjs",
     "test:m1:docker": "node scripts/m1-docker-smoke.mjs",
-    "test:m1:browser": "playwright test",
-    "test:m1:origin": "node scripts/m1-origin-smoke.mjs"
+    "test:m1:browser": "playwright test tests/m1-account.spec.ts",
+    "test:m1:origin": "node scripts/m1-origin-smoke.mjs",
+    "test:market:docker": "node scripts/market-docker-smoke.mjs",
+    "test:market:browser": "playwright test --config playwright.market.config.ts"
   },
   "keywords": [],
   "author": "",
   "license": "UNLICENSED",
   "type": "module",
   "dependencies": {
+    "@supabase/supabase-js": "2.119.0",
     "next": "16.4.5",
     "react": "19.3.1",
-    "react-dom": "19.3.1",
-    "@supabase/supabase-js": "2.119.0"
+    "react-dom": "19.3.1"
   },
   "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
     "@playwright/test": "1.64.1",
     "@tailwindcss/postcss": "4.3.4",
     "@types/node": "26.6.6",
