@@ -54,7 +54,8 @@ jobs:
             mkdir -p .supabase-local
             result=0
             node node_modules/supabase/dist/supabase.js stop > .supabase-local/ci-stop.log 2>&1 || result=$?
-            rm -f .supabase-local/connection.json .supabase-local/m1-fixtures.json .supabase-local/market-fixtures.json .supabase-local/recovery-snapshot.sql .supabase-local/recovery-journal.json .env.local
+            find .supabase-local -mindepth 1 -maxdepth 1 ! -name '*-evidence.json' ! -name '*.sanitized.log' -exec rm -rf -- {} +
+            rm -f .env.local
             if [ "$result" -ne 0 ]; then
               echo 'FAIL: project stack cleanup; raw log withheld because it may contain credentials'
               exit "$result"
@@ -67,7 +68,7 @@ jobs:
         run: |
           node --input-type=module <<'JS'
           import { existsSync, readFileSync, appendFileSync } from 'node:fs';
-          const path = '.supabase-local/market-evidence.json';
+          const path = `.supabase-local/market-${process.env.MARKET_PHASE}-evidence.json`;
           const evidence = existsSync(path) ? JSON.parse(readFileSync(path, 'utf8')) : null;
           const report = {
             source: process.env.GITHUB_SHA,
@@ -105,6 +106,8 @@ jobs:
           docker version --format '{{.Server.Version}}'
       - name: Install locked dependencies
         run: npm ci --no-audit --no-fund
+      - name: Build the tested local server
+        run: npm run build
       - name: 20 concurrent fictional users for ten minutes; no browser phase
         run: npm run test:market:docker
       - name: Stop only this project and remove connection credentials
@@ -115,7 +118,8 @@ jobs:
             mkdir -p .supabase-local
             result=0
             node node_modules/supabase/dist/supabase.js stop > .supabase-local/ci-stop.log 2>&1 || result=$?
-            rm -f .supabase-local/connection.json .supabase-local/m1-fixtures.json .supabase-local/market-fixtures.json .supabase-local/recovery-snapshot.sql .supabase-local/recovery-journal.json .env.local
+            find .supabase-local -mindepth 1 -maxdepth 1 ! -name '*-evidence.json' ! -name '*.sanitized.log' -exec rm -rf -- {} +
+            rm -f .env.local
             if [ "$result" -ne 0 ]; then
               echo 'FAIL: project stack cleanup; raw log withheld because it may contain credentials'
               exit "$result"
@@ -128,7 +132,7 @@ jobs:
         run: |
           node --input-type=module <<'JS'
           import { existsSync, readFileSync, appendFileSync } from 'node:fs';
-          const path = '.supabase-local/market-evidence.json';
+          const path = `.supabase-local/market-${process.env.MARKET_PHASE}-evidence.json`;
           const evidence = existsSync(path) ? JSON.parse(readFileSync(path, 'utf8')) : null;
           const report = {
             source: process.env.GITHUB_SHA,

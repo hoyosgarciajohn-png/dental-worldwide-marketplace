@@ -105,7 +105,7 @@ begin
   return jsonb_build_object('ok',true,'data',d);
  end if;
   keys:=case p_action
-   when 'session.me' then array[]::text[] when 'profile.list' then array[]::text[] when 'enquiry.list' then array[]::text[] when 'export.create' then array[]::text[] when 'governance.list' then array[]::text[] when 'outbox.list' then array[]::text[] when 'invoice.list' then array[]::text[] when 'review.list' then array[]::text[]
+   when 'session.me' then array[]::text[] when 'profile.list' then array[]::text[] when 'enquiry.list' then array[]::text[] when 'export.create' then array[]::text[] when 'governance.list' then array[]::text[] when 'outbox.list' then array[]::text[] when 'invoice.list' then array[]::text[] when 'review.list' then array[]::text[] when 'operations.list' then array[]::text[] when 'coordinator.list' then array[]::text[]
    when 'profile.save' then array['site_id','version','name','summary_en','summary_es','practitioner','languages','services','evidence']
    when 'profile.submit' then array['site_id','version'] when 'profile.review' then array['site_id','version','decision','check_summary','expires_at'] when 'profile.suspend' then array['site_id','version','reason']
    when 'enquiry.create' then array['key','site_id','service','summary','categories','consent_version']
@@ -156,6 +156,18 @@ begin
   elsif p_action='deletion.review' then select * into dr from market.deletion_requests where id=oid for update;end if;
 
   if p_action='session.me' then d:=auth_result->'data';
+  elsif p_action='coordinator.list' then
+   select coalesce(jsonb_agg(jsonb_build_object('id',a.id,'label',a.display_name) order by a.display_name),'[]') into d from m1.accounts a where a.active and m1.has_role(a.id,'coordinator');
+  elsif p_action='operations.list' then
+   perform market.require(market.privileged(u,'platform_admin'));
+   select jsonb_build_object(
+    'enquiries',coalesce((select jsonb_agg(jsonb_build_object('id',x.id,'site_id',x.site_id,'version',x.version,'grant_active',x.grant_active,'continuity',x.continuity) order by x.created_at) from market.enquiries x),'[]'),
+    'sites',coalesce((select jsonb_agg(jsonb_build_object('id',x.id,'organization_id',x.organization_id,'label',x.label) order by x.label) from m1.sites x),'[]'),
+    'organizations',coalesce((select jsonb_agg(jsonb_build_object('id',x.id,'label',x.label) order by x.label) from m1.organizations x),'[]'),
+    'accounts',coalesce((select jsonb_agg(jsonb_build_object('id',x.id,'label',x.display_name) order by x.display_name) from m1.accounts x where x.active),'[]'),
+    'coordinators',coalesce((select jsonb_agg(jsonb_build_object('id',x.id,'label',x.display_name) order by x.display_name) from m1.accounts x where x.active and m1.has_role(x.id,'coordinator')),'[]'),
+    'practitioners',coalesce((select jsonb_agg(jsonb_build_object('id',x.id,'label',x.display_name,'site_id',m.site_id,'role',m.role) order by x.display_name) from m1.accounts x join m1.memberships m on m.user_id=x.id where x.active and m.active and m.role in('practice_admin','practice_staff') and 'write'=any(m.permissions)),'[]'),
+    'profiles',coalesce((select jsonb_agg(market.safe_profile(x) order by x.name) from market.profiles x),'[]')) into d;
   elsif p_action='profile.list' then
    perform market.require(market.privileged(u,'verification_reviewer') or exists(select 1 from m1.sites where market.staff(u,id,false,true)));
    select coalesce(jsonb_agg(to_jsonb(x) order by x.name),'[]') into d from market.profiles x where market.privileged(u,'verification_reviewer') or market.staff(u,x.site_id,false,true);

@@ -8,6 +8,8 @@ Fictional development only. Public RPC `market_dispatch(p_action text,p_payload 
 |---|---|---|
 | `directory.list` | `{}` | array of accepted, unexpired safe profile projections; public |
 | `session.me` | `{}` | M1 `{user_id,display_name,mfa_verified,factor_reset_pending,memberships:[{id,role,organization_id,site_id,permissions}],sites:[{id,organization_id,label}]}` |
+| `coordinator.list` | `{}` | active coordinator choices `[{id,label}]`; current authenticated session |
+| `operations.list` | `{}` | platform admin with MFA only: `{enquiries:[{id,site_id,version,grant_active,continuity}],sites:[{id,organization_id,label}],organizations:[{id,label}],accounts:[{id,label}],coordinators:[{id,label}],practitioners:[{id,label,site_id,role}],profiles:[safe profile projection of all statuses]}`; no case content, patient-owner field, evidence or emails |
 | `profile.list` | `{}` | own practice profiles, or all profiles for verification reviewer; private evidence included only here |
 | `enquiry.list` | `{}` | accessible enquiry rows with `id,patient_id,site_id,service,summary,categories,grant_active,consent_version,continuity,version,created_at` (summary requires care access) |
 | `enquiry.read` | `{id}` | `{enquiry,messages,files,estimates,acceptances,appointments,handoffs,support,reviews,coordinators}`; category-filtered; no blanket admin clinical access |
