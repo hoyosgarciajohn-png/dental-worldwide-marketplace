@@ -39,6 +39,8 @@ create index outbox_actor on market.outbox(actor_id); create index deletion_owne
 do $$declare t record;begin for t in select tablename from pg_tables where schemaname='market' loop execute format('alter table market.%I enable row level security',t.tablename);end loop;end$$;
 revoke all on all tables in schema market from public,anon,authenticated;
 insert into storage.buckets(id,name,public,file_size_limit,allowed_mime_types) values('market-private','market-private',false,5242880,array['application/pdf','image/jpeg','image/png']) on conflict(id) do update set public=false,file_size_limit=5242880,allowed_mime_types=excluded.allowed_mime_types;
+-- This bucket stays unavailable to ordinary clients even if another application adds a broad permissive Storage policy.
+create policy market_private_direct_deny on storage.objects as restrictive for all to anon,authenticated using(bucket_id<>'market-private') with check(bucket_id<>'market-private');
 
 create function market.require(p_ok boolean,p_code text default 'forbidden') returns void language plpgsql set search_path='' as $$begin if not coalesce(p_ok,false) then raise exception using errcode='MQ001',message=p_code;end if;end$$;
 create function market.fictional(p_text text,p_limit integer default 2000) returns boolean language sql immutable set search_path='' as $$select p_text like 'FICTIONAL%' and length(p_text) between 9 and p_limit$$;

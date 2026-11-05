@@ -21,7 +21,7 @@ test('fictional state gates unknown prices, revisions, appointment acceptance an
  expect(visibleCases(s,'practice',site)).toEqual([]);expect(visibleCases(s,'patient',site)).toHaveLength(1);
  act('admin','enquiry.continuity',{enabled:true});expect(visibleCases(s,'practice',site)).toEqual([]);
  act('admin','outbox.process');expect(s.outbox[0].state).toBe('denied');
- expect(()=>act('practice','message.send',{text:'FICTIONAL blocked'})).toThrow();expect(restoreDemo(s)).not.toBeNull();expect(restoreDemo({...s,schema:4})).toBeNull();
+ expect(()=>act('practice','message.send',{text:'FICTIONAL blocked'})).toThrow();expect(restoreDemo(s)).not.toBeNull();expect(restoreDemo({...s,schema:4})).toBeNull();const malformed=structuredClone(s);malformed.cases[0].estimates=[null] as any;expect(restoreDemo(malformed)).toBeNull();const badInvoice=structuredClone(s);badInvoice.invoices=[{id:'bad',site_id:'missing',amount:9900,currency:'USD',period:'2026-11'}];expect(restoreDemo(badInvoice)).toBeNull();
 });
 
 test('fictional practice boundaries, quarantine and clinical escalation stay explicit',()=>{

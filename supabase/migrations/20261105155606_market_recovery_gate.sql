@@ -13,7 +13,7 @@ create trigger recovery_journal_immutable before update or delete on market.reco
 create trigger recovery_journal_no_truncate before truncate on market.recovery_journal for each statement execute function m1.immutable_audit();
 create table market.recovery_checkpoint (
  id boolean primary key default true check(id), snapshot_seq bigint not null default 0,
- target_seq bigint not null default 0,replayed_seq bigint not null default 0,expected_entries bigint not null default 0,expected_digest text,
+ target_seq bigint not null default 0,replayed_seq bigint not null default 0,expected_entries bigint not null default 0,expected_digest text,auth_security_digest text,
  started_at timestamptz, reconciled_at timestamptz
 );
 insert into market.recovery_checkpoint(id) values(true);
@@ -36,7 +36,7 @@ begin
  when 'grants' then array['active','actions','category','recipient_organization','recipient_user']
  when 'assignments' then array['active']
  when 'sessions' then array['revoked','security_version']
- when 'profiles' then array['status','expires_at','version','services']
+ when 'profiles' then array['name','summary_en','summary_es','practitioner','languages','services','evidence','status','submitted_by','reviewed_by','check_summary','checked_at','expires_at','version','updated_at']
  when 'clinical_reviewers' then array['active']
  when 'enquiries' then array['grant_active','categories','continuity','consent_version','version']
  when 'coordinators' then array['assigned','granted','categories','version'] end;
@@ -59,13 +59,22 @@ end$$;
 revoke all on function m1.dispatch_before_market_recovery(text,jsonb) from public,anon,authenticated,service_role;
 revoke all on function m1.dispatch(text,jsonb) from public,anon,authenticated,service_role;
 grant execute on function m1.dispatch(text,jsonb) to authenticated;
+-- Current Auth security state must be retained independently at gate closure.
+-- A stale Auth backup cannot reopen access merely by replaying application grants.
+create function market.auth_security_digest() returns text language plpgsql security definer set search_path='' as $$
+declare t record;part text;combined text:='';begin
+ for t in select tablename from pg_tables where schemaname='auth' and tablename not in('schema_migrations','audit_log_entries') order by tablename loop
+  execute format('select encode(sha256(convert_to(coalesce(string_agg(to_jsonb(x)::text,'''' order by to_jsonb(x)::text),''''),''UTF8'')),''hex'') from auth.%I x',t.tablename) into part;
+  combined:=combined||t.tablename||':'||part||';';
+ end loop;return encode(sha256(convert_to(combined,'UTF8')),'hex');
+end$$;
 create function market.recovery_begin(p_snapshot_seq bigint) returns void language plpgsql security definer set search_path='' as $$declare latest bigint;begin
  perform 1 from market.runtime_state where id for update;
  if not found then raise exception 'recovery_state_missing';end if;
  select coalesce(max(seq),0) into latest from market.recovery_journal;
  if p_snapshot_seq<0 or p_snapshot_seq>latest then raise exception 'invalid_recovery_watermark';end if;
  update market.runtime_state set protected_access_enabled=false,recovery_recording=false where id;
- update market.recovery_checkpoint set snapshot_seq=p_snapshot_seq,target_seq=latest,replayed_seq=p_snapshot_seq,expected_entries=(select count(*) from market.recovery_journal where seq>p_snapshot_seq and seq<=latest),expected_digest=(select md5(coalesce(string_agg(to_jsonb(j)::text,'' order by seq),'')) from market.recovery_journal j where seq>p_snapshot_seq and seq<=latest),started_at=clock_timestamp(),reconciled_at=null where id;
+ update market.recovery_checkpoint set snapshot_seq=p_snapshot_seq,target_seq=latest,replayed_seq=p_snapshot_seq,expected_entries=(select count(*) from market.recovery_journal where seq>p_snapshot_seq and seq<=latest),expected_digest=(select md5(coalesce(string_agg(to_jsonb(j)::text,'' order by seq),'')) from market.recovery_journal j where seq>p_snapshot_seq and seq<=latest),auth_security_digest=market.auth_security_digest(),started_at=clock_timestamp(),reconciled_at=null where id;
 end$$;
 create function market.apply_security_state(p_table text,p_key jsonb,p_state jsonb,p_deleted boolean) returns void language plpgsql security definer set search_path='' as $$
 declare cols text;changes integer;
@@ -83,6 +92,7 @@ declare cp market.recovery_checkpoint%rowtype;j market.recovery_journal%rowtype;
  if not found then raise exception 'recovery_not_locked';end if;
  select * into strict cp from market.recovery_checkpoint where id for update;
  if cp.started_at is null then raise exception 'recovery_not_started';end if;
+ if cp.auth_security_digest is distinct from market.auth_security_digest() then raise exception 'auth_recovery_not_reconciled';end if;
  if cp.expected_entries<>(select count(*) from market.recovery_journal where seq>cp.snapshot_seq and seq<=cp.target_seq) or cp.expected_digest is distinct from (select md5(coalesce(string_agg(to_jsonb(j)::text,'' order by seq),'')) from market.recovery_journal j where seq>cp.snapshot_seq and seq<=cp.target_seq) then raise exception 'recovery_history_incomplete';end if;
  for j in select * from market.recovery_journal where seq>cp.snapshot_seq and seq<=cp.target_seq order by seq loop
   perform market.apply_security_state(j.table_name,j.row_key,j.security_state,j.deleted);n:=n+1;
@@ -96,7 +106,8 @@ create function market.recovery_open() returns void language plpgsql security de
  if not found then raise exception 'recovery_not_locked';end if;
  select * into strict cp from market.recovery_checkpoint where id for update;
  select coalesce(max(seq),0) into latest from market.recovery_journal;
+ if cp.auth_security_digest is distinct from market.auth_security_digest() then raise exception 'auth_recovery_not_reconciled';end if;
  if cp.reconciled_at is null or cp.replayed_seq<>cp.target_seq or latest<>cp.target_seq or cp.expected_entries<>(select count(*) from market.recovery_journal where seq>cp.snapshot_seq and seq<=cp.target_seq) or cp.expected_digest is distinct from (select md5(coalesce(string_agg(to_jsonb(j)::text,'' order by seq),'')) from market.recovery_journal j where seq>cp.snapshot_seq and seq<=cp.target_seq) then raise exception 'recovery_not_reconciled';end if;
  update market.runtime_state set protected_access_enabled=true,recovery_recording=true where id;
 end$$;
-revoke all on function market.capture_recovery_state(),market.recovery_begin(bigint),market.apply_security_state(text,jsonb,jsonb,boolean),market.recovery_reconcile(),market.recovery_open() from public,anon,authenticated,service_role;
+revoke all on function market.auth_security_digest(),market.capture_recovery_state(),market.recovery_begin(bigint),market.apply_security_state(text,jsonb,jsonb,boolean),market.recovery_reconcile(),market.recovery_open() from public,anon,authenticated,service_role;

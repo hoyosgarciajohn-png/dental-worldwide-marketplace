@@ -20,12 +20,32 @@ export const initialDemo=():DemoState=>({schema:5,clinics:[
 export const eligible=(c:Clinic)=>c.status==='accepted'&&Date.parse(c.expires+'T23:59:59Z')>Date.now();
 export const visibleCases=(s:DemoState,r:DemoRole,site:string)=>s.cases.filter(c=>r==='patient'?c.patient_id==='fictional-patient-01':r==='practice'?c.site_id===site&&c.active&&(eligible(s.clinics.find(p=>p.id===site)!)||c.continuity):false);
 export function restoreDemo(v:unknown):DemoState|null{
- if(!v||typeof v!=='object')return null;const s=v as DemoState;
- if(s.schema!==5||!Array.isArray(s.clinics)||s.clinics.length!==5||!Array.isArray(s.cases)||s.cases.length>100||!Array.isArray(s.invoices)||!Array.isArray(s.outbox)||!Array.isArray(s.audit))return null;
- if(s.clinics.some(c=>!c.id||!c.name?.startsWith('FICTIONAL')||!Array.isArray(c.services)||!Array.isArray(c.languages)))return null;
- if(s.cases.some(c=>typeof c.id!=='string'||!s.clinics.some(p=>p.id===c.site_id)||c.patient_id!=='fictional-patient-01'||!c.summary?.startsWith('FICTIONAL')||!Array.isArray(c.grants)||!Array.isArray(c.messages)||!Array.isArray(c.files)||!Array.isArray(c.estimates)||!Array.isArray(c.support)))return null;
- return s;
+ try{
+  const obj=(x:unknown):x is Record<string,any>=>!!x&&typeof x==='object'&&!Array.isArray(x);
+  const str=(x:unknown,max=2200):x is string=>typeof x==='string'&&x.length<=max;
+  const num=(x:unknown,min=0)=>typeof x==='number'&&Number.isFinite(x)&&x>=min;
+  const arr=(x:unknown,fn:(x:any)=>boolean,max=1000)=>Array.isArray(x)&&x.length<=max&&x.every(fn);
+  const stamp=(x:unknown)=>str(x,40)&&Number.isFinite(Date.parse(x));
+  const tagged=(x:unknown)=>str(x)&&x.startsWith('FICTIONAL');
+  const one=(x:unknown,values:string[])=>typeof x==='string'&&values.includes(x);
+  const version=(x:unknown)=>num(x,1)&&Number.isInteger(x);
+  if(!obj(v)||v.schema!==5)return null;const s=v as DemoState;
+  if(!arr(s.clinics,c=>obj(c)&&str(c.id,50)&&tagged(c.name)&&str(c.district,100)&&arr(c.languages,x=>str(x,30),5)&&arr(c.services,x=>one(x,['examination','crown']),2)&&one(c.status,['draft','submitted','accepted','suspended','rejected'])&&str(c.checked,40)&&stamp(c.expires)&&version(c.version)&&tagged(c.summary)&&one(c.tone,['mint','sand','lilac']),5)||s.clinics.length!==5)return null;
+  const site=(id:unknown)=>s.clinics.some(c=>c.id===id);
+  if(!arr(s.cases,c=>obj(c)&&str(c.id,50)&&site(c.site_id)&&c.patient_id==='fictional-patient-01'&&tagged(c.summary)&&one(c.service,['examination','crown'])&&typeof c.active==='boolean'&&arr(c.grants,x=>one(x,['contact','care','files']),3)&&str(c.consent_version,80)&&version(c.version)&&typeof c.continuity==='boolean'&&stamp(c.created)
+   &&arr(c.messages,m=>obj(m)&&str(m.id,50)&&one(m.sender,['patient','practice','reviewer','admin'])&&tagged(m.text)&&stamp(m.at))
+   &&arr(c.files,f=>obj(f)&&str(f.id,50)&&tagged(f.name)&&one(f.state,['quarantine','clean','rejected','error']))
+   &&arr(c.estimates,e=>obj(e)&&str(e.id,50)&&version(e.version)&&one(e.currency,['USD','COP'])&&arr(e.items,i=>obj(i)&&tagged(i.label)&&(i.amount===null||num(i.amount)),20)&&e.items.length>0&&tagged(e.exclusions)&&version(e.visits)&&tagged(e.trip)&&stamp(e.expires)&&typeof e.accepted==='boolean',100)
+   &&(!c.appointment||(obj(c.appointment)&&str(c.appointment.id,50)&&stamp(c.appointment.at)&&str(c.appointment.zone,80)&&one(c.appointment.status,['requested','proposed','confirmed','attended','cancelled'])&&version(c.appointment.version)&&c.estimates.some((e:Estimate)=>e.id===c.appointment.estimate_id)&&typeof c.appointment.patientAccepted==='boolean'))
+   &&(!c.handoff||(obj(c.handoff)&&tagged(c.handoff.text)&&str(c.handoff.contact,200)&&stamp(c.handoff.followUp)&&typeof c.handoff.ack==='boolean'))
+   &&arr(c.support,q=>obj(q)&&str(q.id,50)&&one(q.category,['administrative','financial','clinical'])&&one(q.status,['open','closed','escalated'])&&tagged(q.text))
+   &&(!c.review||(obj(c.review)&&Number.isInteger(c.review.rating)&&c.review.rating>=1&&c.review.rating<=5&&tagged(c.review.text)&&tagged(c.review.conflict)&&one(c.review.status,['pending','published','rejected','appealed'])&&(!c.review.reason||tagged(c.review.reason))))
+   &&(!c.deletion||(obj(c.deletion)&&one(c.deletion.status,['pending_review','held','reviewed'])&&tagged(c.deletion.reason))),100))return null;
+  if(!arr(s.invoices,i=>obj(i)&&str(i.id,50)&&site(i.site_id)&&num(i.amount)&&one(i.currency,['USD','COP'])&&str(i.period,7)&&/^\d{4}-\d{2}$/.test(i.period))||!arr(s.outbox,o=>obj(o)&&str(o.id,50)&&s.cases.some(c=>c.id===o.case_id)&&one(o.state,['queued','captured','denied']))||!arr(s.audit,a=>obj(a)&&str(a.id,50)&&str(a.action,100)&&stamp(a.at),10000))return null;
+  return s;
+ }catch{return null;}
 }
+
 const text=(v:unknown)=>{if(typeof v!=='string'||!v.startsWith('FICTIONAL')||v.length>2000)throw Error('fictional_text_required');return v;};
 const date=(v:unknown)=>{const d=new Date(String(v));if(!Number.isFinite(+d))throw Error('invalid_date');return d.toISOString();};
 const latest=(c:Case)=>c.estimates.at(-1);

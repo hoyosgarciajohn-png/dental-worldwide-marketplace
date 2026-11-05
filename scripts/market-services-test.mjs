@@ -14,8 +14,10 @@ for(let i=0;i<sites.length;i++){
  await no(c,'profile.review',{site_id:p.site_id,version:p.version,decision:'accepted',check_summary:'FICTIONAL self review',expires_at:future(90)});
  p=await yes(reviewer,'profile.review',{site_id:p.site_id,version:p.version,decision:'accepted',check_summary:'FICTIONAL synthetic reviewer check',expires_at:future(90)});profiles.push(p);checks+=2;
 }
+const awaitableCoordinatorSession=await session(coordinator);const operations=await yes(platform,'operations.list');assert.equal(operations.sites.length,10);assert.ok(operations.enquiries.every(x=>!('patient_id'in x)&&!('summary'in x)));assert.ok(!JSON.stringify(operations).includes('evidence'));await no(patients[0],'operations.list');await no(staff[0].c,'operations.list');const coordinatorOptions=await yes(patients[0],'coordinator.list');assert.ok(coordinatorOptions.some(x=>x.id===subject(awaitableCoordinatorSession)));checks+=5;
 const directory=await yes(client(),'directory.list');assert.equal(directory.length,10);assert.ok(directory.every(p=>!('evidence'in p)&&!('submitted_by'in p)));checks++;
 for(let i=0;i<20;i++)enquiries.push(await yes(patients[i],'enquiry.create',{key:key(),site_id:sites[i%10].id,service:'examination',summary:`FICTIONAL patient ${i+1} enquiry`,categories:['contact','care','files'],consent_version:'2026-11-04'}));
+const caseMetadata=await yes(platform,'operations.list');assert.equal(caseMetadata.enquiries.length,20);assert.ok(caseMetadata.enquiries.every(x=>!('patient_id'in x)&&!('summary'in x)));assert.ok(!JSON.stringify(caseMetadata).includes('FICTIONAL patient 1 enquiry'));
 for(let i=0;i<20;i++)for(let j=0;j<10;j++){if(i%10===j){const detail=await yes(staff[j].c,'enquiry.read',{id:enquiries[i].id});assert.equal(detail.enquiry.patient_id,original.patients[i].id);}else await no(staff[j].c,'enquiry.read',{id:enquiries[i].id});matrix++;}
 for(const role of [reviewer,platform,auditor,coordinator,patients[1]]){await no(role,'enquiry.read',{id:enquiries[0].id});checks++;}
 // Recipient, action and category gates remain independent.

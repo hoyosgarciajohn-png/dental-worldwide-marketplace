@@ -17,7 +17,7 @@ test('actual patient browser journey, persistence, recipient consent and bilingu
  expect(await page.evaluate(()=>document.cookie)).not.toContain('dental_access');expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
  // Verify database persistence with a fresh page mount, not a local reducer.
  await page.reload();await page.getByRole('button',{name:'Connected test',exact:true}).click();await page.getByRole('button',{name:new RegExp(marker)}).click();await expect(page.locator('.dwm-message')).toContainText(`message ${marker}`);
- await page.getByRole('button',{name:'Español',exact:true}).click();await expect(page.getByRole('heading',{name:'Espacio conectado',exact:true})).toBeVisible();await expect(page.locator('html')).toHaveAttribute('lang','es');expect(errors).toEqual([]);
+ await page.getByRole('button',{name:'Switch to Spanish',exact:true}).click();await expect(page.getByRole('heading',{name:'Espacio conectado',exact:true})).toBeVisible();await expect(page.locator('html')).toHaveAttribute('lang','es');expect(errors).toEqual([]);
 });
 test('actual role scopes and inaccessible clinical data remain enforced in connected browser',async({page,context})=>{
  for(const [role,s] of [['practice',f.staff[0].session],['reviewer',f.reviewer],['platform',f.platform]] as [string,{access_token:string;refresh_token:string}][]){

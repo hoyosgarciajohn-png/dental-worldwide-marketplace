@@ -3,7 +3,7 @@ name: Dental marketplace validation
 # Stop after success; each job max20minutes, unchanged USD0 billable block.
 on:
   push:
-    branches: [autonomous-candidate-20261105]
+    branches: ['validation-marketplace-*']
     paths: [.github/workflows/market-validation.yml]
 permissions:
   contents: read
