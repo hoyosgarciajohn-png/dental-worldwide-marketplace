@@ -1,0 +1,10 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Upload Records · SonrisaConnect</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css"></head>
+<body data-page="upload"><header class="nav"><div class="wrap navin"><a class="logo" href="index.html">🦷 Sonrisa<span>Connect</span></a>
+<button class="burger" aria-label="Menu" onclick="document.body.classList.toggle('open')">☰</button>
+<nav class="links"><a href="index.html">Home</a><a href="directory.html">Find a Practice</a><a href="for-practices.html">For Practices</a><a href="help.html">Help</a><a class="btn sm" href="signin.html">Sign In</a></nav></div></header><main><section class="wrap narrow"><div id="uploadBox"><h1>Upload your records</h1><p class="muted" id="upFor"></p><form id="upForm" class="card" novalidate>
+<label>Full name *<input id="uName" required></label><label>Email *<input id="uEmail" type="email" required></label>
+<label>Tooth photos * <input type="file" id="photos" accept="image/*" multiple required></label><div id="thumbs" class="thumbs"></div>
+<label>Exam documents / X-rays (PDF or image)<input type="file" id="docs" accept=".pdf,image/*" multiple></label>
+<label>Message *<textarea id="msg" rows="4" required placeholder="What treatment are you interested in?"></textarea></label><p id="err" class="err"></p><button class="btn">Submit records</button></form></div>
+<div id="upDone" class="card success" hidden><h1>✅ Records received!</h1><p>The practice will review your records. Your mock quote is ready now.</p><a class="btn" id="toQuote" href="quote.html">View my quote</a></div></section></main><footer><div class="wrap"><p>© 2026 SonrisaConnect · <a href="help.html">Help</a> · <a href="for-practices.html">For Practices</a></p><p class="note">Prototype with mock data only. Not a real service; no medical advice.</p></div></footer><script src="app.js"></script></body></html>
