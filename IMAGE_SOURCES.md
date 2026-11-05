@@ -1,25 +1,25 @@
-# Image sources (v7 vivid dental refresh)
+# Image sources (v8 high-tech dental refresh)
 
-All images are free-licensed (Unsplash License / Pexels License), downloaded and optimized locally: heroes ~1920px wide, cards 1200px, all under 450KB JPEG. Images not listed under v7 are unchanged from v6.
+All images are free-licensed (Unsplash License / Pexels License), downloaded and optimized locally: heroes ~2400px wide JPEG quality ~85 (under ~600KB); cards 1400px. Images not listed under v8 are unchanged from earlier versions.
 
-## Replaced in v7
-- `hero.jpg` (1920px) — Pexels: Hygienist treating a smiling patient in a bright clinic (patient on the right) — https://www.pexels.com/photo/3845625/
-- `operatory.jpg` (1920px) — Unsplash: Bright modern dental operatory — https://unsplash.com/photos/1629909613654-28e377c37b09
-- `team.jpg` (1920px) — Pexels: Hygienist at work with a smiling patient — https://www.pexels.com/photo/3845810/
-- `reception.jpg` (1920px) — Unsplash: Bright modern multi-chair dental clinic — https://unsplash.com/photos/1629909615184-74f495363b67
-- `tech.jpg` (1200px) — Unsplash: Dentist reviewing digital dental scan on tablet — https://unsplash.com/photos/1600170311833-c2cf5280ce49
-- `smile-before-after.jpg` (1200px) — Unsplash: Smile result close-up during treatment — https://unsplash.com/photos/1606811971618-4486d14f3f99
-- `practice-1.jpg` (1200px) — Pexels: Dentist treating a smiling patient — https://www.pexels.com/photo/3845653/
-- `practice-2.jpg` (1200px) — Unsplash: Modern dental clinic interior — https://unsplash.com/photos/1629909613638-0e4a1fad8f81
-- `practice-3.jpg` (1200px) — Pexels: Dentist performing treatment in operatory — https://www.pexels.com/photo/6812561/
-- `practice-4.jpg` (1200px) — Pexels: Dentist treating a patient — https://www.pexels.com/photo/3779705/
-- `practice-5.jpg` (1200px) — Unsplash: Dentist with patient, monitor in a modern clinic — https://unsplash.com/photos/1606811841689-23dfddce3e95
-- `practice-6.jpg` (1200px) — Unsplash: Bright dental operatory chair — https://unsplash.com/photos/1598256989800-fe5f95da9787
-- `practice-7.jpg` (1200px) — Unsplash: Modern clinic with daylight — https://unsplash.com/photos/1609207825181-52d3214556dd
-- `practice-8.jpg` (1200px) — Pexels: Dental exam in progress — https://www.pexels.com/photo/3881449/
-- `dashboard.jpg` (1920px) — Pexels: Dentist reviewing records on a laptop in the clinic — https://www.pexels.com/photo/6627357/
+## Replaced in v8 (high-tech modern dental offices)
+- `hero.jpg` (2400px) — Pexels: Dentist treating a patient in a sleek high-tech operatory (subject right of center for left text gradient) — https://www.pexels.com/photo/6812558/
+- `dashboard.jpg` (2400px) — Pexels: Dentist beside handpieces with a monitor showing a 3D dental scan — https://www.pexels.com/photo/6812467/
+- `team.jpg` (2400px) — Pexels: Dental team preparing sterile instruments and a handheld scanner — https://www.pexels.com/photo/6812542/
+- `operatory.jpg` (2400px) — Unsplash: Bright multi-chair clinic with digital monitors and cyan chairs — https://unsplash.com/photos/1629909615184-74f495363b67
+- `reception.jpg` (2400px) — Unsplash: Elegant bright modern dental suite with turquoise chairs and monitors — https://unsplash.com/photos/1629909613638-0e4a1fad8f81
+- `tech.jpg` (1400px) — Unsplash: Gloved hand pointing at a tablet with 3D dental scans, panoramic X-rays and CT slices — https://unsplash.com/photos/1600170311833-c2cf5280ce49
+- `practice-1.jpg` (1400px) — Pexels: Sleek black dental chair in a bright high-tech operatory — https://www.pexels.com/photo/6812453/
+- `practice-2.jpg` (1400px) — Unsplash: Modern turquoise dental chair with patient monitor — https://unsplash.com/photos/1629909613654-28e377c37b09
+- `practice-3.jpg` (1400px) — Pexels: Blue dental chair, instrument tray and mounted monitor — https://www.pexels.com/photo/6809639/
+- `practice-4.jpg` (1400px) — Pexels: Dentist positioning a patient in a modern 3D dental CT scanner — https://www.pexels.com/photo/6812456/
+- `practice-5.jpg` (1400px) — Unsplash: Luxury operatory with digital monitors and sunny terrace view — https://unsplash.com/photos/1609207825181-52d3214556dd
+- `practice-6.jpg` (1400px) — Pexels: Dentist adjusting lamp beside dental microscope and monitors — https://www.pexels.com/photo/3845806/
+- `practice-7.jpg` (1400px) — Pexels: Arm-mounted monitor displaying a panoramic dental X-ray — https://www.pexels.com/photo/4687337/
+- `practice-8.jpg` (1400px) — Pexels: Patient viewing a panoramic X-ray on a monitor — https://www.pexels.com/photo/38857367/
 
-## Unchanged from v6
+## Unchanged from earlier
+- `smile-before-after.jpg` — Unsplash: Smile result close-up during treatment — https://unsplash.com/photos/1606811971618-4486d14f3f99
 - `quote-laptop.jpg` — Unsplash: Woman smiling with laptop — https://unsplash.com/photos/1551836022-d5d88e9218df
 - `video-call.jpg` — Unsplash: Medical professional video consult vibe — https://unsplash.com/photos/1576091160550-2173dba999ef
 - `airport.jpg` — Unsplash: Airplane wing travel — https://unsplash.com/photos/1436491865332-7a61a109cc05

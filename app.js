@@ -28,20 +28,20 @@ mk("Barranquilla Dental Arts","Barranquilla",4.7,203,{cleaning:32,implants:820,v
 mk("Cartagena Implant Institute","Cartagena",4.8,276,{cleaning:55,implants:1050,veneers:360,crowns:310,rootcanal:200},"Specialist implant institute offering All-on-4 and bone grafting.",["Oral surgeons on staff","ICOI fellowship","Guided implant surgery"],[["Larry K., Colorado","All-on-4 changed my life."],["Debbie O., Kansas","Very thorough."],["Joe P., Ohio","Highly skilled team."]])
 ];
 const PHOTO_ALT=[
-"Colombian implant dentist standing beside a monitor showing a 3D jaw scan",
-"Prosthodontist showing a patient a smile design preview on a tablet",
-"Dental operatory with a 3D imaging scanner and a window view over Medellín hills",
-"Friendly senior dentist talking with a father and daughter in a family practice",
-"Seaside dental clinic room with a Caribbean ocean view and a smiling dentist",
-"Dentist reviewing a panoramic digital X-ray with a patient",
-"Dental technician crafting a ceramic crown beside a CAD/CAM milling unit",
-"Two oral surgeons performing guided implant surgery in a modern surgical suite"];
+"Sleek black dental chair in a bright high-tech operatory with a digital workstation",
+"Modern turquoise dental chair with a patient monitor and daylight blinds",
+"Dental delivery unit with blue chair, instrument tray and mounted monitor",
+"Dentist positioning a patient in a modern 3D dental CT scanner",
+"Luxury operatory with digital monitors and a sunny outdoor terrace view",
+"Dentist adjusting the lamp beside a dental microscope and monitors",
+"Arm-mounted monitor displaying a panoramic dental X-ray in a bright operatory",
+"Patient viewing a panoramic X-ray on a monitor beside the instrument tray"];
 // shared photos used to fill each profile gallery (rotated per practice)
 const SHARED=[
-["operatory.jpg","Modern dental operatory with a white chair and teal accent wall"],
-["tech.jpg","Intraoral 3D scanner, dental instruments and ceramic crowns"],
-["reception.jpg","Bright clinic reception with a smiling receptionist"],
-["team.jpg","The clinical team in white coats and teal scrubs"]];
+["operatory.jpg","Bright multi-chair dental operatory with digital monitors and sleek cyan chairs"],
+["tech.jpg","Gloved hand pointing at a tablet with 3D dental scans and panoramic X-rays"],
+["reception.jpg","Elegant bright modern dental suite with turquoise chairs and digital monitors"],
+["team.jpg","Dental team preparing sterile instruments in a bright high-tech clinic"]];
 PRACTICES.forEach((p,i)=>{p.verified=true;p.adminVerified=true;p.email_verified=true;p.phone_verified=true;
   p.id=i+1;p.start=Math.min(...Object.values(p.prices));
   p.image=`practice-${i+1}.jpg`;p.imageAlt=`${p.name}: ${PHOTO_ALT[i]}`;
