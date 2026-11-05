@@ -1,4 +1,26 @@
-# M0/M1 requirements and traceability
+# Marketplace requirements and traceability
+
+## Current scope — November 5, 2026
+
+John's autonomous implementation authority supersedes the historical M0/M1-only boundary below. M2–M6 code is implemented as a fictional-data candidate; actual integration, recovery, load and exact-candidate acceptance remain pending until recorded in `market-execution-evidence.json` and `market-independent-review.md`.
+
+| Requirement | Candidate implementation | Automated evidence |
+|---|---|---|
+| R-001–004: discovery, scope checks, expiry and suspension | Bilingual directory; profile review and current scope checks | market-services-test; market-connected; market-demo |
+| R-005–007: selected recipient and sharing categories | Enquiries, versioned consent, coordinator assignment plus patient grant | market-services-test; market-api-test |
+| R-008–011: estimates and appointment lifecycle | Immutable revisions, visible unknowns, current acceptance, alternative times, serialized confirmation and cancellation | market-services-test; market-connected; market-demo |
+| R-012–013: identity and permissions | Preserved M1 Auth, sessions, membership, MFA and audit | Original M1 suites followed by market-service checks |
+| R-014–015: conversation and protected files | Scoped messages, captured outbox, private quarantine, hash-bound simulated scanner, current authorized download | market-services-test; market-api-test; market-connected |
+| R-016: handoff and follow-up | Attendance-gated handoff, responsible contact/date and acknowledgement | market-services-test; market-demo |
+| R-017–018: support and review | Separate concern categories, qualified clinical closure, attendance eligibility, moderation and appeal | market-services-test; market-demo |
+| R-019: governance | Owner export, review-only deletion/holds, metadata administration, append-only audit | market-services-test; market-api-test |
+| R-020: subscription simulation | Synthetic practice-site/month invoice, USD0 or proposed USD99, no treatment payments | market-services-test; market-demo |
+| R-021: accessibility | English/Spanish, keyboard, responsive layout, five browser/viewport projects, automated Axe | market-accessibility; market-connected; market-demo; human checks deferred |
+| R-022: recovery and operations | Closed gate, independent authorization history, Auth security-state reconciliation, real local database/object restore and readiness | market-recovery-test; market-load-test |
+
+Professional checks Q-001–Q-020 remain live operational prerequisites. Simulated acceptance does not establish actual clinic quality. Real malware scanning, real notifications, legal retention/deletion decisions, external payments, live staffing and production disaster recovery are not claimed. The private static preview is browser-local demonstration; the connected application is separately tested with actual local Supabase services.
+
+## Historical M0/M1 baseline
 
 Authority: docs/plan.md. Bounded M0 and M1 are authorized as of November 4, 2026. M1 authority and security decisions are recorded in docs/m1-authorization.md and docs/m1-security-decisions.md.
 

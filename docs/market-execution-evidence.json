@@ -1,0 +1,45 @@
+{
+  "status": "CORRECTION_AND_RETEST_IN_PROGRESS",
+  "scope": "M2\u2013M6 fictional marketplace candidate",
+  "source_commit": "d7542f50c29dadf14926bfda4f88a3945dc1d401",
+  "tree": "d60bf3cbeb75bb374f466ce989b6a66fcd8fe5da",
+  "local_commit": "562b099",
+  "lock_sha256": "3969692d7226cb6654e33ddfae7d694a2ec2ea37640157e60e68f1cf3186bb2e",
+  "runs": [
+    {
+      "attempt": 1,
+      "run_id": 42062958661,
+      "integration_job_id": 127369311140,
+      "branch": "validation-marketplace-01-20261105",
+      "status": "FAIL",
+      "source": "d7542f50c29dadf14926bfda4f88a3945dc1d401",
+      "reason": "Test setup enrolled a duplicate MFA friendly name for a second independent staff session.",
+      "integration_conclusion": "failure",
+      "load": "SKIPPED",
+      "log_path": "docs/evidence/market-run1-integration.txt",
+      "log_sha256": "5c4928f03712761e91f0e863ef8b45f231a2fb98f2cd18d59af8e2bad0511858"
+    }
+  ],
+  "local_checks": {
+    "units": "15/15 PASS",
+    "typecheck": "PASS",
+    "production_build": "PASS",
+    "http": "PASS",
+    "origin": "PASS",
+    "postgres_parser": "PASS; not actual runtime acceptance",
+    "managed_visual_preview": "Home and workspace English/Spanish rendered. Interaction check pending HTTPS preview."
+  },
+  "charges": "USD0 new external charges; existing spending block unchanged",
+  "public_launch": "NOT AUTHORIZED",
+  "human_checks": "DEFERRED TO M7 / NOT PERFORMED",
+  "source_checkpoint_note": "GitHub update_ref internal errors; full snapshot retained on checkpoint-marketplace-20261105, actual test candidate on immutable validation branch. main/develop preserved.",
+  "private_preview": {
+    "url": "https://dental-worldwide-owner-preview.sappydrum2.chatgpt.site",
+    "site_id": "appgprj_6aecaad6d9388191b1b9915563289e9b",
+    "source_commit": "1d89b4f6201407a24e0860606b53c06802533ac1",
+    "deployment_id": "appgdep_6aecad85bf808191b16ca0977ccf4986",
+    "status": "PRIVATE_DEPLOYMENT_SUCCEEDED",
+    "scope": "Static browser-local fictional demonstration; no production backend",
+    "observed": "HTTPS homepage and workspace loaded; fictional enquiry saved and visible to practice role. English/Spanish rendering checked on managed preview."
+  }
+}
