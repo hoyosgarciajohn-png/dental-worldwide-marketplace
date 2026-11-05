@@ -1,28 +1,18 @@
 /* =====================================================================
-   SITE CONFIG: fill these in before launch (see README setup checklist).
-   Any value that starts with "#" is treated as "not configured yet".
+   SonrisaConnect app.js — UI + directory. Config lives in config.js.
+   Auth/data live in auth.js + api.js (Supabase). Stripe via Edge Functions.
    ===================================================================== */
-const SUPPORT_EMAIL='support@sonrisaconnect.com';
-/* Stripe Payment Links (one per plan and billing period). Paste the https://buy.stripe.com/... URLs here. */
-const STRIPE_LINK_BASIC='#stripe-link-pending';
-const STRIPE_LINK_GROWTH='#stripe-link-pending';
-const STRIPE_LINK_PREMIUM='#stripe-link-pending';
-const STRIPE_LINK_BASIC_ANNUAL='#stripe-link-pending';
-const STRIPE_LINK_GROWTH_ANNUAL='#stripe-link-pending';
-const STRIPE_LINK_PREMIUM_ANNUAL='#stripe-link-pending';
-/* Practice onboarding form (join.html). Paste your Formspree URL, e.g. https://formspree.io/f/abcdwxyz */
-const FORM_ENDPOINT='#form-endpoint-pending';
-/* WhatsApp business number: digits only with country code, e.g. '573001234567' (no +, spaces or dashes) */
-const WHATSAPP_NUMBER='#whatsapp-number-pending';
-/* Prefilled WhatsApp text per language lives in i18n.js (key js.waMessage). */
-const WHATSAPP_MESSAGE=()=>t('js.waMessage');
-/* Plans shown on pricing.html and join.html (USD). Keep in sync with pricing.html. */
-const PLANS={
-  basic:{name:'Basic',monthly:29,annual:276,annualMonthly:23,links:{monthly:()=>STRIPE_LINK_BASIC,annual:()=>STRIPE_LINK_BASIC_ANNUAL}},
-  growth:{name:'Growth',monthly:69,annual:660,annualMonthly:55,links:{monthly:()=>STRIPE_LINK_GROWTH,annual:()=>STRIPE_LINK_GROWTH_ANNUAL}},
-  premium:{name:'Premium',monthly:149,annual:1428,annualMonthly:119,links:{monthly:()=>STRIPE_LINK_PREMIUM,annual:()=>STRIPE_LINK_PREMIUM_ANNUAL}}
+const SUPPORT_EMAIL = (window.SC_CONFIG && SC_CONFIG.SUPPORT_EMAIL) || 'support@sonrisaconnect.com';
+const WHATSAPP_NUMBER = () => (window.SC_CONFIG && SC_CONFIG.WHATSAPP_NUMBER) || '#whatsapp-number-pending';
+const WHATSAPP_MESSAGE = () => t('js.waMessage');
+const PLANS = {
+  free: { name: 'Free', monthly: 0, annual: 0, annualMonthly: 0, trialDays: 0 },
+  basic: { name: 'Basic', monthly: 29, annual: 276, annualMonthly: 23, trialDays: 90 },
+  growth: { name: 'Growth', monthly: 69, annual: 660, annualMonthly: 55, trialDays: 90 },
+  premium: { name: 'Premium', monthly: 149, annual: 1428, annualMonthly: 119, trialDays: 90 }
 };
-const isPending=v=>!v||String(v).charAt(0)==='#';
+const isPending = window.SC_isPending || (v => !v || String(v).charAt(0) === '#');
+const DEMO_PRACTICES_FALLBACK = true; /* keep demo clinics when DB empty */
 
 // All mock data for the SonrisaConnect prototype (v2: local images, no external image hosts).
 const TREATMENTS={cleaning:"Cleaning",implants:"Dental implant",veneers:"Porcelain veneer",crowns:"Zirconia crown",rootcanal:"Root canal"};
@@ -52,7 +42,7 @@ const SHARED=[
 ["tech.jpg","Intraoral 3D scanner, dental instruments and ceramic crowns"],
 ["reception.jpg","Bright clinic reception with a smiling receptionist"],
 ["team.jpg","The clinical team in white coats and teal scrubs"]];
-PRACTICES.forEach((p,i)=>{
+PRACTICES.forEach((p,i)=>{p.verified=true;p.adminVerified=true;p.email_verified=true;p.phone_verified=true;
   p.id=i+1;p.start=Math.min(...Object.values(p.prices));
   p.image=`practice-${i+1}.jpg`;p.imageAlt=`${p.name}: ${PHOTO_ALT[i]}`;
   p.gallery=[[p.image,p.imageAlt],SHARED[i%4].slice(),SHARED[(i+2)%4].slice()];
@@ -85,7 +75,8 @@ function animBars(el){el.querySelectorAll("[data-w]").forEach(b=>b.style.width=b
 (function(){const b=document.querySelector(".burger");if(!b)return;b.setAttribute("aria-expanded","false");b.addEventListener("click",()=>b.setAttribute("aria-expanded",document.body.classList.contains("open")));
 document.querySelectorAll(".links a").forEach(a=>a.addEventListener("click",()=>{document.body.classList.remove("open")}));})();
 
-const pcard=(p,i=0)=>`<article class="card pcard reveal" style="--d:${(i%3)*.08}s"><div class="zoom"><img src="${p.image}" alt="${esc(p.imageAlt)}" loading="lazy"><span class="tag">📍 ${p.city}</span><span class="rate"><b>★</b> ${I18N.num(p.rating)} (${I18N.num(p.reviews)})</span></div><div class="in"><h3>${p.name}</h3><span class="price">${t("js.from")} <b>${usd(p.start)}</b> <span class="muted" style="font-weight:400">${t("js.cleaningLc")}</span></span><p class="muted">${p.description}</p><a class="btn" href="practice.html?id=${p.id}">${t("js.viewProfile")}</a></div></article>`;
+const pcard=(p,i=0)=>{const badges=(window.SCAuth&&SCAuth.verificationBadgesHtml)?SCAuth.verificationBadgesHtml({emailVerified:p.email_verified||p.emailVerified||p.verified,phoneVerified:p.phone_verified||p.phoneVerified,verified:p.verified||p.adminVerified}): (p.verified?`<div class="vbadges"><span class="vbadge admin">✔</span></div>`:"");
+return `<article class="card pcard reveal" style="--d:${(i%3)*.08}s"><div class="zoom"><img src="${p.image}" alt="${esc(p.imageAlt)}" loading="lazy"><span class="tag">📍 ${p.city}</span><span class="rate"><b>★</b> ${I18N.num(p.rating)} (${I18N.num(p.reviews)})</span></div><div class="in"><h3>${p.name}</h3>${badges}<span class="price">${t("js.from")} <b>${usd(p.start)}</b> <span class="muted" style="font-weight:400">${t("js.cleaningLc")}</span></span><p class="muted">${p.description}</p><a class="btn" href="practice.html?id=${p.id}">${t("js.viewProfile")}</a></div></article>`;};
 
 if(page==="home"){
   $("#searchForm").onsubmit=e=>{e.preventDefault();location.href=`directory.html?treatment=${encodeURIComponent($("#sTreat").value)}&city=${encodeURIComponent($("#sCity").value)}`;};
@@ -122,7 +113,7 @@ if(page==="directory"){
 if(page==="practice"){
   const p=getP();document.title=p.name+" · SonrisaConnect";
   const save=Math.round((1-p.prices.implants/US.implants)*100);
-  $("#pHero").innerHTML=`<img class="bg" src="${p.image}" alt="${esc(p.imageAlt)}"><div class="wrap"><p><a href="directory.html">← ${t("js.backDir")}</a></p><span class="eyebrow">📍 ${p.city}, Colombia</span><h1>${p.name}</h1><p><span class="stars">${stars(p.rating)}</span> ${I18N.num(p.rating)} · ${t("js.reviewsN",{n:I18N.num(p.reviews)})}</p></div>`;
+  $("#pHero").innerHTML=`<img class="bg" src="${p.image}" alt="${esc(p.imageAlt)}"><div class="wrap"><p><a href="directory.html">← ${t("js.backDir")}</a></p><span class="eyebrow">📍 ${p.city}, Colombia</span><h1>${p.name}</h1>${(window.SCAuth&&SCAuth.verificationBadgesHtml)?SCAuth.verificationBadgesHtml({emailVerified:p.email_verified||p.verified,phoneVerified:p.phone_verified,verified:p.verified}):""}<p><span class="stars">${stars(p.rating)}</span> ${I18N.num(p.rating)} · ${t("js.reviewsN",{n:I18N.num(p.reviews)})}</p></div>`;
   $("#profile").innerHTML=`<div class="gallery reveal">${p.gallery.map(([s,a],i)=>`<figure><img src="${s}" alt="${esc(a)}"${i?' loading="lazy"':''}><figcaption>${esc(a.replace(p.name+": ",""))}</figcaption></figure>`).join("")}</div>
   <div class="actions"><a class="btn" href="upload.html?id=${p.id}">${t("js.uploadRecords")}</a><a class="btn navy" href="quote.html?id=${p.id}">${t("js.requestQuote")}</a></div>
   <div class="cols"><div><div class="card reveal"><h2>${t("js.about")}</h2><p>${p.description}</p><h3>${t("js.credentials")}</h3>${p.credentials.map(c=>`<span class="badge">✔ ${c}</span>`).join("")}</div>
@@ -162,7 +153,7 @@ function openModal(h){const m=ensureModal();lastFocus=document.activeElement;$("
 function closeModal(){const m=$("#modal");if(m)m.hidden=true;if(lastFocus&&lastFocus.focus){lastFocus.focus();lastFocus=null;}}
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("#modal")&&!$("#modal").hidden)closeModal()});
 
-if(page==="signin"){$("#signForm").onsubmit=e=>{e.preventDefault();e.target.innerHTML=`<h2>${t("js.welcome")}</h2><p><a class="btn" href="directory.html">${t("js.findPractice")}</a></p>`;};}
+/* auth pages handled below */
 
 /* ---------- open a FAQ item when linked by #hash ---------- */
 (function(){const d=location.hash&&document.querySelector("details"+location.hash);if(d)d.open=true;})();
@@ -172,12 +163,20 @@ function setPressed(a,b,on){a.setAttribute("aria-pressed",on?"false":"true");b.s
 if(page==="pricing"){
   const plans=$("#plans"),bM=$("#bMonthly"),bA=$("#bAnnual");
   const setBilling=b=>{plans.dataset.billing=b;setPressed(bM,bA,b==="annual");
-    document.querySelectorAll(".trial").forEach(a=>{const pl=PLANS[a.dataset.plan];a.href=pl.links[b]();a.dataset.billing=b;});};
+    document.querySelectorAll(".trial").forEach(a=>{
+      const plan=a.dataset.plan||"growth";
+      a.dataset.billing=b;
+      if(plan==="free"){a.href="signup.html?role=clinic";return;}
+      a.href=`join.html?plan=${plan}&billing=${b}`;
+    });};
   bM.onclick=()=>setBilling("monthly");bA.onclick=()=>setBilling("annual");
   document.querySelectorAll(".trial").forEach(a=>a.addEventListener("click",e=>{
-    if(!isPending(a.getAttribute("href")))return; /* real Stripe link: let the browser follow it */
-    e.preventDefault();const b=a.dataset.billing||"monthly";
-    openModal(`<h2>${t("js.payH")}</h2><p>${t("js.payP",{p:"<b>"+planName(a.dataset.plan)+"</b>"})}</p><p><a class="btn" href="join.html?plan=${a.dataset.plan}&amp;billing=${b}">${t("js.payCont")}</a> <button class="btn ghost" type="button" onclick="closeModal()">${t("js.close")}</button></p>`);}));
+    const plan=a.dataset.plan||"growth", b=a.dataset.billing||"monthly";
+    if(plan==="free"){ /* allow navigation to signup/join */ return; }
+    // Paid plans: send clinics through join → dashboard checkout (Stripe via Edge Function)
+    if((a.getAttribute("href")||"").includes("join.html") || (a.getAttribute("href")||"").includes("signup.html")) return;
+    e.preventDefault();
+    openModal(`<h2>${t("js.payH")}</h2><p>${t("js.payP",{p:"<b>"+planName(plan)+"</b>"})}</p><p class="muted">${t("js.trial90")}</p><p><a class="btn" href="join.html?plan=${plan}&amp;billing=${b}">${t("js.payCont")}</a> <button class="btn ghost" type="button" onclick="closeModal()">${t("js.close")}</button></p>`);}));
   setBilling(qs.get("billing")==="annual"?"annual":"monthly");
 }
 
@@ -197,7 +196,7 @@ if(page==="join"){
   /* plan picker */
   const picks=$("#picks");
   const renderPicks=()=>{picks.innerHTML=Object.entries(PLANS).map(([k,p])=>{const pr=billing==="annual"?`<b>${usd(p.annualMonthly)}</b>${t("js.perMo")}<small>${t("js.billedYearly",{p:usd(p.annual)})}</small>`:`<b>${usd(p.monthly)}</b>${t("js.perMo")}<small>${t("js.billedMonthly")}</small>`;
-    return `<label class="pick${k===plan?" sel":""}"><input type="radio" name="plan" value="${k}"${k===plan?" checked":""}><span><b>${planName(k)}</b><small>${t("js.trial30")}</small></span><span class="pr">${pr}</span></label>`}).join("");
+    return `<label class="pick${k===plan?" sel":""}"><input type="radio" name="plan" value="${k}"${k===plan?" checked":""}><span><b>${planName(k)}</b><small>${ (k==="free"?t("js.freeForever"):t("js.trial90")) }</small></span><span class="pr">${pr}</span></label>`}).join("");
     picks.querySelectorAll("input").forEach(r=>r.addEventListener("change",()=>{plan=r.value;renderPicks();}));
     setPressed($("#jMonthly"),$("#jAnnual"),billing==="annual");};
   $("#jMonthly").onclick=()=>{billing="monthly";renderPicks();};$("#jAnnual").onclick=()=>{billing="annual";renderPicks();};
@@ -224,27 +223,326 @@ if(page==="join"){
   form.onsubmit=async e=>{e.preventDefault();
     for(let i=0;i<N;i++){const m=val(i);if(m){err(i+1,m);show(i);return;}}
     const sub=$("#submitErr");sub.textContent="";
-    if(isPending(FORM_ENDPOINT)){
-      console.warn("SonrisaConnect: FORM_ENDPOINT is not configured in app.js. Nothing was sent. See README setup checklist.");
+    if(!(window.SCAuth && SCAuth.configured && SCAuth.configured())){
+      console.warn("SonrisaConnect: Supabase not configured yet. Application kept locally / mailto fallback. See SETUP.md.");
       const body=encodeURIComponent(t("js.mailIntro")+"\n\n"+textSummary());
       done(`<h1>${t("js.pendH")}</h1><p>${t("js.pendP1")}</p><p>${t("js.pendP2")}</p><p>${t("js.pendP3")}</p><p><a class="btn" href="mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent("Practice application: "+form.elements.clinic_name.value.trim())}&amp;body=${body}">${t("js.emailApp")}</a> <a class="btn ghost" href="pricing.html">${t("js.backPricing")}</a></p><div class="sumbox"><b>${t("js.yourEntries")}</b><br>${esc(textSummary()).replace(/\n/g,"<br>")}</div>`,true);
       return;}
     const fd=new FormData(form);fd.set("billing",billing);fd.set("treatments_summary",summary());fd.set("language",I18N.lang);fd.set("_subject","New practice application: "+form.elements.clinic_name.value.trim());
     bSub.disabled=true;bSub.textContent=t("js.sending");
-    try{const r=await fetch(FORM_ENDPOINT,{method:"POST",body:fd,headers:{Accept:"application/json"}});
-      if(!r.ok){let m=t("js.serverErr");try{const j=await r.json();if(j.errors&&j.errors.length)m=j.errors.map(x=>x.message).join(" ");}catch(_){}throw new Error(m);}
-      const link=PLANS[plan].links[billing]();
-      done(`<img src="reception.jpg" alt="${esc(t("js.recAlt"))}"><h1>${t("js.thanksH")}</h1><p>${t("js.thanksP",{e:"<b>"+esc(form.elements.email.value.trim())+"</b>"})}</p>${isPending(link)?"":`<p>${t("js.nextTrial",{p:planName(plan)})}</p><p><a class="btn" href="${esc(link)}">${t("js.startTrial")}</a></p>`}<p><a class="btn ghost" href="index.html">${t("js.backHome")}</a></p>`);
+    try{
+      // Ensure clinic owner is signed in (or create account note)
+      const user = await SCAuth.getUser();
+      if(!user){
+        done(`<h1>${t("js.thanksH")}</h1><p>${t("js.joinNeedAccount")}</p><p><a class="btn" href="signup.html">${t("js.signUp")}</a> <a class="btn ghost" href="signin.html">${t("js.signIn")}</a></p>`,true);
+        return;
+      }
+      const services={};
+      [...form.querySelectorAll("input[data-t]:checked")].forEach(c=>{services[c.dataset.t]=+form.querySelector(`input[data-p="${c.dataset.t}"]`).value;});
+      if(form.elements.other_name.value.trim()) services[form.elements.other_name.value.trim()]=+form.elements.other_price.value;
+      const clinic=await SCApi.upsertClinic({
+        name:form.elements.clinic_name.value.trim(),
+        city:form.elements.city.value,
+        address:form.elements.address.value.trim(),
+        license:form.elements.license.value.trim(),
+        website:form.elements.website.value.trim(),
+        whatsapp:form.elements.whatsapp.value.trim(),
+        languages:form.elements.languages.value.trim(),
+        services, prices:services,
+        plan: plan==="free"?"free":"free", /* paid upgrades go through Stripe checkout */
+        plan_status:"active",
+        managed_bookings:!!form.elements.managed_bookings.checked
+      });
+      let next="";
+      if(plan!=="free"){
+        try{
+          const res=await SCApi.startCheckout(clinic.id, plan, billing);
+          if(res&&res.url) next=`<p>${t("js.nextTrial",{p:planName(plan)})}</p><p><a class="btn" href="${esc(res.url)}">${t("js.startTrial")}</a></p>`;
+        }catch(ce){ next=`<p class="muted">${t("js.stripeLater")} <a href="dashboard-clinic.html">${t("js.myDashboard")}</a></p>`; }
+      } else {
+        next=`<p><a class="btn" href="dashboard-clinic.html">${t("js.myDashboard")}</a></p>`;
+      }
+      done(`<img src="reception.jpg" alt="${esc(t("js.recAlt"))}"><h1>${t("js.thanksH")}</h1><p>${t("js.thanksP",{e:"<b>"+esc(form.elements.email.value.trim())+"</b>"})}</p>${next}<p><a class="btn ghost" href="index.html">${t("js.backHome")}</a></p>`);
     }catch(x){bSub.disabled=false;bSub.textContent=t("js.submitApp");sub.textContent=t("js.sendFail",{m:x.message,e:SUPPORT_EMAIL});}
   };
 }
 
+
+/* ---------- Directory: prefer verified clinics from Supabase; demo fallback ---------- */
+(async function mergeDirectoryFromDb(){
+  if (!(page === "directory" || page === "home" || page === "practice")) return;
+  if (!(window.SCAuth && SCAuth.configured && SCAuth.configured())) return;
+  try {
+    const rows = await SCApi.fetchVerifiedClinics();
+    if (!rows.length) return;
+    PRACTICES.splice(0, PRACTICES.length, ...rows.map((r) => {
+      const prices = r.prices && Object.keys(r.prices).length ? r.prices : { cleaning: 40, implants: 900, veneers: 300, crowns: 260, rootcanal: 150 };
+      const start = Math.min(...Object.values(prices).filter(n => typeof n === "number"));
+      return {
+        id: r.id, name: r.name, city: r.city, rating: r.rating || 4.8, reviews: r.reviews || 0,
+        prices, description: r.description || "", credentials: r.credentials || [],
+        reviewList: r.reviewList || [], start,
+        image: (typeof r.image === "string" && !r.image.includes("/")) ? r.image : "practice-1.jpg",
+        imageAlt: r.imageAlt || r.name,
+        gallery: r.gallery && r.gallery.length ? r.gallery : [["practice-1.jpg", r.name]],
+        verified: true, plan: r.plan, featured: r.featured
+      };
+    }));
+    if (page === "home" && $("#featured")) {
+      $("#featured").innerHTML = [...PRACTICES].sort((a,b)=>b.rating-a.rating||b.reviews-a.reviews).slice(0,3).map(pcard).join("");
+      reveal($("#featured"));
+    }
+    if (page === "directory" && $("#results")) {
+      const city = $("#city"); if (city) city.dispatchEvent(new Event("input"));
+    }
+  } catch (e) { console.warn("directory db merge", e); }
+})();
+
+/* ---------- Auth pages (signup / signin / forgot / reset / logout) ---------- */
+(function(){
+  const errMsg = e => {
+    if (!e) return t("js.genericErr");
+    if (e.message === "setup" || !SCAuth.configured()) return t("js.setupBody");
+    return e.message || String(e);
+  };
+  if (page === "signup") {
+    SCAuth.bindPasswordChecklist({ passSel: "#suPass", confirmSel: "#suConfirm", listSel: "#suRules", submitSel: "#suSubmit" });
+    SCAuth.bindShowHide("#suPass", "#suShow");
+    SCAuth.bindShowHide("#suConfirm", "#suShow2");
+    const form = $("#signupForm");
+    if (!form) return;
+    form.onsubmit = async e => {
+      e.preventDefault();
+      $("#suErr").textContent = "";
+      const password = $("#suPass").value, confirm = $("#suConfirm").value;
+      if (!SCAuth.passwordOk(password, confirm)) { $("#suErr").textContent = t("js.pwIncomplete"); return; }
+      const role = (form.querySelector('input[name="role"]:checked') || {}).value || "patient";
+      try {
+        $("#suSubmit").disabled = true;
+        await SCAuth.signUp({ email: $("#suEmail").value.trim(), password, role, fullName: $("#suName").value.trim() });
+        location.href = "verify.html";
+      } catch (err) {
+        $("#suErr").textContent = errMsg(err);
+        $("#suSubmit").disabled = !SCAuth.passwordOk(password, confirm);
+      }
+    };
+  }
+  if (page === "signin") {
+    SCAuth.bindShowHide("#siPass", "#siShow");
+    const form = $("#signForm");
+    if (!form) return;
+    form.onsubmit = async e => {
+      e.preventDefault();
+      $("#siErr").textContent = "";
+      try {
+        $("#siSubmit").disabled = true;
+        await SCAuth.signIn($("#siEmail").value.trim(), $("#siPass").value);
+        const profile = await SCAuth.getProfile(true);
+        const next = new URLSearchParams(location.search).get("next");
+        location.href = next || SCAuth.dashboardFor(profile);
+      } catch (err) {
+        $("#siErr").textContent = errMsg(err);
+        $("#siSubmit").disabled = false;
+      }
+    };
+  }
+  if (page === "forgot") {
+    const form = $("#forgotForm");
+    if (!form) return;
+    form.onsubmit = async e => {
+      e.preventDefault();
+      $("#fgErr").textContent = "";
+      try {
+        await SCAuth.resetPassword($("#fgEmail").value.trim());
+        $("#fgOk").hidden = false;
+      } catch (err) { $("#fgErr").textContent = errMsg(err); }
+    };
+  }
+  if (page === "reset") {
+    SCAuth.bindPasswordChecklist({ passSel: "#rsPass", confirmSel: "#rsConfirm", listSel: "#rsRules", submitSel: "#rsSubmit" });
+    SCAuth.bindShowHide("#rsPass", "#rsShow");
+    SCAuth.bindShowHide("#rsConfirm", "#rsShow2");
+    const form = $("#resetForm");
+    if (!form) return;
+    form.onsubmit = async e => {
+      e.preventDefault();
+      $("#rsErr").textContent = "";
+      const password = $("#rsPass").value, confirm = $("#rsConfirm").value;
+      if (!SCAuth.passwordOk(password, confirm)) { $("#rsErr").textContent = t("js.pwIncomplete"); return; }
+      try {
+        await SCAuth.updatePassword(password);
+        $("#rsOk").hidden = false;
+      } catch (err) { $("#rsErr").textContent = errMsg(err); }
+    };
+  }
+
+  if (page === "verify") {
+    const params = new URLSearchParams(location.search);
+    const coolKey = "sc_email_resend_until";
+    const btn = $("#btnResendEmail");
+    const cool = $("#resendCool");
+    const err = $("#verifyErr");
+    const ok = $("#verifyOk");
+    const syncCool = () => {
+      const left = SCAuth.cooldownLeft(coolKey);
+      if (left > 0) {
+        if (btn) btn.disabled = true;
+        if (cool) { cool.hidden = false; cool.textContent = t("js.resendWait", { n: left }); }
+      } else {
+        if (btn) btn.disabled = false;
+        if (cool) cool.hidden = true;
+      }
+    };
+    syncCool();
+    setInterval(syncCool, 1000);
+    (async () => {
+      const user = await SCAuth.getUser();
+      if (user && SCAuth.isEmailVerified(user, await SCAuth.getProfile())) {
+        const next = params.get("next") || SCAuth.dashboardFor(await SCAuth.getProfile());
+        const lead = $("#verifyLead");
+        if (lead) lead.textContent = t("js.emailAlreadyVerified");
+        setTimeout(() => { location.href = next; }, 1200);
+      }
+    })();
+    if (btn) btn.onclick = async () => {
+      err.textContent = ""; ok.hidden = true;
+      if (SCAuth.cooldownLeft(coolKey) > 0) return;
+      try {
+        if (!SCAuth.configured()) { err.textContent = t("js.setupBody"); return; }
+        const user = await SCAuth.getUser();
+        let email = user && user.email;
+        if (!email) {
+          email = prompt(t("js.enterEmailResend")) || "";
+        }
+        if (!email) return;
+        btn.disabled = true;
+        await SCAuth.resendEmailVerification(email.trim());
+        ok.hidden = false;
+        SCAuth.startCooldown(coolKey, 60, n => { cool.hidden = false; cool.textContent = t("js.resendWait", { n }); if (btn) btn.disabled = n > 0; }, () => { btn.disabled = false; cool.hidden = true; });
+      } catch (e) {
+        err.textContent = e.message || String(e);
+        btn.disabled = false;
+      }
+    };
+  }
+
+  if (page === "account") {
+    (async () => {
+      let user = null, profile = null;
+      if (SCAuth.configured()) {
+        user = await SCAuth.getUser();
+        if (!user) { location.href = "signin.html?next=account.html"; return; }
+        await SCAuth.syncVerificationFlags();
+        profile = await SCAuth.getProfile(true);
+      }
+      const state = {
+        emailVerified: user ? SCAuth.isEmailVerified(user, profile) : false,
+        phoneVerified: user ? SCAuth.isPhoneVerified(user, profile) : false,
+        role: (profile && profile.role) || "patient",
+        adminVerified: false
+      };
+      if (profile && profile.role === "clinic") {
+        try {
+          const c = await SCApi.getMyClinic();
+          state.adminVerified = !!(c && c.verified);
+        } catch (e) {}
+      }
+      if ($("#vPanel")) SCAuth.renderVerificationPanel($("#vPanel"), state);
+      if (state.phoneVerified) {
+        $("#phoneOk").hidden = false;
+        $("#otpWrap").hidden = true;
+      }
+    })();
+
+    const local = $("#phoneLocal"), cc = $("#ccSelect"), e164 = $("#phoneE164");
+    const fmt = () => {
+      const digits = (local.value || "").replace(/\D/g, "");
+      const full = (cc.value || "+1") + digits;
+      e164.textContent = digits ? t("js.willSendTo", { p: full }) : "";
+      return digits ? full : "";
+    };
+    if (local) { local.oninput = fmt; cc.onchange = fmt; }
+
+    const coolKey = "sc_sms_resend_until";
+    let lastPhone = "";
+    const setSmsCool = () => {
+      const left = SCAuth.cooldownLeft(coolKey);
+      const cool = $("#smsCool");
+      const sendBtn = $("#btnSendOtp");
+      const resend = $("#btnResendSms");
+      if (left > 0) {
+        if (cool) { cool.hidden = false; cool.textContent = t("js.resendWait", { n: left }); }
+        if (sendBtn) sendBtn.disabled = true;
+        if (resend) resend.disabled = true;
+      } else {
+        if (cool) cool.hidden = true;
+        if (sendBtn) sendBtn.disabled = false;
+        if (resend) resend.disabled = false;
+      }
+    };
+    setInterval(setSmsCool, 1000);
+
+    const sendOtp = async () => {
+      $("#phoneErr").textContent = "";
+      try {
+        if (!SCAuth.configured()) { $("#phoneErr").textContent = t("js.setupBody"); return; }
+        if (SCAuth.cooldownLeft(coolKey) > 0) return;
+        const phone = fmt();
+        if (!phone || phone.length < 11) { $("#phoneErr").textContent = t("js.badPhone"); return; }
+        lastPhone = phone;
+        await SCAuth.startPhoneOtp(phone);
+        $("#otpWrap").hidden = false;
+        SCAuth.startCooldown(coolKey, 60, () => setSmsCool(), setSmsCool);
+        setSmsCool();
+      } catch (e) {
+        $("#phoneErr").textContent = e.message === "bad_phone" ? t("js.badPhone") : (e.message || e);
+      }
+    };
+    if ($("#btnSendOtp")) $("#btnSendOtp").onclick = sendOtp;
+    if ($("#btnResendSms")) $("#btnResendSms").onclick = sendOtp;
+
+    const confirmCode = async (code) => {
+      $("#phoneErr").textContent = "";
+      try {
+        await SCAuth.verifyPhoneOtp(lastPhone || fmt(), code);
+        $("#phoneOk").hidden = false;
+        const profile = await SCAuth.getProfile(true);
+        const user = await SCAuth.getUser();
+        SCAuth.renderVerificationPanel($("#vPanel"), {
+          emailVerified: SCAuth.isEmailVerified(user, profile),
+          phoneVerified: true,
+          role: (profile && profile.role) || "patient",
+          adminVerified: false
+        });
+      } catch (e) {
+        $("#phoneErr").textContent = e.message === "bad_code" ? t("js.badCode") : (e.message || e);
+      }
+    };
+    SCAuth.bindOtpBoxes("#otpBoxes", code => { /* auto */ });
+    if ($("#btnVerifyOtp")) $("#btnVerifyOtp").onclick = () => {
+      const code = [...document.querySelectorAll("#otpBoxes input")].map(i => i.value).join("");
+      confirmCode(code);
+    };
+  }
+
+
+  if (page === "logout") {
+    (async () => {
+      try { await SCAuth.signOut(); } catch (e) {}
+      const m = $("#loMsg");
+      if (m) m.textContent = t("js.logoutDone");
+      setTimeout(() => location.href = "index.html", 600);
+    })();
+  }
+})();
+
+
 /* ---------- WhatsApp floating button (all pages) ---------- */
 (function(){const a=document.createElement("a");a.className="wa";a.setAttribute("aria-label",t("js.waAria"));a.title=t("js.waTitle");
   a.innerHTML='<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16.04 3C9.4 3 4 8.4 4 15.03c0 2.12.55 4.19 1.6 6.02L4 29l8.14-1.56a12 12 0 0 0 3.9.65C22.68 28.09 28 22.69 28 16.06 28 9.4 22.68 3 16.04 3zm0 22.03c-1.2 0-2.38-.3-3.42-.87l-.6-.33-4.84.93.97-4.7-.36-.62a9.9 9.9 0 0 1-1.5-5.2c0-5.5 4.5-9.97 10.05-9.97 5.55 0 10.06 4.47 10.06 9.97s-4.5 9.99-10.36 9.99zm5.5-7.48c-.3-.15-1.78-.88-2.06-.98-.28-.1-.48-.15-.68.15-.2.3-.78.98-.96 1.18-.18.2-.35.22-.65.07-.3-.15-1.28-.47-2.43-1.5-.9-.8-1.5-1.8-1.68-2.1-.18-.3-.02-.46.13-.6.14-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.68-1.64-.93-2.25-.24-.58-.5-.5-.68-.5h-.58c-.2 0-.53.08-.8.38-.28.3-1.05 1.03-1.05 2.5s1.08 2.9 1.23 3.1c.15.2 2.1 3.2 5.1 4.5.7.3 1.27.5 1.7.62.72.23 1.37.2 1.88.12.58-.08 1.78-.73 2.03-1.43.25-.7.25-1.3.18-1.43-.08-.13-.28-.2-.58-.35z"/></svg>';
-  if(isPending(WHATSAPP_NUMBER)){a.href="#whatsapp-pending";a.addEventListener("click",e=>{e.preventDefault();console.warn("SonrisaConnect: WHATSAPP_NUMBER is not configured in app.js.");
+  if(isPending(WHATSAPP_NUMBER())){a.href="#whatsapp-pending";a.addEventListener("click",e=>{e.preventDefault();console.warn("SonrisaConnect: WHATSAPP_NUMBER is not configured in app.js.");
     openModal(`<h2>${t("js.waSoonH")}</h2><p>${t("js.waSoonP",{e:`<a href="mailto:${SUPPORT_EMAIL}">${SUPPORT_EMAIL}</a>`})}</p><p><button class="btn" type="button" onclick="closeModal()">${t("js.close")}</button></p>`);});}
-  else{a.href="https://wa.me/"+String(WHATSAPP_NUMBER).replace(/\D/g,"")+"?text="+encodeURIComponent(WHATSAPP_MESSAGE());a.target="_blank";a.rel="noopener";}
+  else{a.href="https://wa.me/"+String(WHATSAPP_NUMBER()).replace(/\D/g,"")+"?text="+encodeURIComponent(WHATSAPP_MESSAGE());a.target="_blank";a.rel="noopener";}
   document.body.appendChild(a);})();
 
 reveal();

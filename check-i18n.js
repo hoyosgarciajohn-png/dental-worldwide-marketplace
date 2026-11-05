@@ -6,10 +6,13 @@ const EN=Object.assign({},ctx.R.HTML_EN,ctx.R.JS_EN),ES=Object.assign({},ctx.R.H
 const used=new Map();const add=(k,f)=>{if(!used.has(k))used.set(k,new Set());used.get(k).add(f);};
 for(const f of fs.readdirSync(dir).filter(f=>f.endsWith(".html"))){const h=fs.readFileSync(path.join(dir,f),"utf8");
   for(const m of h.matchAll(/data-i18n(?:-html|-placeholder|-aria|-alt|-title|-content)?="([^"]+)"/g))add(m[1],f);}
-const js=fs.readFileSync(path.join(dir,"app.js"),"utf8");
-for(const m of js.matchAll(/\bt\(\s*"([^"]*[^"_])"/g))add(m[1],"app.js");
-for(const m of js.matchAll(/"(js\.[\w]*[a-zA-Z0-9])"/g))add(m[1],"app.js");
-["js.plan_basic","js.plan_growth","js.plan_premium","js.langLabel","js.switchTo"].forEach(k=>add(k,"i18n.js"));
+for(const jf of ["app.js","auth.js","api.js","dashboard.js"]){
+  if(!fs.existsSync(path.join(dir,jf)))continue;
+  const js=fs.readFileSync(path.join(dir,jf),"utf8");
+  for(const m of js.matchAll(/\bt\(\s*"([^"]*[^"_])"/g))add(m[1],jf);
+  for(const m of js.matchAll(/"(js\.[\w]*[a-zA-Z0-9])"/g))add(m[1],jf);
+}
+["js.plan_free","js.plan_basic","js.plan_growth","js.plan_premium","js.langLabel","js.switchTo"].forEach(k=>add(k,"i18n.js"));
 let bad=0;for(const [k,fs_] of used){const miss=[!(k in EN)&&"EN",!(k in ES)&&"ES"].filter(Boolean);
   if(miss.length){bad++;console.log(`MISSING ${miss.join("+")}: ${k}  (${[...fs_].join(", ")})`);}}
 const unused=Object.keys(EN).filter(k=>!used.has(k));

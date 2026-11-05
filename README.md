@@ -1,3 +1,9 @@
+# SonrisaConnect (v5 marketplace frontend)
+
+Static GitHub Pages site wired for **Supabase** (auth, Postgres, storage, edge functions) and **Stripe** subscriptions (90-day trial on paid plans). Fill `config.js`, run `supabase/schema.sql`, deploy functions — see **SETUP.md**.
+
+Until keys are set, the site stays usable with demo clinics and a yellow “Setup pending” banner.
+
 # SonrisaConnect: Dental Tourism Marketplace (v3: practice pricing and onboarding)
 
 A static, clickable prototype that connects US patients with Colombian dental practices. It uses plain HTML, CSS and vanilla JS, with no backend and no build step. All mock data lives in `app.js`. All images are local files (AI-generated, no text in them) that sit at the repo root and are referenced by bare filename, so the site works offline. Only the Google Fonts stylesheet needs a connection; it falls back to system fonts.
